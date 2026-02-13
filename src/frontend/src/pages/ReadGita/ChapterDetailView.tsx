@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ChevronsRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useGetVersesByChapter, useGetAllChapters } from '@/hooks/useQueries';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 export default function ChapterDetailView({
   chapterNumber,
@@ -49,69 +49,80 @@ export default function ChapterDetailView({
         )}
       </header>
 
-      {/* Verse Table - 5 columns */}
-      <div className="border border-border/50 rounded-2xl overflow-hidden bg-card/80 backdrop-blur-sm shadow-lg">
+      {/* Verse Table - 4 columns with horizontal scroll */}
+      <div className="relative border border-border/50 rounded-2xl overflow-hidden bg-card/80 backdrop-blur-sm shadow-lg">
         {isLoading ? (
           <div className="p-6 space-y-3">
-            {[...Array(5)].map((_, i) => (
+            {[...Array(4)].map((_, i) => (
               <Skeleton key={i} className="h-20 rounded-lg" />
             ))}
           </div>
-        ) : verses && verses.length > 0 ? (
-          <ScrollArea className="w-full">
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow className="bg-primary/5 hover:bg-primary/5">
-                    <TableHead className="font-semibold text-primary w-[100px]">Ch:Verse</TableHead>
-                    <TableHead className="font-semibold text-primary min-w-[250px]">Sanskrit</TableHead>
-                    <TableHead className="font-semibold text-primary min-w-[200px]">Literal Hindi</TableHead>
-                    <TableHead className="font-semibold text-primary min-w-[200px]">Literal English</TableHead>
-                    <TableHead className="font-semibold text-primary min-w-[250px]">Interpretation</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {verses.map((verse) => (
-                    <TableRow
-                      key={`${verse.chapter}-${verse.verse}`}
-                      className="cursor-pointer hover:bg-primary/5 transition-colors"
-                      onClick={() => onVerseSelect(Number(verse.chapter), Number(verse.verse))}
-                    >
-                      <TableCell className="font-medium text-primary align-top">
-                        <span className="text-sm font-bold whitespace-nowrap">
-                          {verse.chapter.toString()}:{verse.verse.toString()}
-                        </span>
-                      </TableCell>
-                      <TableCell className="text-sm text-foreground align-top">
-                        <p className="leading-relaxed font-serif">{verse.sanskrit || ''}</p>
-                      </TableCell>
-                      <TableCell className="text-sm text-foreground align-top">
-                        <p className="leading-relaxed">{verse.hindiMeaning || ''}</p>
-                      </TableCell>
-                      <TableCell className="text-sm text-foreground align-top">
-                        <p className="leading-relaxed">{verse.englishMeaning || ''}</p>
-                      </TableCell>
-                      <TableCell className="text-sm text-foreground align-top">
-                        <p className="leading-relaxed font-medium text-primary/90">
-                          {verse.genZKrishnaInterpretation || ''}
-                        </p>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </ScrollArea>
         ) : (
-          <div className="p-6 text-center text-muted-foreground">
-            <p>No verses available for this chapter yet.</p>
-          </div>
+          <>
+            <ScrollArea className="w-full">
+              <div className="min-w-[1000px]">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-primary/5 hover:bg-primary/5">
+                      <TableHead className="font-semibold text-primary w-[100px] sticky left-0 bg-primary/5 z-10">
+                        Ch:Verse
+                      </TableHead>
+                      <TableHead className="font-semibold text-primary min-w-[250px]">Sanskrit</TableHead>
+                      <TableHead className="font-semibold text-primary min-w-[220px]">Literal English</TableHead>
+                      <TableHead className="font-semibold text-primary min-w-[280px]">
+                        Interpretation (Gen-Z)
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {verses && verses.length > 0 ? (
+                      verses.map((verse) => (
+                        <TableRow
+                          key={`${verse.chapter}-${verse.verse}`}
+                          className="cursor-pointer hover:bg-primary/5 transition-colors"
+                          onClick={() => onVerseSelect(Number(verse.chapter), Number(verse.verse))}
+                        >
+                          <TableCell className="font-medium text-primary align-top sticky left-0 bg-card/80 backdrop-blur-sm z-10">
+                            <span className="text-sm font-bold whitespace-nowrap">
+                              {verse.chapter.toString()}:{verse.verse.toString()}
+                            </span>
+                          </TableCell>
+                          <TableCell className="text-sm text-foreground align-top">
+                            <p className="leading-relaxed font-serif">{verse.sanskrit || '—'}</p>
+                          </TableCell>
+                          <TableCell className="text-sm text-foreground align-top">
+                            <p className="leading-relaxed">{verse.englishMeaning || '—'}</p>
+                          </TableCell>
+                          <TableCell className="text-sm text-foreground align-top">
+                            <p className="leading-relaxed font-medium text-primary/90">
+                              {verse.genZKrishnaInterpretation?.trim() || '—'}
+                            </p>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <TableCell colSpan={4} className="text-center text-muted-foreground py-8">
+                          No verses available for this chapter yet.
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
+            {/* Scroll indicator for mobile */}
+            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-card/90 to-transparent pointer-events-none flex items-center justify-center md:hidden">
+              <ChevronsRight className="w-5 h-5 text-primary/60 animate-pulse" />
+            </div>
+          </>
         )}
       </div>
 
       {/* Mobile-friendly note */}
       <p className="text-xs text-muted-foreground text-center mt-4 px-4">
-        💡 Tip: Scroll horizontally on mobile to view all 5 columns. Tap any verse to see full details.
+        Tip: Scroll horizontally to view the Interpretation (Gen-Z) column. Tap any verse to see full details.
       </p>
     </div>
   );

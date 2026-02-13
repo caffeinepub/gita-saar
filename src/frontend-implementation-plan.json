@@ -1,114 +1,39 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Make Ask Krishna sticky, upgrade Read Gita to 5-column verse table, and replace floral overlays with Krishna-life background imagery",
+  "title": "Remove Hindi translation from Read Gita tables and verse detail UI while keeping Gen Z interpretation",
   "requirements": [
     {
-      "id": "REQ-37",
-      "summary": "Keep the Home mini Ask Krishna widget sticky under TopMenuBar while Home scrolls, and keep the Talk to Krishna composer fixed at the bottom while the thread scrolls independently.",
+      "id": "REQ-1",
+      "summary": "Update the Read Gita chapter verses table to remove the Hindi translation column while keeping the Gen Z interpretation column and ensuring table layout remains correct.",
       "acceptanceCriteria": [
-        "On the Home tab, the Krishna portrait + mini Ask Krishna widget stays visible and does not scroll away while the user scrolls the rest of the Home content.",
-        "On the Talk to Krishna tab, the message composer stays visible at the bottom while only the message list scrolls.",
-        "No UI overlap occurs between the TopMenuBar and the sticky Ask Krishna section (correct top offset is preserved)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "modify",
-          "description": "Ensure the existing sticky mini Ask Krishna section is the only pinned area for Home content, and adjust spacing/z-index as needed so it stays fixed below TopMenuBar (using the existing --top-menu-height offset) without overlap while the rest of Home scrolls."
-        },
-        {
-          "path": "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
-          "operation": "modify",
-          "description": "Restructure layout so only the chat thread area scrolls (overflow-y-auto) and the composer remains pinned at the bottom of the visible chat area; ensure sizing accounts for the global TopMenuBar and fixed bottom navigation so the composer is always visible."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Add/adjust global CSS variables (e.g., a bottom-nav height variable) and any small global layout utilities needed to keep sticky elements correctly offset (TopMenuBar and bottom nav) and prevent overlap."
-        }
-      ]
-    },
-    {
-      "id": "REQ-38",
-      "summary": "Change ChapterDetailView verse listing to a consistent 5-column table: Chapter:Verse, full Sanskrit, literal Hindi, literal English, and respectful Gen‑Z interpretation.",
-      "acceptanceCriteria": [
-        "In ChapterDetailView, the table header shows 5 columns corresponding to: Chapter:Verse, Sanskrit, Literal Hindi, Literal English, Interpretation.",
-        "Each verse row renders the Chapter:Verse identifier (e.g., “2:47”) in column 1, and the full Sanskrit shloka in column 2 (not just a preview).",
-        "Horizontal scrolling still works on mobile and all 5 columns remain accessible and readable."
+        "In `frontend/src/pages/ReadGita/ChapterDetailView.tsx`, the table header no longer includes a Hindi translation column (e.g., remove \"Literal Hindi\").",
+        "Each verse row no longer renders `verse.hindiMeaning` in the chapter table.",
+        "The remaining columns include: Ch:Verse, Sanskrit, Literal English, and Interpretation (Gen-Z).",
+        "The table empty-state `colSpan` value matches the new total number of columns.",
+        "Any hardcoded layout values tied to the old column count (e.g., skeleton row count, min table width) are updated so the table renders correctly on desktop and mobile."
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
           "operation": "modify",
-          "description": "Update the verse table to exactly 5 columns (Chapter:Verse, full Sanskrit, literal Hindi meaning, literal English meaning, Gen‑Z interpretation); render the full Sanskrit text in its own column; keep horizontal scrolling working via the existing overflow-x wrapper/ScrollArea and adjust min-widths for mobile readability."
+          "description": "Remove the Hindi translation column from the chapter verses table by deleting the \"Literal Hindi\" header and the corresponding body cell that renders verse.hindiMeaning, while retaining the Interpretation (Gen-Z) column. Update table-level layout constants tied to the old 5-column layout (e.g., comment labeling, empty-state TableCell colSpan from 5 to 4, and any hardcoded min table width) so rendering remains correct on desktop and mobile. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-39",
-      "summary": "Remove floral overlay decorations and apply subtle Krishna-life background imagery across the app with good readability in light and dark mode, served as static generated assets.",
+      "id": "REQ-2",
+      "summary": "Remove the Hindi translation section from the single-verse detail card while keeping Sanskrit, Literal English, Gen Z interpretation, and Action Step sections responsive.",
       "acceptanceCriteria": [
-        "The FlowerOverlay is no longer rendered globally (no flower stickers appear anywhere unless explicitly reintroduced).",
-        "The app uses Krishna-life imagery as background visuals across tabs (Home, Read Gita, Discover, Talk to Krishna) with appropriate opacity/blur so foreground text and cards remain readable.",
-        "Light and dark mode both maintain sufficient contrast (no background image makes primary text or table content hard to read).",
-        "All newly generated images are served as static assets from frontend/public/assets/generated and referenced directly from the frontend."
+        "In `frontend/src/components/verse/VerseCard.tsx`, remove the \"Literal Hindi Translation\" section and stop rendering `verse.hindiMeaning`.",
+        "The verse detail still shows Sanskrit (collapsible), Literal English translation, Gen Z interpretation, and Action Step.",
+        "Layout remains responsive and does not leave an empty gap where the Hindi section used to be."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png",
-          "operation": "create",
-          "description": "Add generated static asset for Krishna-life background image: baby Krishna with butter theme, soft pastel style (frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png)."
-        },
-        {
-          "path": "frontend/public/assets/generated/krishna-life-bg-2.dim_1600x2400.png",
-          "operation": "create",
-          "description": "Add generated static asset for Krishna-life background image: Krishna playing flute, serene devotional style (frontend/public/assets/generated/krishna-life-bg-2.dim_1600x2400.png)."
-        },
-        {
-          "path": "frontend/public/assets/generated/krishna-life-bg-3.dim_1600x2400.png",
-          "operation": "create",
-          "description": "Add generated static asset for Krishna-life background image: Krishna lifting Govardhan, gentle pastel illustration/photo-collage look (frontend/public/assets/generated/krishna-life-bg-3.dim_1600x2400.png)."
-        },
-        {
-          "path": "frontend/public/assets/generated/krishna-life-bg-4.dim_1600x2400.png",
-          "operation": "create",
-          "description": "Add generated static asset for Krishna-life background image: Krishna with Arjuna on chariot (Kurukshetra), subtle and non-busy composition (frontend/public/assets/generated/krishna-life-bg-4.dim_1600x2400.png)."
-        },
-        {
-          "path": "frontend/public/assets/generated/krishna-life-bg-5.dim_1600x2400.png",
-          "operation": "create",
-          "description": "Add generated static asset for Krishna-life background image: Krishna dancing on Kaliya, softened tones and low visual noise (frontend/public/assets/generated/krishna-life-bg-5.dim_1600x2400.png)."
-        },
-        {
-          "path": "frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png",
-          "operation": "create",
-          "description": "Add generated static asset for Krishna-life background image: Radha-Krishna devotional scene, minimal background clutter (frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png)."
-        },
-        {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/components/verse/VerseCard.tsx",
           "operation": "modify",
-          "description": "Remove global rendering of FlowerOverlay and wire in a new global background treatment component/layer that uses the six Krishna-life images as subtle, readable backgrounds across all tabs (with appropriate opacity/blur/gradient overlays for light/dark mode)."
-        },
-        {
-          "path": "frontend/src/components/decorations/KrishnaLifeBackground.tsx",
-          "operation": "create",
-          "description": "Create a reusable global background component that renders Krishna-life imagery (using frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png through frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png) with a readability overlay that adapts to light/dark themes."
-        },
-        {
-          "path": "frontend/src/components/decorations/FlowerOverlay.tsx",
-          "operation": "delete",
-          "description": "Remove the FlowerOverlay component so floral sticker overlays can no longer appear from the global app shell."
-        },
-        {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "modify",
-          "description": "Remove any remaining floral corner decorations in the Home hero section and align Home visuals with the new Krishna-life background approach so foreground text/cards remain readable."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Add global styles/utilities for the Krishna-life background layer (e.g., opacity/blur and light/dark readability overlays) to ensure tables and primary text remain legible across the app."
+          "description": "Remove the \"Literal Hindi Translation\" block and any rendering of verse.hindiMeaning. Rebalance the responsive grid so remaining sections (Literal English and Gen Z interpretation) flow naturally without empty gaps (e.g., adjust grid column spans and update any comments/labels that state a 4-part layout). Keep all user-facing text English-only. Verify the component's usage instructions before implementing."
         }
       ]
     }

@@ -1,33 +1,18 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T09:19:33.231Z",
+  "generatedAt": "2026-02-13T10:38:14.264Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 4,
-    "implemented": 3,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-37",
-        "summary": "Make the “Ask Krishna” entry UI static (not moving with scroll) by ensuring the Home page’s mini Ask Krishna widget section remains fixed/sticky below the global TopMenuBar across Home scrolling, and ensure the chat composer on the Talk to Krishna page remains fixed at the bottom while the chat thread scrolls independently.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
-          "frontend/src/index.css"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
-          "frontend/src/index.css"
-        ]
-      },
-      {
-        "id": "REQ-38",
-        "summary": "Update the Read Gita chapter detail verse table to a 5-column layout exactly as follows: (1) Chapter:Verse identifier, (2) Original Sanskrit verse (full text), (3) Literal Hindi meaning, (4) Literal English meaning, (5) Interpretation in elegant, respectable Gen-Z lingo. Apply this consistently for every chapter’s verse listing.",
+        "id": "REQ-1",
+        "summary": "Update the Chapter verses table (Read Gita → Chapters → Chapter detail) to remove the Hindi translation column while retaining the Gen Z interpretation column.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/pages/ReadGita/ChapterDetailView.tsx"
@@ -37,64 +22,25 @@
         ]
       },
       {
-        "id": "REQ-39",
-        "summary": "Replace the current floral overlay/background decorations with Krishna-life background imagery used across the app. Remove the flower overlay from the global app shell and instead render a subtle, readable background treatment composed of Lord Krishna images from various instances in his life, ensuring readability in both light and dark mode.",
+        "id": "REQ-2",
+        "summary": "Remove Hindi translation from the single-verse detail UI while keeping the Gen Z interpretation section intact.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png",
-          "frontend/public/assets/generated/krishna-life-bg-2.dim_1600x2400.png",
-          "frontend/public/assets/generated/krishna-life-bg-3.dim_1600x2400.png",
-          "frontend/public/assets/generated/krishna-life-bg-4.dim_1600x2400.png",
-          "frontend/public/assets/generated/krishna-life-bg-5.dim_1600x2400.png",
-          "frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png",
-          "frontend/src/App.tsx",
-          "frontend/src/components/decorations/KrishnaLifeBackground.tsx",
-          "frontend/src/components/decorations/FlowerOverlay.tsx",
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/index.css"
+          "frontend/src/components/verse/VerseCard.tsx"
         ],
         "matchedFiles": [
-          "frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png",
-          "frontend/public/assets/generated/krishna-life-bg-2.dim_1600x2400.png",
-          "frontend/public/assets/generated/krishna-life-bg-3.dim_1600x2400.png",
-          "frontend/public/assets/generated/krishna-life-bg-4.dim_1600x2400.png",
-          "frontend/public/assets/generated/krishna-life-bg-5.dim_1600x2400.png",
-          "frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png",
-          "frontend/src/App.tsx",
-          "frontend/src/components/decorations/KrishnaLifeBackground.tsx",
-          "frontend/src/components/decorations/FlowerOverlay.tsx",
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/index.css"
+          "frontend/src/components/verse/VerseCard.tsx"
         ]
-      },
-      {
-        "id": "REQ-40",
-        "summary": "Populate the backend with the complete set of verses for all 18 chapters so that Read Gita can display every verse in the 5-column format fields (chapter, verse, Sanskrit, literal Hindi, literal English, elegant/respectable Gen-Z interpretation). Ensure the existing backend query methods return complete data for every chapter and verse.",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
       }
     ]
   },
   "changedFiles": [
-    "backend/main.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png",
-    "frontend/public/assets/generated/krishna-life-bg-2.dim_1600x2400.png",
-    "frontend/public/assets/generated/krishna-life-bg-3.dim_1600x2400.png",
-    "frontend/public/assets/generated/krishna-life-bg-4.dim_1600x2400.png",
-    "frontend/public/assets/generated/krishna-life-bg-5.dim_1600x2400.png",
-    "frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png",
-    "frontend/src/App.tsx",
-    "frontend/src/components/decorations/FlowerOverlay.tsx",
-    "frontend/src/components/decorations/KrishnaLifeBackground.tsx",
-    "frontend/src/index.css",
-    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/components/verse/VerseCard.tsx",
     "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
-    "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

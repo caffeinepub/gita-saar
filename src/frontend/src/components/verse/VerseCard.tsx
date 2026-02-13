@@ -39,16 +39,8 @@ export default function VerseCard({ verse }: { verse: Verse }) {
         )}
       </div>
 
-      {/* Responsive Layout for 4 parts */}
-      <div className="grid gap-4 md:grid-cols-2">
-        {/* Literal Hindi Translation */}
-        <div className="p-4 rounded-2xl bg-secondary/40 border border-border/30">
-          <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">
-            Literal Hindi Translation
-          </h4>
-          <p className="text-sm text-foreground leading-relaxed">{verse.hindiMeaning}</p>
-        </div>
-
+      {/* Responsive Layout for 2 parts */}
+      <div className="grid gap-4">
         {/* Literal English Translation */}
         <div className="p-4 rounded-2xl bg-accent/30 border border-border/30">
           <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">
@@ -57,8 +49,8 @@ export default function VerseCard({ verse }: { verse: Verse }) {
           <p className="text-sm text-foreground leading-relaxed">{verse.englishMeaning}</p>
         </div>
 
-        {/* Gen-Z Interpretation (full width on mobile, spans both columns on larger screens) */}
-        <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20 md:col-span-2">
+        {/* Gen-Z Interpretation */}
+        <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20">
           <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">Gen Z Interpretation</h4>
           <p className="text-sm text-foreground leading-relaxed font-medium">{verse.genZKrishnaInterpretation}</p>
         </div>

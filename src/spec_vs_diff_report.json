@@ -1,71 +1,47 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T09:19:33.227Z",
-  "summary": "Diff implements Krishna-life background component and wires it into App shell, makes Home mini Ask Krishna section sticky below TopMenuBar, and updates ChapterDetailView to a 5-column verse table. Backend changes are truncated and do not clearly show full 18-chapter verse population. Some additional unrequested features appear to be added/modified per the diff summary file list.",
+  "generatedAt": "2026-02-13T10:38:14.262Z",
+  "summary": "REQ-2 appears implemented in VerseCard by removing the Hindi translation section and keeping Sanskrit (collapsible), Literal English, Gen Z interpretation, and Action Step. REQ-1 appears partially implemented in ChapterDetailView by showing a 4-column table header without Hindi and updating some layout values (skeleton count, min table width), but the diff is truncated so removal of verse.hindiMeaning in rows and the empty-state colSpan update cannot be fully verified. Two non-requested metadata/tracking files were also modified.",
   "missing_requirements": [
     {
-      "id": "REQ-37",
-      "requirement": "Ensure the chat composer on the Talk to Krishna page remains fixed at the bottom while the chat thread scrolls independently.",
-      "reason": "TalkToKrishnaPage changes are truncated; the shown snippet confirms a scrollable chat thread container (\"flex-1 overflow-y-auto\"), but does not show the composer being fixed/sticky at the bottom or its layout placement.",
+      "id": "REQ-1",
+      "requirement": "Each verse row no longer renders verse.hindiMeaning in the chapter table.",
+      "reason": "ChapterDetailView row rendering is truncated; the provided snippet does not show whether any TableCell still uses verse.hindiMeaning.",
       "evidence": [
-        "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx (truncated)"
+        "frontend/src/pages/ReadGita/ChapterDetailView.tsx (truncated)"
       ]
     },
     {
-      "id": "REQ-39",
-      "requirement": "All newly generated images are served as static assets from frontend/public/assets/generated and referenced directly from the frontend.",
-      "reason": "Frontend components reference multiple generated PNGs under /assets/generated, but the diff summary does not show these image files being added under frontend/public/assets/generated (only a TSX component was added).",
+      "id": "REQ-1",
+      "requirement": "The table empty-state colSpan value matches the new total number of columns.",
+      "reason": "The empty-state rendering is not visible in the truncated ChapterDetailView diff, so colSpan cannot be confirmed.",
       "evidence": [
-        "frontend/src/components/decorations/KrishnaLifeBackground.tsx",
-        "frontend/src/pages/HomePage.tsx"
-      ]
-    },
-    {
-      "id": "REQ-40",
-      "requirement": "Populate the backend with the complete set of verses for all 18 chapters, with getVersesByChapter returning all verses and getVerse working for any valid chapter/verse across the Gita; each Verse includes sanskrit, literal Hindi/English meanings, Gen-Z interpretation, and non-empty actionStep.",
-      "reason": "backend/main.mo diff is truncated and only clearly shows chapter list generation; it does not provide evidence of a complete verse dataset across all 18 chapters or that getVersesByChapter/getVerse return complete coverage with required fields populated.",
-      "evidence": [
-        "backend/main.mo (truncated)"
+        "frontend/src/pages/ReadGita/ChapterDetailView.tsx (truncated)"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Added a custom theme management hook and theme toggle infrastructure beyond the requested background/overlay changes.",
-      "reason": "BuildRequest did not ask for new theme hooks or theme toggle features; only required readability in light/dark mode.",
+      "description": "Updated/added project tracking metadata in project_state.json unrelated to UI rendering changes.",
+      "reason": "BuildRequest only asks for frontend UI rendering changes in ChapterDetailView and VerseCard; it does not request changes to project_state.json.",
       "evidence": [
-        "frontend-file-summaries.txt (mentions frontend/src/hooks/useTheme.ts and frontend/src/components/settings/ThemeToggle.ts)",
-        "frontend/src/App.tsx (adds ThemeProvider from next-themes)"
-      ]
-    },
-    {
-      "description": "Added/modified speech-to-text (voice input) capability in chat.",
-      "reason": "BuildRequest did not request voice input or speech-to-text features.",
-      "evidence": [
-        "frontend-file-summaries.txt (mentions frontend/src/hooks/useSpeechToText.ts and ChatComposer voice input)"
-      ]
-    },
-    {
-      "description": "Added/updated extensive developer documentation and project state metadata describing broader product behavior.",
-      "reason": "BuildRequest did not request new docs or project_state.json updates as part of the functional requirements.",
-      "evidence": [
-        "frontend-file-summaries.txt (mentions frontend/docs/APP_STRUCTURE_AND_FLOWS.md)",
         "project_state.json"
+      ]
+    },
+    {
+      "description": "Modified frontend-file-summaries.txt contents.",
+      "reason": "BuildRequest does not request updating summary/metadata files; only UI changes to specific React components are required.",
+      "evidence": [
+        "frontend-file-summaries.txt (truncated)"
       ]
     }
   ],
-  "confidence": 0.68,
+  "confidence": 0.62,
   "changed_files": [
-    "backend/main.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/App.tsx",
-    "frontend/src/components/decorations/FlowerOverlay.tsx",
-    "frontend/src/components/decorations/KrishnaLifeBackground.tsx",
-    "frontend/src/index.css",
-    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/components/verse/VerseCard.tsx",
     "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
-    "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
     "project_state.json"
   ]
 }
