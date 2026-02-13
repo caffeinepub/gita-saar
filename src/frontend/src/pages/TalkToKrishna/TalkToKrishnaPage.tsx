@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import ChatThread from '@/components/chat/ChatThread';
 import ChatComposer from '@/components/chat/ChatComposer';
 import ChatSafetyModal from '@/components/chat/ChatSafetyModal';
+import SafeImage from '@/components/common/SafeImage';
 import { useSession } from '@/state/sessionContext';
 import { useChatbotResponse } from '@/hooks/useQueries';
 import { Verse, Mood } from '@/backend';
@@ -94,7 +95,7 @@ export default function TalkToKrishnaPage() {
       <header className="bg-card/95 backdrop-blur-lg border-b border-border/50 px-4 py-3 shrink-0">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img
+            <SafeImage
               src="/assets/generated/lord-krishna-portrait.dim_1024x1024.png"
               alt="Krishna"
               className="w-10 h-10 rounded-full border-2 border-primary/20"
@@ -119,7 +120,7 @@ export default function TalkToKrishnaPage() {
         <div className="max-w-2xl mx-auto px-4 py-6">
           {messages.length === 0 ? (
             <div className="text-center py-12 space-y-4">
-              <img
+              <SafeImage
                 src="/assets/generated/lord-krishna-portrait.dim_1024x1024.png"
                 alt="Krishna"
                 className="w-24 h-24 rounded-full mx-auto border-4 border-primary/20 shadow-lg"

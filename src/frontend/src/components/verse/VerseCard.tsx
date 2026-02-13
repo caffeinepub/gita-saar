@@ -6,6 +6,7 @@ import type { Verse } from '@/backend';
 
 export default function VerseCard({ verse }: { verse: Verse }) {
   const [showSanskrit, setShowSanskrit] = useState(false);
+  const [showFullEnglish, setShowFullEnglish] = useState(false);
 
   return (
     <Card className="p-6 space-y-6 border-border/50 bg-card/80 backdrop-blur-sm shadow-md">
@@ -41,12 +42,24 @@ export default function VerseCard({ verse }: { verse: Verse }) {
 
       {/* Responsive Layout for 2 parts */}
       <div className="grid gap-4">
-        {/* Literal English Translation */}
+        {/* Literal English Translation - Collapsible with line clamp */}
         <div className="p-4 rounded-2xl bg-accent/30 border border-border/30">
-          <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">
-            Literal English Translation
-          </h4>
-          <p className="text-sm text-foreground leading-relaxed">{verse.englishMeaning}</p>
+          <div className="flex items-center justify-between mb-2">
+            <h4 className="text-xs font-semibold text-primary uppercase tracking-wide">
+              Literal English Translation
+            </h4>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowFullEnglish(!showFullEnglish)}
+              className="h-auto py-1 px-2 text-xs text-primary hover:text-primary hover:bg-primary/10"
+            >
+              {showFullEnglish ? 'Show less' : 'Show more'}
+            </Button>
+          </div>
+          <p className={`text-sm text-foreground leading-relaxed ${!showFullEnglish ? 'line-clamp-3' : ''}`}>
+            {verse.englishMeaning}
+          </p>
         </div>
 
         {/* Gen-Z Interpretation */}

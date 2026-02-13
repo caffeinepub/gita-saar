@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Send, Mic } from 'lucide-react';
+import { Send, Mic, MicOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useSpeechToText } from '@/hooks/useSpeechToText';
@@ -13,7 +13,7 @@ const placeholders = [
 export default function ChatComposer({ onSend, disabled }: { onSend: (message: string) => void; disabled?: boolean }) {
   const [message, setMessage] = useState('');
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
-  const { isListening, startListening, stopListening, transcript } = useSpeechToText();
+  const { isListening, startListening, stopListening, transcript, isSupported } = useSpeechToText();
 
   const handleSend = () => {
     const textToSend = message.trim() || transcript.trim();
@@ -32,6 +32,10 @@ export default function ChatComposer({ onSend, disabled }: { onSend: (message: s
   };
 
   const handleVoiceToggle = () => {
+    if (!isSupported) {
+      return;
+    }
+
     if (isListening) {
       stopListening();
       if (transcript) {
@@ -57,15 +61,22 @@ export default function ChatComposer({ onSend, disabled }: { onSend: (message: s
           rows={1}
         />
       </div>
-      <Button
-        variant={isListening ? 'destructive' : 'outline'}
-        size="icon"
-        onClick={handleVoiceToggle}
-        disabled={disabled}
-        className="rounded-full w-12 h-12 shrink-0"
-      >
-        <Mic className={`w-5 h-5 ${isListening ? 'animate-pulse' : ''}`} />
-      </Button>
+      {isSupported && (
+        <Button
+          variant={isListening ? 'destructive' : 'outline'}
+          size="icon"
+          onClick={handleVoiceToggle}
+          disabled={disabled}
+          className="rounded-full w-12 h-12 shrink-0"
+          title={isSupported ? (isListening ? 'Stop recording' : 'Start voice input') : 'Voice input not supported'}
+        >
+          {isListening ? (
+            <Mic className="w-5 h-5 animate-pulse" />
+          ) : (
+            <MicOff className="w-5 h-5" />
+          )}
+        </Button>
+      )}
       <Button
         onClick={handleSend}
         disabled={disabled || (!message.trim() && !transcript.trim())}

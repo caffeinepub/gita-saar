@@ -3,13 +3,25 @@ import ChapterListView from './ChapterListView';
 import ChapterDetailView from './ChapterDetailView';
 import VerseDetailView from './VerseDetailView';
 import TodaysWisdomCard from '@/components/today/TodaysWisdomCard';
+import { useSession } from '@/state/sessionContext';
 
 type View = 'chapters' | 'today' | 'chapter-detail' | 'verse-detail';
 
-export default function ReadGitaPage() {
+export default function ReadGitaPage({ isActive }: { isActive: boolean }) {
   const [view, setView] = useState<View>('chapters');
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const [selectedVerse, setSelectedVerse] = useState<{ chapter: number; verse: number } | null>(null);
+  const { consumeReadGitaIntent } = useSession();
+
+  // Consume navigation intent when tab becomes active
+  useEffect(() => {
+    if (isActive) {
+      const intent = consumeReadGitaIntent();
+      if (intent === 'today') {
+        setView('today');
+      }
+    }
+  }, [isActive, consumeReadGitaIntent]);
 
   // Scroll to top whenever view changes
   useEffect(() => {

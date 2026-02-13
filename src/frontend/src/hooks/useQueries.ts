@@ -8,10 +8,12 @@ export function useGetAllChapters() {
   return useQuery<Chapter[]>({
     queryKey: ['chapters'],
     queryFn: async () => {
-      if (!actor) return [];
+      if (!actor) throw new Error('Backend actor not initialized');
       return actor.getAllChapters();
     },
     enabled: !!actor && !isFetching,
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 }
 
@@ -21,10 +23,12 @@ export function useGetVersesByChapter(chapterNumber: number) {
   return useQuery<Verse[]>({
     queryKey: ['verses', chapterNumber],
     queryFn: async () => {
-      if (!actor) return [];
+      if (!actor) throw new Error('Backend actor not initialized');
       return actor.getVersesByChapter(BigInt(chapterNumber));
     },
     enabled: !!actor && !isFetching && !!chapterNumber,
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 }
 
@@ -34,10 +38,12 @@ export function useGetVerse(chapter: number, verse: number) {
   return useQuery<Verse | null>({
     queryKey: ['verse', chapter, verse],
     queryFn: async () => {
-      if (!actor) return null;
+      if (!actor) throw new Error('Backend actor not initialized');
       return actor.getVerse(BigInt(chapter), BigInt(verse));
     },
     enabled: !!actor && !isFetching && !!chapter && !!verse,
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 }
 
@@ -47,10 +53,12 @@ export function useGetTodaysVerse() {
   return useQuery<Verse>({
     queryKey: ['todaysVerse'],
     queryFn: async () => {
-      if (!actor) throw new Error('Actor not initialized');
+      if (!actor) throw new Error('Backend actor not initialized');
       return actor.getTodaysVerse();
     },
     enabled: !!actor && !isFetching,
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 }
 
@@ -60,10 +68,12 @@ export function useGetCuratedVersesByMood(mood: Mood) {
   return useQuery<Verse[]>({
     queryKey: ['curatedVerses', mood],
     queryFn: async () => {
-      if (!actor) return [];
+      if (!actor) throw new Error('Backend actor not initialized');
       return actor.getCuratedVersesByMood(mood);
     },
     enabled: !!actor && !isFetching && !!mood,
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 }
 

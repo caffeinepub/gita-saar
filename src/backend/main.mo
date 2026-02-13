@@ -1,10 +1,9 @@
 import Time "mo:core/Time";
 import Nat "mo:core/Nat";
+import Order "mo:core/Order";
 import Array "mo:core/Array";
 import List "mo:core/List";
 import Map "mo:core/Map";
-import Order "mo:core/Order";
-
 
 // Attach state migration logic using to new actor instance with the with clause
 
@@ -306,6 +305,7 @@ actor {
   };
 
   public query ({ caller }) func getVerse(chapter : Nat, verse : Nat) : async ?Verse {
+    if (chapter < 1 or chapter > 18) { return null };
     generateAllVerses().find(func(v) { v.chapter == chapter and v.verse == verse });
   };
 
@@ -374,4 +374,3 @@ actor {
     ];
   };
 };
-

@@ -2,10 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-chapter-verses-table-read-gita-chapters-chapter-detail-to-remove-the-hindi-translation-column-while-retaining-the-gen-z-interpretation-column",
-      "featureTitle": "Update the Chapter verses table (Read Gita → Chapters → Chapter detail) to remove the Hindi translation column while retaining the Gen Z interpretation column.",
+      "featureId": "feature-identify-and-fix-the-underlying-cause-of-the-error-shown-in-the-read-gita-section-so-that-chapters-and-verses-load-reliably-without-triggering-a-runtime-exception-or-failed-backend-call",
+      "featureTitle": "Identify and fix the underlying cause of the error shown in the Read Gita section so that chapters and verses load reliably without triggering a runtime exception or failed backend call.",
       "files": [
-        "frontend/src/pages/ReadGita/ChapterDetailView.tsx"
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/ReadGita/ChapterListView.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -20,10 +21,14 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-remove-hindi-translation-from-the-single-verse-detail-ui-while-keeping-the-gen-z-interpretation-section-intact",
-      "featureTitle": "Remove Hindi translation from the single-verse detail UI while keeping the Gen Z interpretation section intact.",
+      "featureId": "feature-add-consistent-user-facing-error-handling-and-recovery-actions-to-the-read-gita-views-chapterdetailview-versedetailview-and-today-s-wisdom-view-including-displaying-a-clear-english-error-state-and-a-retry-action-when-their-respective-queries-fail",
+      "featureTitle": "Add consistent user-facing error handling and recovery actions to the Read Gita views (ChapterDetailView, VerseDetailView, and Today’s Wisdom view), including displaying a clear English error state and a Retry action when their respective queries fail.",
       "files": [
-        "frontend/src/components/verse/VerseCard.tsx"
+        "frontend/src/components/common/QueryErrorState.tsx",
+        "frontend/src/components/today/TodaysWisdomCard.tsx",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
+        "frontend/src/pages/ReadGita/VerseDetailView.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",

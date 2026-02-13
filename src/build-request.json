@@ -1,56 +1,74 @@
 {
   "kind": "build_request",
-  "title": "Remove Hindi translation column and keep Gen Z interpretation in Read Gita UI",
-  "priority": "normal",
+  "title": "Fix error message in Read Gita section",
+  "priority": "high",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Update the Chapter verses table (Read Gita → Chapters → Chapter detail) to remove the Hindi translation column while retaining the Gen Z interpretation column.",
-      "target": "frontend",
+      "text": "Identify and fix the underlying cause of the error shown in the Read Gita section so that chapters and verses load reliably without triggering a runtime exception or failed backend call.",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-3"
         ],
         "quotes": [
-          "remove the hindi translation column and retain gen z interpretation"
+          "I am getting error message in read gita section. fix this"
         ]
       },
       "acceptanceCriteria": [
-        "In `frontend/src/pages/ReadGita/ChapterDetailView.tsx`, the table header no longer includes a Hindi translation column (e.g., remove \"Literal Hindi\").",
-        "Each verse row no longer renders `verse.hindiMeaning` in the chapter table.",
-        "The remaining columns include: Ch:Verse, Sanskrit, Literal English, and Interpretation (Gen-Z).",
-        "The table empty-state `colSpan` value matches the new total number of columns.",
-        "Any hardcoded layout values tied to the old column count (e.g., skeleton row count, min table width) are updated so the table renders correctly on desktop and mobile."
+        "Opening the Read Gita tab loads the chapter list without showing an error message.",
+        "Selecting a chapter successfully loads that chapter’s verse list without errors.",
+        "No uncaught exceptions occur in the browser console during Read Gita navigation (chapter list -> chapter detail -> verse detail -> back)."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Remove Hindi translation from the single-verse detail UI while keeping the Gen Z interpretation section intact.",
+      "text": "Add consistent user-facing error handling and recovery actions to the Read Gita views (ChapterDetailView, VerseDetailView, and Today’s Wisdom view), including displaying a clear English error state and a Retry action when their respective queries fail.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-3"
         ],
         "quotes": [
-          "remove the hindi translation column and retain gen z interpretation"
+          "I am getting error message in read gita section. fix this"
         ]
       },
       "acceptanceCriteria": [
-        "In `frontend/src/components/verse/VerseCard.tsx`, remove the \"Literal Hindi Translation\" section and stop rendering `verse.hindiMeaning`.",
-        "The verse detail still shows Sanskrit (collapsible), Literal English translation, Gen Z interpretation, and Action Step.",
-        "Layout remains responsive and does not leave an empty gap where the Hindi section used to be."
+        "If loading verses for a chapter fails, the chapter detail screen shows an English error message and a Retry button that re-attempts the request.",
+        "If loading an individual verse fails, the verse detail screen shows an English error message and a Retry button.",
+        "If loading Today’s Wisdom fails, the Today’s Wisdom screen shows an English error message and a Retry button.",
+        "Existing non-error empty states remain intact (e.g., “No verses available for this chapter yet.” when the backend returns an empty list)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Harden the backend Read Gita query methods so they cannot trap on missing data and always return the expected types for: getAllChapters, getVersesByChapter, getVerse, and getTodaysVerse.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-3"
+        ],
+        "quotes": [
+          "I am getting error message in read gita section. fix this"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend canister compiles and deploys successfully after changes.",
+        "Calling getAllChapters returns a non-empty list of chapters.",
+        "Calling getVersesByChapter for any chapter returns an array (possibly empty) without trapping.",
+        "Calling getVerse for a missing verse returns null (Motoko ?Verse) without trapping.",
+        "Calling getTodaysVerse always returns a Verse without trapping."
       ]
     }
   ],
   "constraints": [
-    "Do not modify any files under `frontend/src/components/ui` (read-only shadcn components).",
-    "Do not change backend types or data returned by the Motoko canister; only adjust frontend rendering.",
-    "Use English-only user-facing text."
+    "Do not edit files under frontend/src/components/ui (read-only).",
+    "Do not edit frontend/src/hooks/useInternetIdentity.ts(x), frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths).",
+    "Backend must remain a single Motoko actor in backend/main.mo; only add backend/migration.mo if an actual state migration is required."
   ],
   "nonGoals": [
-    "Removing or migrating the `hindiMeaning` field from the backend `Verse` type or its data source.",
-    "Changing the meaning/content of the Gen Z interpretation text.",
-    "Adding new columns or new data fields beyond removing the Hindi column from the UI."
+    "Adding new Gita content, new chapters, or additional verses beyond what is needed to fix the error.",
+    "Redesigning the overall app navigation or adding new tabs/features unrelated to Read Gita."
   ],
   "imageRequirements": {
     "required": [],

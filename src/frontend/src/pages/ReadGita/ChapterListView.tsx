@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { BookOpen, Sparkles, Search } from 'lucide-react';
+import { BookOpen, Sparkles, Search, AlertCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useGetAllChapters } from '@/hooks/useQueries';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function ChapterListView({
   onChapterSelect,
@@ -13,7 +14,7 @@ export default function ChapterListView({
   onChapterSelect: (chapterNumber: number) => void;
   onShowToday: () => void;
 }) {
-  const { data: chapters, isLoading } = useGetAllChapters();
+  const { data: chapters, isLoading, isError, error, refetch } = useGetAllChapters();
   const [searchQuery, setSearchQuery] = useState('');
 
   // Sort chapters by number and filter by search query
@@ -23,14 +24,17 @@ export default function ChapterListView({
 
   const filteredChapters = sortedChapters.filter((chapter) => {
     const query = searchQuery.toLowerCase();
+    // Safe lowercasing with fallback to empty string
+    const englishTitle = (chapter.englishTitle || '').toLowerCase();
+    const sanskritSubtitle = (chapter.sanskritSubtitle || '').toLowerCase();
     return (
-      chapter.englishTitle.toLowerCase().includes(query) ||
-      chapter.sanskritSubtitle.toLowerCase().includes(query)
+      englishTitle.includes(query) ||
+      sanskritSubtitle.includes(query)
     );
   });
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6">
+    <div className="max-w-2xl mx-auto px-4 py-6 relative z-10">
       {/* Header */}
       <header className="mb-6">
         <div className="flex items-center gap-3 mb-2">
@@ -70,11 +74,30 @@ export default function ChapterListView({
               <Skeleton key={i} className="h-24 rounded-2xl" />
             ))}
           </>
+        ) : isError ? (
+          <Alert variant="destructive" className="mb-4">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription className="flex items-center justify-between gap-4">
+              <span>
+                {error instanceof Error 
+                  ? error.message 
+                  : 'Failed to load chapters. Please check your connection and try again.'}
+              </span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => refetch()}
+                className="shrink-0"
+              >
+                Retry
+              </Button>
+            </AlertDescription>
+          </Alert>
         ) : filteredChapters && filteredChapters.length > 0 ? (
           filteredChapters.map((chapter) => (
             <Card
               key={chapter.number}
-              className="p-5 cursor-pointer hover:shadow-lg hover:shadow-purple-glow/20 transition-all duration-300 hover:scale-[1.02] border-border/50 bg-card/80 backdrop-blur-sm"
+              className="p-5 cursor-pointer hover:shadow-lg hover:shadow-purple-glow/20 transition-all duration-300 hover:scale-[1.02] border-border/50 bg-card/80 backdrop-blur-sm relative z-10"
               onClick={() => onChapterSelect(Number(chapter.number))}
             >
               <div className="flex items-start gap-4">
@@ -82,13 +105,28 @@ export default function ChapterListView({
                   <span className="text-lg font-bold text-primary">{chapter.number.toString()}</span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-semibold text-primary mb-1">{chapter.englishTitle}</h3>
-                  <p className="text-sm text-muted-foreground mb-2 italic">{chapter.sanskritSubtitle}</p>
-                  <p className="text-xs text-muted-foreground">({chapter.verseCount.toString()})</p>
+                  <h3 className="text-lg font-semibold text-primary mb-1">{chapter.englishTitle || 'Untitled'}</h3>
+                  <p className="text-sm text-muted-foreground mb-2 italic">{chapter.sanskritSubtitle || ''}</p>
+                  <p className="text-xs text-muted-foreground">({chapter.verseCount.toString()} verses)</p>
                 </div>
               </div>
             </Card>
           ))
+        ) : chapters && chapters.length === 0 ? (
+          <Alert>
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription className="flex items-center justify-between gap-4">
+              <span>No chapters available. Please try again.</span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => refetch()}
+                className="shrink-0"
+              >
+                Retry
+              </Button>
+            </AlertDescription>
+          </Alert>
         ) : (
           <div className="text-center py-12">
             <p className="text-muted-foreground">No chapters found matching "{searchQuery}"</p>

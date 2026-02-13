@@ -11,7 +11,10 @@ interface TopMenuBarProps {
 export default function TopMenuBar({ activeTab, onNavigate }: TopMenuBarProps) {
   const handleHomeClick = () => {
     if (activeTab === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Only scroll if window is defined (browser environment)
+      if (typeof window !== 'undefined') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     } else {
       onNavigate('home');
     }

@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Update the Read Gita UI to remove Hindi translation displays while keeping the Gen Z interpretation intact.
+**Goal:** Fix the Read Gita section runtime/error state so chapters and verses load reliably, and add consistent, recoverable error handling in Read Gita-related views.
 
 **Planned changes:**
-- Update the Chapter detail verses table to remove the Hindi translation column and stop rendering `verse.hindiMeaning`.
-- Adjust table layout details tied to the previous column count (e.g., empty-state `colSpan`, skeleton/layout sizing) so the table remains responsive on desktop and mobile.
-- Update the single-verse detail card to remove the “Literal Hindi Translation” section and stop rendering `verse.hindiMeaning`, keeping Sanskrit, Literal English, Gen Z interpretation, and Action Step.
+- Identify and fix the root cause of the Read Gita loading error so chapter list, chapter verses, and verse details can be navigated without backend call failures or uncaught exceptions.
+- Add consistent frontend error states and a Retry action for failed loads in ChapterDetailView, VerseDetailView, and Today’s Wisdom, while preserving existing non-error empty states.
+- Harden backend Read Gita query methods (getAllChapters, getVersesByChapter, getVerse, getTodaysVerse) to avoid trapping on missing data and always return the expected types.
 
-**User-visible outcome:** In Read Gita, chapter verse tables and verse detail views no longer show Hindi translations, while Gen Z interpretation remains available and the layout continues to render cleanly across screen sizes.
+**User-visible outcome:** Opening Read Gita shows chapters without errors, selecting a chapter and verse works reliably, and if any Read Gita/TODAY’s Wisdom fetch fails the user sees a clear English message with a Retry button instead of a crash or stuck state.

@@ -1,47 +1,37 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T10:38:14.262Z",
-  "summary": "REQ-2 appears implemented in VerseCard by removing the Hindi translation section and keeping Sanskrit (collapsible), Literal English, Gen Z interpretation, and Action Step. REQ-1 appears partially implemented in ChapterDetailView by showing a 4-column table header without Hindi and updating some layout values (skeleton count, min table width), but the diff is truncated so removal of verse.hindiMeaning in rows and the empty-state colSpan update cannot be fully verified. Two non-requested metadata/tracking files were also modified.",
+  "generatedAt": "2026-02-13T11:29:48.192Z",
+  "summary": "Frontend adds a reusable QueryErrorState component and integrates clearer error states + Retry actions into ChapterDetailView, VerseDetailView, and Today’s Wisdom. ChapterListView also adds safer string handling and an error+retry alert. Backend changes are present but truncated in the diff summary, so hardening of specific query methods cannot be verified from the provided evidence.",
   "missing_requirements": [
     {
-      "id": "REQ-1",
-      "requirement": "Each verse row no longer renders verse.hindiMeaning in the chapter table.",
-      "reason": "ChapterDetailView row rendering is truncated; the provided snippet does not show whether any TableCell still uses verse.hindiMeaning.",
+      "id": "REQ-3",
+      "requirement": "Harden backend Read Gita query methods so they cannot trap on missing data and always return the expected types for getAllChapters, getVersesByChapter, getVerse, and getTodaysVerse.",
+      "reason": "backend/main.mo is truncated in the diff summary and does not include the implementations of getAllChapters/getVersesByChapter/getVerse/getTodaysVerse, so it cannot be verified that these methods were updated to never trap and to return the required types/behaviors (e.g., getVerse returns null when missing; getTodaysVerse always returns a Verse).",
       "evidence": [
-        "frontend/src/pages/ReadGita/ChapterDetailView.tsx (truncated)"
-      ]
-    },
-    {
-      "id": "REQ-1",
-      "requirement": "The table empty-state colSpan value matches the new total number of columns.",
-      "reason": "The empty-state rendering is not visible in the truncated ChapterDetailView diff, so colSpan cannot be confirmed.",
-      "evidence": [
-        "frontend/src/pages/ReadGita/ChapterDetailView.tsx (truncated)"
+        "backend/main.mo (truncated)"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Updated/added project tracking metadata in project_state.json unrelated to UI rendering changes.",
-      "reason": "BuildRequest only asks for frontend UI rendering changes in ChapterDetailView and VerseCard; it does not request changes to project_state.json.",
+      "description": "Added/updated React Query hooks unrelated to the Read Gita error-handling requirements (e.g., useGetCuratedVersesByMood, useChatbotResponse).",
+      "reason": "BuildRequest only asks for Read Gita reliability fixes and error handling in specific Read Gita views plus backend hardening for Read Gita query methods; mood-curation and chatbot hooks are not part of the requested scope.",
       "evidence": [
-        "project_state.json"
-      ]
-    },
-    {
-      "description": "Modified frontend-file-summaries.txt contents.",
-      "reason": "BuildRequest does not request updating summary/metadata files; only UI changes to specific React components are required.",
-      "evidence": [
-        "frontend-file-summaries.txt (truncated)"
+        "frontend/src/hooks/useQueries.ts"
       ]
     }
   ],
   "confidence": 0.62,
   "changed_files": [
+    "backend/main.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/components/verse/VerseCard.tsx",
+    "frontend/src/components/common/QueryErrorState.tsx",
+    "frontend/src/components/today/TodaysWisdomCard.tsx",
+    "frontend/src/hooks/useQueries.ts",
     "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
+    "frontend/src/pages/ReadGita/ChapterListView.tsx",
+    "frontend/src/pages/ReadGita/VerseDetailView.tsx",
     "project_state.json"
   ]
 }

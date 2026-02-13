@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { Mood } from '@/backend';
 
+type ReadGitaIntent = 'today' | null;
+
 type SessionContextType = {
   mood: Mood | null;
   setMood: (mood: Mood | null) => void;
@@ -10,6 +12,9 @@ type SessionContextType = {
   pendingMessage: string | null;
   setPendingMessage: (message: string | null) => void;
   consumePendingMessage: () => string | null;
+  readGitaIntent: ReadGitaIntent;
+  setReadGitaIntent: (intent: ReadGitaIntent) => void;
+  consumeReadGitaIntent: () => ReadGitaIntent;
 };
 
 const SessionContext = createContext<SessionContextType | undefined>(undefined);
@@ -18,6 +23,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const [mood, setMood] = useState<Mood | null>(null);
   const [sessionHistory, setSessionHistory] = useState<string[]>([]);
   const [pendingMessage, setPendingMessage] = useState<string | null>(null);
+  const [readGitaIntent, setReadGitaIntent] = useState<ReadGitaIntent>(null);
 
   const addToHistory = (message: string) => {
     setSessionHistory((prev) => [...prev, message]);
@@ -27,12 +33,19 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     setMood(null);
     setSessionHistory([]);
     setPendingMessage(null);
+    setReadGitaIntent(null);
   };
 
   const consumePendingMessage = () => {
     const msg = pendingMessage;
     setPendingMessage(null);
     return msg;
+  };
+
+  const consumeReadGitaIntent = () => {
+    const intent = readGitaIntent;
+    setReadGitaIntent(null);
+    return intent;
   };
 
   return (
@@ -46,6 +59,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
         pendingMessage,
         setPendingMessage,
         consumePendingMessage,
+        readGitaIntent,
+        setReadGitaIntent,
+        consumeReadGitaIntent,
       }}
     >
       {children}

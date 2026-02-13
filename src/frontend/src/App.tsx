@@ -28,20 +28,20 @@ export default function App() {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <SessionProvider>
-        <div className="min-h-screen bg-background pb-20">
-          {/* Global Top Menu Bar */}
+        <div className="relative min-h-screen bg-background pb-20">
+          {/* Global Top Menu Bar - highest z-index for navigation */}
           <TopMenuBar activeTab={activeTab} onNavigate={handleTabChange} />
 
-          {/* Krishna life background imagery */}
+          {/* Krishna life background imagery - behind everything */}
           <KrishnaLifeBackground />
 
-          {/* Tab content */}
-          <div className="relative">
+          {/* Tab content - explicitly above background with isolated stacking context */}
+          <div className="relative z-10 pointer-events-auto">
             <div className={activeTab === 'home' ? 'block' : 'hidden'}>
               <HomePage onNavigate={handleTabChange} />
             </div>
             <div className={activeTab === 'read' ? 'block' : 'hidden'}>
-              <ReadGitaPage />
+              <ReadGitaPage isActive={activeTab === 'read'} />
             </div>
             <div className={activeTab === 'chat' ? 'block' : 'hidden'}>
               <TalkToKrishnaPage />
