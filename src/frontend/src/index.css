@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 1rem;
+    
+    /* Pink & Purple Light Theme */
+    --background: 0.96 0.04 340;
+    --foreground: 0.25 0.03 300;
+    --card: 0.98 0.03 340;
+    --card-foreground: 0.25 0.03 300;
+    --popover: 0.98 0.03 340;
+    --popover-foreground: 0.25 0.03 300;
+    --primary: 0.55 0.18 290;
+    --primary-foreground: 0.98 0.02 340;
+    --secondary: 0.94 0.03 330;
+    --secondary-foreground: 0.3 0.03 300;
+    --muted: 0.95 0.02 340;
+    --muted-foreground: 0.5 0.03 300;
+    --accent: 0.92 0.04 320;
+    --accent-foreground: 0.3 0.03 300;
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0.02 340;
+    --border: 0.88 0.03 330;
+    --input: 0.88 0.03 330;
+    --ring: 0.55 0.18 290;
+    
+    /* Chart colors */
+    --chart-1: 0.65 0.15 290;
+    --chart-2: 0.7 0.12 320;
+    --chart-3: 0.6 0.14 340;
+    --chart-4: 0.75 0.16 310;
+    --chart-5: 0.68 0.13 280;
+  }
+
+  .dark {
+    /* Dark Theme - Deep with purple/pink accents */
+    --background: 0.18 0.02 300;
+    --foreground: 0.95 0.02 340;
+    --card: 0.22 0.025 300;
+    --card-foreground: 0.95 0.02 340;
+    --popover: 0.25 0.025 300;
+    --popover-foreground: 0.95 0.02 340;
+    --primary: 0.65 0.16 290;
+    --primary-foreground: 0.98 0.02 340;
+    --secondary: 0.28 0.03 300;
+    --secondary-foreground: 0.95 0.02 340;
+    --muted: 0.3 0.025 300;
+    --muted-foreground: 0.65 0.03 340;
+    --accent: 0.35 0.035 310;
+    --accent-foreground: 0.95 0.02 340;
+    --destructive: 0.6 0.2 25;
+    --destructive-foreground: 0.98 0.02 340;
+    --border: 0.3 0.025 300;
+    --input: 0.3 0.025 300;
+    --ring: 0.65 0.14 290;
+    
+    /* Chart colors */
+    --chart-1: 0.65 0.18 290;
+    --chart-2: 0.7 0.15 320;
+    --chart-3: 0.75 0.16 340;
+    --chart-4: 0.6 0.2 310;
+    --chart-5: 0.68 0.17 280;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+}
+
+@layer utilities {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Subtle animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes gentle-bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out;
+  }
+  
+  .animate-gentle-bounce {
+    animation: gentle-bounce 0.6s ease-in-out;
+  }
+}

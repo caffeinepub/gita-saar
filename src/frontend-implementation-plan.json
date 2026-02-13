@@ -1,0 +1,130 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Pink + purple theme polish, consistent UI, improved verse layout, and chapter search",
+  "requirements": [
+    {
+      "id": "REQ-14",
+      "summary": "Update global theme to pink background with purple typography accents while preserving readable light/dark modes and not editing shadcn ui source components.",
+      "acceptanceCriteria": [
+        "In light mode, the app background is visibly pink (not peach/ivory) across all tabs/pages (Home, Read Gita, Talk to Krishna, Discover).",
+        "Purple is used intentionally for emphasis (e.g., headings/active states) without reducing contrast below readable levels for body text.",
+        "Dark mode remains available and readable; purple accents remain visible and consistent in dark mode.",
+        "No changes are made to any files under frontend/src/components/ui (compose components instead)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Adjust CSS variable tokens for light/dark themes so --background is a clearly pink canvas across the app, and set primary/ring/accent tokens to a purple-forward palette that maintains readable contrast for foreground/body text."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Ensure Tailwind theme extensions (fonts, radii, shadows) support the updated pink/purple token strategy (e.g., add/adjust shadow presets and any needed semantic utilities) without relying on edits to frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Refine bottom tab active/hover styling to use the updated purple accents clearly (active state emphasis and readable inactive state) while keeping the four-tab structure unchanged."
+        }
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "summary": "Refine UI/UX to match the screenshot direction (soft pink canvas, airy spacing, rounded cards, serif-forward hero headings, clean navigation states) and fix visual inconsistencies across pages.",
+      "acceptanceCriteria": [
+        "Home, Read Gita, Discover, and Talk to Krishna share a consistent spacing system (padding, gaps) and consistent card radii/shadows.",
+        "Primary and secondary button styles are consistent across the app (pill buttons, predictable hover/press states).",
+        "Typography hierarchy is consistent (page titles, section titles, body text, captions) and visually aligned with the screenshot direction.",
+        "Navigation active state styling is clear and consistent (active tab stands out using purple accents)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add a small set of reusable global utility classes (via Tailwind layers) for consistent spacing, soft card styling, and pill button conventions to reduce per-page inconsistencies (no changes inside frontend/src/components/ui)."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Update hero typography to be serif-forward where appropriate (e.g., headline), tune spacing and section rhythm to feel airy, and align CTA/button styling with consistent pill/hover states. Continue using shadcn-ui Button/Card components via composition only; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ReadGita/ChapterListView.tsx",
+          "operation": "modify",
+          "description": "Align Read Gita list layout with consistent card radii/shadows/spacing and headline hierarchy; ensure interactions (hover/press) match the rest of the app using composed shadcn-ui Card/Button. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
+          "operation": "modify",
+          "description": "Normalize spacing, typography hierarchy, and verse list card styling so it matches the screenshot direction and other pages; keep interactions subtle and consistent using composed shadcn-ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/Discover/DiscoverPage.tsx",
+          "operation": "modify",
+          "description": "Refine mood grid spacing and card styling for consistency (rounded corners, soft elevation, clean focus/hover states) and align headings/subtext with the global typography scale using composed shadcn-ui Card. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/Discover/MoodDetailView.tsx",
+          "operation": "modify",
+          "description": "Ensure CTA button style matches global primary button conventions (pill, consistent hover/press), and align section spacing and verse list rhythm with the rest of the app using composed shadcn-ui Button/Skeleton. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
+          "operation": "modify",
+          "description": "Unify chat page spacing, header styling, and background overlays with the global theme; ensure button/icon states match the updated purple accent system using composed shadcn-ui Button. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/chat/FollowUpQuestions.tsx",
+          "operation": "modify",
+          "description": "Standardize follow-up question chips as secondary/pill buttons with consistent hover/press/focus styling that fits the pink/purple theme, using composed shadcn-ui Button. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "summary": "Update verse presentation so every verse card shows the 4 required parts with explicit labels and a clearly separated, always-visible action step, with responsive layout.",
+      "acceptanceCriteria": [
+        "VerseCard labels explicitly use “Literal Hindi translation” and “Literal English translation” (not just “Meaning”).",
+        "Sanskrit is available for every verse and is not effectively hidden (either shown by default or the control to reveal it is clearly visible and discoverable).",
+        "The UI is responsive: on small screens the four parts are stacked cleanly; on larger screens the layout may use a multi-column/grid presentation without losing readability.",
+        "The action step is always displayed and visually distinct from the translations/interpretation."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/verse/VerseCard.tsx",
+          "operation": "modify",
+          "description": "Revise VerseCard to present the four parts (Sanskrit (original), Literal Hindi translation, Literal English translation, Gen‑Z interpretation) with explicit labels; ensure Sanskrit is shown by default or the reveal control is prominent; implement a responsive stacked-to-grid layout; keep the action step always visible and visually distinct. Use shadcn-ui Card/Button via composition only and do not edit frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ReadGita/VerseDetailView.tsx",
+          "operation": "modify",
+          "description": "Ensure the verse detail view layout complements the updated VerseCard (consistent padding/spacing, readable width, and header hierarchy) without introducing new routes or tabs."
+        },
+        {
+          "path": "frontend/src/components/chat/ChatThread.tsx",
+          "operation": "modify",
+          "description": "Adjust chat rendering spacing around VerseCard (and Krishna message container) to match the updated verse presentation and global card rhythm, keeping readability strong in both themes."
+        }
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "summary": "Add an in-page search/filter input to the Read Gita chapter list to filter chapters client-side by English title and Sanskrit subtitle without changing the four-tab structure.",
+      "acceptanceCriteria": [
+        "Read Gita chapter list includes a search input that filters chapters client-side by English title and Sanskrit subtitle.",
+        "Search is case-insensitive and updates results as the user types.",
+        "Clearing the search restores the full 18-chapter list.",
+        "The existing navigation structure (four tabs) remains unchanged."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ReadGita/ChapterListView.tsx",
+          "operation": "modify",
+          "description": "Add a client-side search input above the chapter list; filter fetched chapters by englishTitle and sanskritSubtitle (case-insensitive) as the user types; ensure clear/empty restores full list; keep existing Read Gita flow and four-tab navigation unchanged. Use shadcn-ui Input (or an equivalent composed input pattern) and existing Card/Skeleton styles without editing frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "kind": "build_request",
+  "title": "UI/UX polish with pink background + purple typography and populate complete Gita Saar (18 chapters, all verses, literal translations + Gen‑Z interpretation)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-14",
+      "text": "Update the global visual theme to use a pink background across the platform and apply purple typography accents appropriately (headlines, key labels, links, active navigation, and emphasis text) while maintaining readability and consistency in both light and dark mode.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "Keep background color pink and use purple in words suitably."
+        ]
+      },
+      "acceptanceCriteria": [
+        "In light mode, the app background is visibly pink (not peach/ivory) across all tabs/pages (Home, Read Gita, Talk to Krishna, Discover).",
+        "Purple is used intentionally for emphasis (e.g., headings/active states) without reducing contrast below readable levels for body text.",
+        "Dark mode remains available and readable; purple accents remain visible and consistent in dark mode.",
+        "No changes are made to any files under frontend/src/components/ui (compose components instead)."
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Refine the overall UI/UX to match the attached screenshot styling direction (soft pink canvas, airy spacing, rounded cards, serif-forward hero headings where appropriate, and clean navigation states) and fix visual inconsistencies across pages (spacing, card elevation, typography hierarchy, and button styles).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "Evaluate the platform completely and provide the best UI and UX for the platform. Like it was there in the screenshot i have attached. Fix the details and update the website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Home, Read Gita, Discover, and Talk to Krishna share a consistent spacing system (padding, gaps) and consistent card radii/shadows.",
+        "Primary and secondary button styles are consistent across the app (pill buttons, predictable hover/press states).",
+        "Typography hierarchy is consistent (page titles, section titles, body text, captions) and visually aligned with the screenshot direction.",
+        "Navigation active state styling is clear and consistent (active tab stands out using purple accents)."
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "text": "Populate the backend with the complete Gita Saar content: all 18 chapters and every verse for each chapter, ensuring each verse includes (1) Sanskrit original verse, (2) literal Hindi translation, (3) literal English translation, and (4) Gen‑Z interpretation, plus exactly one action step per verse.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "Also i need to populate the complete Gita sar such that each chapter is shown separately, has all verses indiviudally displayed in 4 ways - sanskrit (original verse), Literal Hindi translation, Literal english translation and Gen Z inter pretation."
+        ]
+      },
+      "acceptanceCriteria": [
+        "getAllChapters() returns 18 chapters (1–18) with correct verseCount per chapter.",
+        "getVersesByChapter(n) returns all verses for chapter n (and none for other chapters).",
+        "Each Verse returned by getVersesByChapter and getVerse includes non-empty fields for sanskrit, hindiMeaning (literal), englishMeaning (literal), genZKrishnaInterpretation, and actionStep (exactly one actionable sentence/step).",
+        "getTodaysVerse() always returns a valid verse from the populated dataset (not an empty fallback verse)."
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "text": "Update the verse presentation UI so each verse is displayed in the required 4-part format with clear labels: Sanskrit (original), Literal Hindi translation, Literal English translation, and Gen‑Z interpretation; keep the action step clearly separated and always visible within the verse card.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "each chapter is shown separately, has all verses indiviudally displayed in 4 ways"
+        ]
+      },
+      "acceptanceCriteria": [
+        "VerseCard labels explicitly use “Literal Hindi translation” and “Literal English translation” (not just “Meaning”).",
+        "Sanskrit is available for every verse and is not effectively hidden (either shown by default or the control to reveal it is clearly visible and discoverable).",
+        "The UI is responsive: on small screens the four parts are stacked cleanly; on larger screens the layout may use a multi-column/grid presentation without losing readability.",
+        "The action step is always displayed and visually distinct from the translations/interpretation."
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "text": "Enhance the Read Gita chapter listing screen to include an in-page search/filter input for chapters (by English title and Sanskrit subtitle) to match the usability shown in the screenshots, without changing the existing app’s four-tab structure.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "Like it was there in the screenshot i have attached. Fix the details and update the website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Read Gita chapter list includes a search input that filters chapters client-side by English title and Sanskrit subtitle.",
+        "Search is case-insensitive and updates results as the user types.",
+        "Clearing the search restores the full 18-chapter list.",
+        "The existing navigation structure (four tabs) remains unchanged."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor with logic in backend/main.mo; add backend/migration.mo only if an upgrade requires state migration.",
+    "Do not edit immutable frontend paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "No paywalls, subscriptions, upsells, or guilt nudges anywhere in the UI."
+  ],
+  "nonGoals": [
+    "Adding new main tabs/sections beyond Home, Read Gita, Talk to Krishna, Discover.",
+    "Introducing any external database or third-party content APIs to source Gita text.",
+    "Implementing third-party authentication providers (only Internet Identity is supported).",
+    "Adding new Discover modes (e.g., “By Situation”) unless explicitly requested later."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

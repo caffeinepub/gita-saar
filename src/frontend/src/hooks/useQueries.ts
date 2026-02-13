@@ -1,0 +1,91 @@
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useActor } from './useActor';
+import { Chapter, Verse, Mood } from '@/backend';
+
+export function useGetAllChapters() {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<Chapter[]>({
+    queryKey: ['chapters'],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getAllChapters();
+    },
+    enabled: !!actor && !isFetching,
+  });
+}
+
+export function useGetVersesByChapter(chapterNumber: number) {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<Verse[]>({
+    queryKey: ['verses', chapterNumber],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getVersesByChapter(BigInt(chapterNumber));
+    },
+    enabled: !!actor && !isFetching && !!chapterNumber,
+  });
+}
+
+export function useGetVerse(chapter: number, verse: number) {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<Verse | null>({
+    queryKey: ['verse', chapter, verse],
+    queryFn: async () => {
+      if (!actor) return null;
+      return actor.getVerse(BigInt(chapter), BigInt(verse));
+    },
+    enabled: !!actor && !isFetching && !!chapter && !!verse,
+  });
+}
+
+export function useGetTodaysVerse() {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<Verse>({
+    queryKey: ['todaysVerse'],
+    queryFn: async () => {
+      if (!actor) throw new Error('Actor not initialized');
+      return actor.getTodaysVerse();
+    },
+    enabled: !!actor && !isFetching,
+  });
+}
+
+export function useGetCuratedVersesByMood(mood: Mood) {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<Verse[]>({
+    queryKey: ['curatedVerses', mood],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getCuratedVersesByMood(mood);
+    },
+    enabled: !!actor && !isFetching && !!mood,
+  });
+}
+
+export function useChatbotResponse() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      userMessage,
+      mood,
+      sessionHistory,
+    }: {
+      userMessage: string;
+      mood: Mood | null;
+      sessionHistory: string[];
+    }) => {
+      if (!actor) throw new Error('Actor not initialized');
+      return actor.getChatbotResponse(userMessage, mood, sessionHistory);
+    },
+    onSuccess: () => {
+      // Optionally invalidate related queries
+    },
+  });
+}

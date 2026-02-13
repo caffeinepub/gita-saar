@@ -1,0 +1,252 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Mobile-first spiritual reflection app/platform called \"Gita Saar\" for ages 13–25, featuring a Gen‑Z Hinglish \"best-friend Krishna\" chatbot, full Bhagavad Gita verse browsing with a fixed 4-column verse card format + action step, mood-based discovery, and an app-like UI with bottom navigation, dark mode, and updated styling preference: pink background with suitably-used purple typography.",
+  "architectural_notes": [
+    "Mobile-first app-like IA with bottom navigation: Home / Read Gita / Talk to Krishna / Discover.",
+    "Chatbot outputs must follow a strict verse card structure (Sanskrit + Hindi meaning + English meaning + Gen‑Z interpretation) and always end with a small action step.",
+    "AI behavior constraints: Hinglish Gen‑Z best-friend Krishna; multi-turn clarifying questions; no judgment/preaching; in-session context memory; not therapy/medical advice.",
+    "Design system: soft pastel minimal UI, rounded components, micro-animations, and dark mode.",
+    "Product constraint: 100% free (no paywalls, no guilt nudging).",
+    "UI color constraint: primary background should be pink; use purple for typography/word accents in a readable, consistent way across light/dark modes.",
+    "Verse card translation fields should be explicitly \"Literal Hindi translation\" and \"Literal English translation\" (not paraphrases), alongside Sanskrit and Gen‑Z interpretation."
+  ],
+  "known_issues": [],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-the-core-mobile-first-app-shell-with-bottom-navigation-containing-exactly-four-main-sections-home-read-gita-talk-to-krishna-and-discover-the-experience-must-feel-app-like-and-thumb-friendly-with-routing-state-that-preserves-the-current-tab-and-scroll-position-per-tab-during-the-session",
+      "title": "Create the core mobile-first app shell with bottom navigation containing exactly four main sections: Home, Read Gita, Talk to Krishna, and Discover. The experience must feel app-like and thumb-friendly, with routing/state that preserves the current tab and scroll position per tab during the session.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-mandatory-ui-ux-style-direction-across-the-app-soft-pastel-palette-peach-blush-ivory-saffron-accents-minimal-airy-spacing-rounded-cards-and-pill-buttons-and-smooth-subtle-micro-animations-e-g-gentle-hover-press-soft-breathing-on-key-cards-add-a-user-accessible-dark-mode-and-ensure-all-pages-are-readable-and-visually-consistent-in-both-light-and-dark-themes",
+      "title": "Implement the mandatory UI/UX style direction across the app: soft pastel palette (peach, blush, ivory, saffron accents), minimal airy spacing, rounded cards and pill buttons, and smooth subtle micro-animations (e.g., gentle hover/press, soft ‘breathing’ on key cards). Add a user-accessible dark mode and ensure all pages are readable and visually consistent in both light and dark themes.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-home-page-emotional-hook-hero-section-with-the-exact-headline-and-subtext-provided-plus-three-primary-ctas-open-today-s-wisdom-find-by-mood-and-talk-to-krishna-the-ctas-must-navigate-to-the-corresponding-sections-and-be-prominently-reachable-by-thumb-on-mobile",
+      "title": "Build the Home page ‘emotional hook’ hero section with the exact headline and subtext provided, plus three primary CTAs: “Open today’s wisdom”, “Find by mood”, and “Talk to Krishna”. The CTAs must navigate to the corresponding sections and be prominently reachable by thumb on mobile.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-read-gita-section-with-1-an-18-chapter-listing-screen-using-clean-chapter-cards-that-show-english-chapter-name-sanskrit-subtitle-and-verse-count-2-a-chapter-detail-screen-listing-all-verses-for-that-chapter-and-3-a-verse-detail-card-view-the-content-must-be-zero-intimidation-with-clear-hierarchy-and-approachable-copy",
+      "title": "Implement the Read Gita section with: (1) an 18-chapter listing screen using clean chapter cards that show English chapter name, Sanskrit subtitle, and verse count; (2) a chapter detail screen listing all verses for that chapter; and (3) a verse detail/card view. The content must be ‘zero intimidation’ with clear hierarchy and approachable copy.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-standardize-the-verse-display-format-everywhere-read-gita-discover-today-s-wisdom-and-chat-responses-to-the-required-4-column-verse-card-layout-column-1-sanskrit-original-shloka-clean-typography-optional-toggle-column-2-hindi-meaning-simple-conversational-hindi-column-3-english-meaning-plain-modern-english-column-4-gen-z-krishna-interpretation-first-person-krishna-voice-in-hinglish-relatable-every-verse-card-must-end-with-exactly-one-small-doable-action-step",
+      "title": "Standardize the verse display format everywhere (Read Gita, Discover, Today’s wisdom, and Chat responses) to the required 4-column ‘Verse Card Layout’: Column 1 Sanskrit (original shloka, clean typography, optional toggle), Column 2 Hindi meaning (simple conversational Hindi), Column 3 English meaning (plain modern English), Column 4 Gen-Z Krishna interpretation (first-person Krishna voice in Hinglish, relatable). Every verse card must end with exactly one small, doable ‘Action step’.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-discover-section-as-find-by-feeling-with-exactly-six-mood-cards-anxious-lost-angry-sad-motivated-calm-using-the-provided-short-mood-taglines-each-mood-page-must-show-curated-verses-short-gen-z-explanations-and-a-cta-talk-to-krishna-about-this-that-opens-talk-to-krishna-with-the-mood-preselected-attached-for-the-current-session",
+      "title": "Build the Discover section as ‘Find by feeling’ with exactly six mood cards (Anxious, Lost, Angry, Sad, Motivated, Calm) using the provided short mood taglines. Each mood page must show curated verses, short Gen-Z explanations, and a CTA “Talk to Krishna about this” that opens Talk to Krishna with the mood preselected/attached for the current session.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-talk-to-krishna-chatbot-ui-with-mandatory-input-methods-text-input-and-a-voice-input-button-speech-to-text-in-the-browser-provide-friendly-placeholder-prompts-exactly-in-hinglish-including-bol-kya-chal-raha-hai-dimaag-mein-and-jo-feel-ho-raha-hai-bol-de-the-chat-ui-must-support-multi-turn-conversation-and-show-responses-that-include-the-standard-verse-card-format-plus-an-action-step",
+      "title": "Implement the Talk to Krishna chatbot UI with mandatory input methods: text input and a voice input button (speech-to-text in the browser). Provide friendly placeholder prompts exactly in Hinglish, including: “Bol, kya chal raha hai dimaag mein?” and “Jo feel ho raha hai, bol de…”. The chat UI must support multi-turn conversation and show responses that include the standard Verse Card format plus an action step.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enforce-strict-krishna-personality-and-conversation-behavior-rules-in-chatbot-responses-hinglish-output-wise-best-friend-tone-calm-slightly-playful-emotionally-intelligent-no-shaming-judgment-preaching-asks-clarifying-follow-up-questions-and-remembers-context-within-the-same-session-responses-must-avoid-dumping-too-much-content-at-once-progressive-depth",
+      "title": "Enforce strict Krishna personality and conversation behavior rules in chatbot responses: Hinglish output, wise best-friend tone (calm, slightly playful, emotionally intelligent), no shaming/judgment/preaching, asks clarifying follow-up questions, and remembers context within the same session. Responses must avoid dumping too much content at once (progressive depth).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-ai-safety-and-content-boundaries-across-the-app-especially-chat-clearly-communicate-it-is-not-therapy-or-medical-advice-focus-on-emotional-grounding-encourage-reflection-without-dependency-and-avoid-instructions-that-could-be-interpreted-as-medical-guidance-include-an-in-chat-safety-footer-or-an-accessible-info-modal-linked-from-the-chat-screen",
+      "title": "Add AI safety and content boundaries across the app (especially chat): clearly communicate it is not therapy or medical advice, focus on emotional grounding, encourage reflection without dependency, and avoid instructions that could be interpreted as medical guidance. Include an in-chat safety footer or an accessible info modal linked from the chat screen.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-monetization-stays-100-free-do-not-add-paywalls-subscriptions-upsells-or-guilt-nudges-anywhere-in-the-ui",
+      "title": "Ensure monetization stays 100% free: do not add paywalls, subscriptions, upsells, or guilt nudges anywhere in the UI.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-provide-build-deliverables-inside-the-codebase-as-developer-facing-documentation-full-app-site-structure-ux-flow-notes-chatbot-response-logic-description-ui-layout-notes-and-at-least-3-sample-multi-turn-conversations-that-demonstrate-the-tone-follow-up-questioning-verse-card-output-and-action-step-ending",
+      "title": "Provide build deliverables inside the codebase as developer-facing documentation: full app/site structure, UX flow notes, chatbot response logic description, UI layout notes, and at least 3 sample multi-turn conversations that demonstrate the tone, follow-up questioning, verse card output, and action step ending.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-global-visual-theme-to-use-a-pink-background-across-the-platform-and-apply-purple-typography-accents-appropriately-headlines-key-labels-links-active-navigation-and-emphasis-text-while-maintaining-readability-and-consistency-in-both-light-and-dark-mode",
+      "title": "Update the global visual theme to use a pink background across the platform and apply purple typography accents appropriately (headlines, key labels, links, active navigation, and emphasis text) while maintaining readability and consistency in both light and dark mode.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-refine-the-overall-ui-ux-to-match-the-attached-screenshot-styling-direction-soft-pink-canvas-airy-spacing-rounded-cards-serif-forward-hero-headings-where-appropriate-and-clean-navigation-states-and-fix-visual-inconsistencies-across-pages-spacing-card-elevation-typography-hierarchy-and-button-styles",
+      "title": "Refine the overall UI/UX to match the attached screenshot styling direction (soft pink canvas, airy spacing, rounded cards, serif-forward hero headings where appropriate, and clean navigation states) and fix visual inconsistencies across pages (spacing, card elevation, typography hierarchy, and button styles).",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-verse-presentation-ui-so-each-verse-is-displayed-in-the-required-4-part-format-with-clear-labels-sanskrit-original-literal-hindi-translation-literal-english-translation-and-gen-z-interpretation-keep-the-action-step-clearly-separated-and-always-visible-within-the-verse-card",
+      "title": "Update the verse presentation UI so each verse is displayed in the required 4-part format with clear labels: Sanskrit (original), Literal Hindi translation, Literal English translation, and Gen‑Z interpretation; keep the action step clearly separated and always visible within the verse card.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enhance-the-read-gita-chapter-listing-screen-to-include-an-in-page-search-filter-input-for-chapters-by-english-title-and-sanskrit-subtitle-to-match-the-usability-shown-in-the-screenshots-without-changing-the-existing-app-s-four-tab-structure",
+      "title": "Enhance the Read Gita chapter listing screen to include an in-page search/filter input for chapters (by English title and Sanskrit subtitle) to match the usability shown in the screenshots, without changing the existing app’s four-tab structure.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Define full site/app structure + UX flow (mobile-first, app-like, bottom navigation: Home / Read Gita / Talk to Krishna / Discover)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Home page emotional hook with hero headline/subtext and primary CTAs (today’s wisdom, find by mood, talk to Krishna)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "\"Talk to Krishna\" chatbot with strict Gen‑Z Hinglish personality rules + multi-turn clarifying conversation behavior + in-session context memory",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Chat input methods: text input + voice input (speech-to-text) with friendly Hinglish placeholders",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Standardize verse response output: 4-column verse card (Sanskrit, Hindi meaning, English meaning, Gen‑Z Krishna interpretation) + mandatory small action step",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Read Gita section: all 18 chapters listing with chapter cards (English name + Sanskrit subtitle + verse count) and verse list views",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "For every verse in verse list: include Sanskrit + Hindi meaning + English meaning + Gen‑Z interpretation + action step (consistent with verse card format)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Discover page: mood-based cards (anxious/lost/angry/sad/motivated/calm) that show curated verses, short Gen‑Z explanations, and CTA to talk to Krishna",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "UI/UX design direction: soft pastel palette, minimal airy spacing, rounded cards/pill buttons, smooth micro-animations, thumb-friendly layout, and dark mode",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "AI safety rules: not therapy replacement, no medical advice, emotional grounding focus, encourage reflection not dependency",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Monetization constraint: 100% free, no paywalls, no guilt nudging",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Provide sample conversations, AI response logic, UI layout suggestions, and component-level build guidance as deliverables",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Implement backend data and APIs to support: all 18 chapters, all verses (with Sanskrit, Hindi meaning, English meaning, Gen-Z Krishna interpretation, and action step), mood-to-verse curation mappings, and a deterministic ‘today’s wisdom’ selection. Provide query methods that the frontend can call to fetch chapters, verses by chapter, a single verse, curated verses by mood, and today’s verse reference/content.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-22",
+      "summary": "Implement chatbot response logic on the backend that selects an appropriate verse based on (a) user-selected mood (if present), (b) simple keyword/emotion matching from the user’s message, and (c) recent conversation context passed from the client for the current session. The backend must return a structured response object containing: selected verse content (all fields needed for the VerseCard), a short supportive message in Hinglish, 1–2 clarifying follow-up questions, and an action step (or use the verse’s action step).",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "UI theme update: keep overall background color pink and use purple in words/typography suitably across the platform while maintaining readability and the existing app-like layout.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Content spec update: ensure verse display uses literal Hindi translation and literal English translation fields (in addition to Sanskrit and Gen‑Z interpretation) consistently across all chapters/verses in the 4-column format.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Populate the backend with the complete Gita Saar content: all 18 chapters and every verse for each chapter, ensuring each verse includes (1) Sanskrit original verse, (2) literal Hindi translation, (3) literal English translation, and (4) Gen‑Z interpretation, plus exactly one action step per verse.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Gita Saar",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

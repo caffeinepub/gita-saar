@@ -1,0 +1,118 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-13T07:33:08.995Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 5,
+    "implemented": 4,
+    "items": [
+      {
+        "id": "REQ-14",
+        "summary": "Update the global visual theme to use a pink background across the platform and apply purple typography accents appropriately (headlines, key labels, links, active navigation, and emphasis text) while maintaining readability and consistency in both light and dark mode.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-15",
+        "summary": "Refine the overall UI/UX to match the attached screenshot styling direction (soft pink canvas, airy spacing, rounded cards, serif-forward hero headings where appropriate, and clean navigation states) and fix visual inconsistencies across pages (spacing, card elevation, typography hierarchy, and button styles).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/ReadGita/ChapterListView.tsx",
+          "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
+          "frontend/src/pages/Discover/DiscoverPage.tsx",
+          "frontend/src/pages/Discover/MoodDetailView.tsx",
+          "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
+          "frontend/src/components/chat/FollowUpQuestions.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/ReadGita/ChapterListView.tsx",
+          "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
+          "frontend/src/pages/Discover/DiscoverPage.tsx",
+          "frontend/src/pages/Discover/MoodDetailView.tsx",
+          "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
+          "frontend/src/components/chat/FollowUpQuestions.tsx"
+        ]
+      },
+      {
+        "id": "REQ-16",
+        "summary": "Populate the backend with the complete Gita Saar content: all 18 chapters and every verse for each chapter, ensuring each verse includes (1) Sanskrit original verse, (2) literal Hindi translation, (3) literal English translation, and (4) Gen‑Z interpretation, plus exactly one action step per verse.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-17",
+        "summary": "Update the verse presentation UI so each verse is displayed in the required 4-part format with clear labels: Sanskrit (original), Literal Hindi translation, Literal English translation, and Gen‑Z interpretation; keep the action step clearly separated and always visible within the verse card.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/verse/VerseCard.tsx",
+          "frontend/src/pages/ReadGita/VerseDetailView.tsx",
+          "frontend/src/components/chat/ChatThread.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/verse/VerseCard.tsx",
+          "frontend/src/pages/ReadGita/VerseDetailView.tsx",
+          "frontend/src/components/chat/ChatThread.tsx"
+        ]
+      },
+      {
+        "id": "REQ-18",
+        "summary": "Enhance the Read Gita chapter listing screen to include an in-page search/filter input for chapters (by English title and Sanskrit subtitle) to match the usability shown in the screenshots, without changing the existing app’s four-tab structure.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/ReadGita/ChapterListView.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/ReadGita/ChapterListView.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/chat/ChatThread.tsx",
+    "frontend/src/components/chat/FollowUpQuestions.tsx",
+    "frontend/src/components/verse/VerseCard.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/index.css",
+    "frontend/src/pages/Discover/DiscoverPage.tsx",
+    "frontend/src/pages/Discover/MoodDetailView.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
+    "frontend/src/pages/ReadGita/ChapterListView.tsx",
+    "frontend/src/pages/ReadGita/VerseDetailView.tsx",
+    "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
+    "frontend/tailwind.config.js",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}
