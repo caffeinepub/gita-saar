@@ -9,7 +9,7 @@ export default function FollowUpQuestions({
 }) {
   return (
     <div className="space-y-2">
-      <p className="text-xs text-primary font-medium">You might want to explore:</p>
+      <p className="text-xs text-primary font-medium">You might wanna explore:</p>
       <div className="flex flex-wrap gap-2">
         {questions.map((question, index) => (
           <Button

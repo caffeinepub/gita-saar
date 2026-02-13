@@ -67,7 +67,7 @@ export default function VerseCard({ verse }: { verse: Verse }) {
       {/* Action Step - Always visible and distinct */}
       <div className="pt-4 border-t border-border/50">
         <div className="flex items-start gap-3 p-4 rounded-2xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 shadow-sm">
-          <Lightbulb className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+          <Lightbulb className="w-5 h-5 text-primary shrink-0 mt-0.5" />
           <div>
             <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">Action Step</h4>
             <p className="text-sm text-foreground leading-relaxed font-medium">{verse.actionStep}</p>

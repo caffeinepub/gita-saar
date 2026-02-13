@@ -78,7 +78,7 @@ export default function ChapterListView({
               onClick={() => onChapterSelect(Number(chapter.number))}
             >
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/15 flex items-center justify-center shadow-sm">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-primary/15 flex items-center justify-center shadow-sm">
                   <span className="text-lg font-bold text-primary">{chapter.number.toString()}</span>
                 </div>
                 <div className="flex-1 min-w-0">

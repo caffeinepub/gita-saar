@@ -27,7 +27,7 @@ export default function ChapterDetailView({
   const chapter = chapters?.find((c) => Number(c.number) === chapterNumber);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4 py-6">
       {/* Header */}
       <header className="mb-6">
         <Button variant="ghost" size="sm" onClick={onBack} className="mb-4 -ml-2 text-primary hover:text-primary">
@@ -49,7 +49,7 @@ export default function ChapterDetailView({
         )}
       </header>
 
-      {/* Verse Table */}
+      {/* Verse Table - 5 columns */}
       <div className="border border-border/50 rounded-2xl overflow-hidden bg-card/80 backdrop-blur-sm shadow-lg">
         {isLoading ? (
           <div className="p-6 space-y-3">
@@ -57,39 +57,44 @@ export default function ChapterDetailView({
               <Skeleton key={i} className="h-20 rounded-lg" />
             ))}
           </div>
-        ) : (
+        ) : verses && verses.length > 0 ? (
           <ScrollArea className="w-full">
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow className="bg-primary/5 hover:bg-primary/5">
-                    <TableHead className="font-semibold text-primary w-[100px]">Verse</TableHead>
-                    <TableHead className="font-semibold text-primary min-w-[200px]">Hindi Meaning</TableHead>
-                    <TableHead className="font-semibold text-primary min-w-[200px]">English Meaning</TableHead>
-                    <TableHead className="font-semibold text-primary min-w-[200px]">Gen Z Interpretation</TableHead>
+                    <TableHead className="font-semibold text-primary w-[100px]">Ch:Verse</TableHead>
+                    <TableHead className="font-semibold text-primary min-w-[250px]">Sanskrit</TableHead>
+                    <TableHead className="font-semibold text-primary min-w-[200px]">Literal Hindi</TableHead>
+                    <TableHead className="font-semibold text-primary min-w-[200px]">Literal English</TableHead>
+                    <TableHead className="font-semibold text-primary min-w-[250px]">Interpretation</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {verses?.map((verse) => (
+                  {verses.map((verse) => (
                     <TableRow
                       key={`${verse.chapter}-${verse.verse}`}
                       className="cursor-pointer hover:bg-primary/5 transition-colors"
                       onClick={() => onVerseSelect(Number(verse.chapter), Number(verse.verse))}
                     >
                       <TableCell className="font-medium text-primary align-top">
-                        <div className="flex flex-col gap-1">
-                          <span className="text-sm font-bold">{verse.verse.toString()}</span>
-                          <span className="text-xs text-muted-foreground italic line-clamp-2">{verse.sanskrit}</span>
-                        </div>
+                        <span className="text-sm font-bold whitespace-nowrap">
+                          {verse.chapter.toString()}:{verse.verse.toString()}
+                        </span>
                       </TableCell>
                       <TableCell className="text-sm text-foreground align-top">
-                        <p className="leading-relaxed">{verse.hindiMeaning}</p>
+                        <p className="leading-relaxed font-serif">{verse.sanskrit || ''}</p>
                       </TableCell>
                       <TableCell className="text-sm text-foreground align-top">
-                        <p className="leading-relaxed">{verse.englishMeaning}</p>
+                        <p className="leading-relaxed">{verse.hindiMeaning || ''}</p>
                       </TableCell>
                       <TableCell className="text-sm text-foreground align-top">
-                        <p className="leading-relaxed font-medium text-primary/90">{verse.genZKrishnaInterpretation}</p>
+                        <p className="leading-relaxed">{verse.englishMeaning || ''}</p>
+                      </TableCell>
+                      <TableCell className="text-sm text-foreground align-top">
+                        <p className="leading-relaxed font-medium text-primary/90">
+                          {verse.genZKrishnaInterpretation || ''}
+                        </p>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -97,12 +102,16 @@ export default function ChapterDetailView({
               </Table>
             </div>
           </ScrollArea>
+        ) : (
+          <div className="p-6 text-center text-muted-foreground">
+            <p>No verses available for this chapter yet.</p>
+          </div>
         )}
       </div>
 
       {/* Mobile-friendly note */}
       <p className="text-xs text-muted-foreground text-center mt-4 px-4">
-        💡 Tip: Scroll horizontally on mobile to view all columns. Tap any verse to see full details.
+        💡 Tip: Scroll horizontally on mobile to view all 5 columns. Tap any verse to see full details.
       </p>
     </div>
   );

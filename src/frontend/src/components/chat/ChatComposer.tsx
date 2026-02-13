@@ -4,7 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useSpeechToText } from '@/hooks/useSpeechToText';
 
-const placeholders = ['Bol, kya chal raha hai dimaag mein?', 'Jo feel ho raha hai, bol de…'];
+const placeholders = [
+  "What's on your mind?",
+  "Share what you're feeling...",
+  "Talk to me, I'm listening"
+];
 
 export default function ChatComposer({ onSend, disabled }: { onSend: (message: string) => void; disabled?: boolean }) {
   const [message, setMessage] = useState('');
@@ -58,14 +62,14 @@ export default function ChatComposer({ onSend, disabled }: { onSend: (message: s
         size="icon"
         onClick={handleVoiceToggle}
         disabled={disabled}
-        className="rounded-full w-12 h-12 flex-shrink-0"
+        className="rounded-full w-12 h-12 shrink-0"
       >
         <Mic className={`w-5 h-5 ${isListening ? 'animate-pulse' : ''}`} />
       </Button>
       <Button
         onClick={handleSend}
         disabled={disabled || (!message.trim() && !transcript.trim())}
-        className="rounded-full w-12 h-12 flex-shrink-0"
+        className="rounded-full w-12 h-12 shrink-0"
         size="icon"
       >
         <Send className="w-5 h-5" />

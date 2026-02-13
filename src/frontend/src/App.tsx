@@ -5,6 +5,7 @@ import ReadGitaPage from './pages/ReadGita/ReadGitaPage';
 import TalkToKrishnaPage from './pages/TalkToKrishna/TalkToKrishnaPage';
 import DiscoverPage from './pages/Discover/DiscoverPage';
 import TopMenuBar from './components/layout/TopMenuBar';
+import KrishnaLifeBackground from './components/decorations/KrishnaLifeBackground';
 import { SessionProvider } from './state/sessionContext';
 import { ThemeProvider } from 'next-themes';
 
@@ -30,6 +31,9 @@ export default function App() {
         <div className="min-h-screen bg-background pb-20">
           {/* Global Top Menu Bar */}
           <TopMenuBar activeTab={activeTab} onNavigate={handleTabChange} />
+
+          {/* Krishna life background imagery */}
+          <KrishnaLifeBackground />
 
           {/* Tab content */}
           <div className="relative">

@@ -7,6 +7,9 @@ type SessionContextType = {
   sessionHistory: string[];
   addToHistory: (message: string) => void;
   resetSession: () => void;
+  pendingMessage: string | null;
+  setPendingMessage: (message: string | null) => void;
+  consumePendingMessage: () => string | null;
 };
 
 const SessionContext = createContext<SessionContextType | undefined>(undefined);
@@ -14,6 +17,7 @@ const SessionContext = createContext<SessionContextType | undefined>(undefined);
 export function SessionProvider({ children }: { children: ReactNode }) {
   const [mood, setMood] = useState<Mood | null>(null);
   const [sessionHistory, setSessionHistory] = useState<string[]>([]);
+  const [pendingMessage, setPendingMessage] = useState<string | null>(null);
 
   const addToHistory = (message: string) => {
     setSessionHistory((prev) => [...prev, message]);
@@ -22,6 +26,13 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const resetSession = () => {
     setMood(null);
     setSessionHistory([]);
+    setPendingMessage(null);
+  };
+
+  const consumePendingMessage = () => {
+    const msg = pendingMessage;
+    setPendingMessage(null);
+    return msg;
   };
 
   return (
@@ -32,6 +43,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
         sessionHistory,
         addToHistory,
         resetSession,
+        pendingMessage,
+        setPendingMessage,
+        consumePendingMessage,
       }}
     >
       {children}

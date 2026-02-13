@@ -5,6 +5,8 @@
 @layer base {
   :root {
     --radius: 1rem;
+    --top-menu-height: 56px;
+    --bottom-nav-height: 4rem;
     
     /* Pink & Purple Light Theme */
     --background: 0.96 0.04 340;

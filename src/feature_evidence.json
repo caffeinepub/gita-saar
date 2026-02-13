@@ -2,65 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-home-page-hero-layout-so-that-open-today-s-wisdom-and-find-by-mood-render-side-by-side-parallel-directly-under-the-hero-subtext-the-bhagavad-gita-decoded-for-overthinkers-anxious-minds-and-curious-gen-z-souls-and-are-visible-without-scrolling-on-typical-mobile-viewports",
-      "featureTitle": "Update the Home page hero layout so that “Open today’s wisdom” and “Find by mood” render side-by-side (parallel) directly under the hero subtext (“The Bhagavad Gita — decoded for overthinkers, anxious minds, and curious Gen-Z souls.”) and are visible without scrolling on typical mobile viewports.",
+      "featureId": "feature-make-the-ask-krishna-entry-ui-static-not-moving-with-scroll-by-ensuring-the-home-page-s-mini-ask-krishna-widget-section-remains-fixed-sticky-below-the-global-topmenubar-across-home-scrolling-and-ensure-the-chat-composer-on-the-talk-to-krishna-page-remains-fixed-at-the-bottom-while-the-chat-thread-scrolls-independently",
+      "featureTitle": "Make the “Ask Krishna” entry UI static (not moving with scroll) by ensuring the Home page’s mini Ask Krishna widget section remains fixed/sticky below the global TopMenuBar across Home scrolling, and ensure the chat composer on the Talk to Krishna page remains fixed at the bottom while the chat thread scrolls independently.",
       "files": [
-        "frontend/src/pages/HomePage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-22"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-the-home-page-hero-layout-so-that-the-talk-to-krishna-cta-is-moved-next-to-the-lord-krishna-picture-portrait-rather-than-being-stacked-below-the-find-by-mood-button",
-      "featureTitle": "Update the Home page hero layout so that the “Talk to Krishna” CTA is moved next to the Lord Krishna picture (portrait) rather than being stacked below the “Find by mood” button.",
-      "files": [
-        "frontend/src/pages/HomePage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-23"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-make-the-floral-visuals-in-the-home-page-background-more-prominent-while-preserving-readability-of-foreground-hero-text-and-ctas-in-both-light-and-dark-mode",
-      "featureTitle": "Make the floral visuals in the Home page background more prominent while preserving readability of foreground hero text and CTAs in both light and dark mode.",
-      "files": [
-        "frontend/src/pages/HomePage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-24"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-make-the-top-menu-bar-buttons-labeled-exactly-home-read-gita-discover-ask-krishna-visible-on-all-pages-tabs-home-read-gita-discover-talk-to-krishna-not-only-on-the-home-page",
-      "featureTitle": "Make the top menu bar (buttons labeled exactly: “Home”, “Read Gita”, “Discover”, “Ask Krishna”) visible on all pages/tabs (Home, Read Gita, Discover, Talk to Krishna), not only on the Home page.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/layout/TopMenuBar.tsx",
+        "frontend/src/index.css",
         "frontend/src/pages/HomePage.tsx",
         "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx"
       ],
@@ -72,18 +17,37 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-25"
+        "REQ-37"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-change-navigation-scroll-behavior-so-that-when-a-user-opens-any-tab-page-it-starts-at-the-top-of-that-page-do-not-preserve-previous-per-tab-scroll-position-also-ensure-internal-view-changes-within-read-gita-chapter-list-chapter-detail-verse-detail-back-start-at-the-top-of-the-newly-shown-view",
-      "featureTitle": "Change navigation scroll behavior so that when a user opens any tab/page, it starts at the top of that page (do not preserve previous per-tab scroll position). Also ensure internal view changes within Read Gita (chapter list → chapter detail → verse detail → back) start at the top of the newly shown view.",
+      "featureId": "feature-update-the-read-gita-chapter-detail-verse-table-to-a-5-column-layout-exactly-as-follows-1-chapter-verse-identifier-2-original-sanskrit-verse-full-text-3-literal-hindi-meaning-4-literal-english-meaning-5-interpretation-in-elegant-respectable-gen-z-lingo-apply-this-consistently-for-every-chapter-s-verse-listing",
+      "featureTitle": "Update the Read Gita chapter detail verse table to a 5-column layout exactly as follows: (1) Chapter:Verse identifier, (2) Original Sanskrit verse (full text), (3) Literal Hindi meaning, (4) Literal English meaning, (5) Interpretation in elegant, respectable Gen-Z lingo. Apply this consistently for every chapter’s verse listing.",
+      "files": [
+        "frontend/src/pages/ReadGita/ChapterDetailView.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-38"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-replace-the-current-floral-overlay-background-decorations-with-krishna-life-background-imagery-used-across-the-app-remove-the-flower-overlay-from-the-global-app-shell-and-instead-render-a-subtle-readable-background-treatment-composed-of-lord-krishna-images-from-various-instances-in-his-life-ensuring-readability-in-both-light-and-dark-mode",
+      "featureTitle": "Replace the current floral overlay/background decorations with Krishna-life background imagery used across the app. Remove the flower overlay from the global app shell and instead render a subtle, readable background treatment composed of Lord Krishna images from various instances in his life, ensuring readability in both light and dark mode.",
       "files": [
         "frontend/src/App.tsx",
-        "frontend/src/pages/Discover/DiscoverPage.tsx",
-        "frontend/src/pages/ReadGita/ReadGitaPage.tsx",
-        "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx"
+        "frontend/src/components/decorations/FlowerOverlay.tsx",
+        "frontend/src/components/decorations/KrishnaLifeBackground.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/HomePage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -93,25 +57,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-26"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-ensure-the-read-gita-chapter-list-displays-all-18-chapters-and-show-each-chapter-s-total-verse-count-in-brackets-in-the-list-ui-e-g-47",
-      "featureTitle": "Ensure the Read Gita chapter list displays all 18 chapters and show each chapter’s total verse count in brackets in the list UI (e.g., “(47)”).",
-      "files": [
-        "frontend/src/pages/ReadGita/ChapterListView.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-27"
+        "REQ-39"
       ],
       "confidence": "high"
     }

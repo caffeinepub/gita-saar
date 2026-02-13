@@ -29,8 +29,9 @@ const moodLabels: Record<Mood, string> = {
 export default function TalkToKrishnaPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [showSafetyModal, setShowSafetyModal] = useState(false);
-  const { mood, sessionHistory, addToHistory } = useSession();
+  const { mood, sessionHistory, addToHistory, consumePendingMessage } = useSession();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const hasConsumedPending = useRef(false);
 
   const { mutate: sendMessage, isPending } = useChatbotResponse();
 
@@ -42,22 +43,31 @@ export default function TalkToKrishnaPage() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = (content: string) => {
+  // Auto-send pending message from Home on mount
+  useEffect(() => {
+    if (!hasConsumedPending.current) {
+      const pending = consumePendingMessage();
+      if (pending) {
+        handleSendMessage(pending);
+      }
+      hasConsumedPending.current = true;
+    }
+  }, [consumePendingMessage]);
+
+  const handleSendMessage = (text: string) => {
+    if (!text.trim()) return;
+
     const userMessage: Message = {
       id: Date.now().toString(),
       role: 'user',
-      content,
+      content: text,
     };
 
     setMessages((prev) => [...prev, userMessage]);
-    addToHistory(content);
+    addToHistory(text);
 
     sendMessage(
-      {
-        userMessage: content,
-        mood: mood || null,
-        sessionHistory,
-      },
+      { userMessage: text, mood: mood || null, sessionHistory },
       {
         onSuccess: (response) => {
           const krishnaMessage: Message = {
@@ -74,49 +84,69 @@ export default function TalkToKrishnaPage() {
     );
   };
 
+  const handleFollowUpClick = (question: string) => {
+    handleSendMessage(question);
+  };
+
   return (
-    <div className="flex flex-col h-screen max-w-2xl mx-auto">
+    <div className="flex flex-col h-[calc(100vh-var(--top-menu-height)-4rem)]">
       {/* Header */}
-      <header className="bg-background/90 backdrop-blur-lg border-b border-border/50 px-4 py-3">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold text-primary font-serif">Talk to Krishna</h1>
-            {mood && (
-              <p className="text-xs text-muted-foreground">
-                Current mood: <span className="capitalize text-primary">{moodLabels[mood]}</span>
-              </p>
-            )}
+      <header className="bg-card/95 backdrop-blur-lg border-b border-border/50 px-4 py-3 shrink-0">
+        <div className="max-w-2xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img
+              src="/assets/generated/lord-krishna-portrait.dim_1024x1024.png"
+              alt="Krishna"
+              className="w-10 h-10 rounded-full border-2 border-primary/20"
+            />
+            <div>
+              <h1 className="text-lg font-semibold text-primary">Talk to Krishna</h1>
+              {mood && (
+                <p className="text-xs text-muted-foreground">
+                  Mood: <span className="text-primary font-medium">{moodLabels[mood]}</span>
+                </p>
+              )}
+            </div>
           </div>
-          <Button variant="ghost" size="icon" onClick={() => setShowSafetyModal(true)} className="text-primary hover:text-primary hover:bg-primary/10">
-            <Info className="w-5 h-5" />
+          <Button variant="ghost" size="sm" onClick={() => setShowSafetyModal(true)}>
+            <Info className="w-4 h-4" />
           </Button>
         </div>
       </header>
 
-      {/* Chat Thread */}
-      <div className="flex-1 overflow-y-auto px-4 py-6">
-        {messages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full text-center px-6">
-            <div className="w-20 h-20 rounded-full bg-primary/15 flex items-center justify-center mb-4 shadow-sm">
-              <img src="/assets/generated/gita-saar-logo.dim_512x512.png" alt="Krishna" className="w-12 h-12" />
+      {/* Scrollable chat thread */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-2xl mx-auto px-4 py-6">
+          {messages.length === 0 ? (
+            <div className="text-center py-12 space-y-4">
+              <img
+                src="/assets/generated/lord-krishna-portrait.dim_1024x1024.png"
+                alt="Krishna"
+                className="w-24 h-24 rounded-full mx-auto border-4 border-primary/20 shadow-lg"
+              />
+              <div>
+                <h2 className="text-xl font-semibold text-primary mb-2">Hey there! 👋</h2>
+                <p className="text-muted-foreground max-w-md mx-auto">
+                  I'm here to listen and guide you. Share what's on your mind, and let's figure it out together.
+                </p>
+              </div>
             </div>
-            <h2 className="text-xl font-semibold text-primary mb-2">Hey, I'm here for you</h2>
-            <p className="text-muted-foreground mb-6">
-              Whatever's on your mind, just share it. No judgment, only clarity.
-            </p>
-          </div>
-        ) : (
-          <ChatThread messages={messages} onFollowUpClick={handleSendMessage} />
-        )}
-        <div ref={messagesEndRef} />
+          ) : (
+            <>
+              <ChatThread messages={messages} onFollowUpClick={handleFollowUpClick} />
+              <div ref={messagesEndRef} />
+            </>
+          )}
+        </div>
       </div>
 
-      {/* Chat Composer */}
-      <div className="sticky bottom-0 bg-background/90 backdrop-blur-lg border-t border-border/50 px-4 py-4">
-        <ChatComposer onSend={handleSendMessage} disabled={isPending} />
+      {/* Fixed composer at bottom */}
+      <div className="shrink-0 bg-card/95 backdrop-blur-lg border-t border-border/50 px-4 py-3">
+        <div className="max-w-2xl mx-auto">
+          <ChatComposer onSend={handleSendMessage} disabled={isPending} />
+        </div>
       </div>
 
-      {/* Safety Modal */}
       <ChatSafetyModal open={showSafetyModal} onOpenChange={setShowSafetyModal} />
     </div>
   );

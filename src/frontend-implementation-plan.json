@@ -1,136 +1,114 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Refine hero layout, persistent top menu, scroll-to-top behavior, and Read Gita chapter list formatting",
+  "title": "Make Ask Krishna sticky, upgrade Read Gita to 5-column verse table, and replace floral overlays with Krishna-life background imagery",
   "requirements": [
     {
-      "id": "REQ-22",
-      "summary": "Restructure Home hero so the two primary CTAs render side-by-side directly under the hero subtext and fit on typical mobile without scrolling.",
+      "id": "REQ-37",
+      "summary": "Keep the Home mini Ask Krishna widget sticky under TopMenuBar while Home scrolls, and keep the Talk to Krishna composer fixed at the bottom while the thread scrolls independently.",
       "acceptanceCriteria": [
-        "On the Home page, the two CTAs “Open today’s wisdom” and “Find by mood” appear in a single row on mobile (wrapping only on extremely narrow widths), positioned immediately below the hero subtext.",
-        "On initial load at ~390x844 viewport, both CTAs are visible without scrolling (no vertical overflow required to see them).",
-        "The CTA buttons remain tappable and maintain the existing app styling (rounded/pill, soft pastel, readable in light/dark)."
+        "On the Home tab, the Krishna portrait + mini Ask Krishna widget stays visible and does not scroll away while the user scrolls the rest of the Home content.",
+        "On the Talk to Krishna tab, the message composer stays visible at the bottom while only the message list scrolls.",
+        "No UI overlap occurs between the TopMenuBar and the sticky Ask Krishna section (correct top offset is preserved)."
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/HomePage.tsx",
           "operation": "modify",
-          "description": "Update the hero layout so the “Open today's wisdom” and “Find by mood” Buttons (shadcn-ui Button) render in a single-row layout immediately under the hero subtext on mobile, adjusting spacing/padding/typography so both CTAs are visible above the fold on typical mobile viewports. Verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-23",
-      "summary": "Move the “Talk to Krishna” CTA next to the Krishna portrait so it’s grouped with the image rather than stacked under the other CTAs.",
-      "acceptanceCriteria": [
-        "On the Home page hero, the “Talk to Krishna” button is visually grouped with and placed adjacent to the Krishna portrait (e.g., beside it or aligned in the same row/cluster), not underneath the other two CTAs.",
-        "The button continues to navigate to the Talk to Krishna tab when clicked.",
-        "Layout remains responsive and does not overlap the portrait on small screens."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "modify",
-          "description": "Recompose the hero section so the Krishna portrait and “Talk to Krishna” Button (shadcn-ui Button) are laid out as an adjacent cluster (e.g., portrait with CTA alongside/nearby) while keeping small-screen responsiveness and preserving navigation to the chat tab. Verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-24",
-      "summary": "Increase prominence of Home floral background visuals while keeping hero content readable in light and dark mode.",
-      "acceptanceCriteria": [
-        "The Home page floral decoration is noticeably more visible than the current implementation (e.g., increased scale/coverage/contrast/opacity and/or additional placements), but hero headline/subtext and CTA labels retain accessible contrast.",
-        "No foreground UI elements become visually cluttered or hard to read in either light or dark theme."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/flowers-corner-prominent.dim_1024x1024.png",
-          "operation": "create",
-          "description": "Add the updated generated floral asset for a more prominent soft-pastel background decoration: frontend/public/assets/generated/flowers-corner-prominent.dim_1024x1024.png."
-        },
-        {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "modify",
-          "description": "Swap the floral decoration image to frontend/public/assets/generated/flowers-corner-prominent.dim_1024x1024.png and adjust placement/scale/opacity (and, if needed, add additional decorative placements) while ensuring hero text and CTAs remain readable in both light and dark mode. Verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-25",
-      "summary": "Make a sticky top menu bar visible on all tabs/pages with exact labels and correct navigation/scroll-to-top behavior.",
-      "acceptanceCriteria": [
-        "When switching to any tab (Read Gita, Discover, Talk to Krishna), the same top menu bar is present and sticky at the top.",
-        "Menu button labels match exactly: “Home”, “Read Gita”, “Discover”, “Ask Krishna”.",
-        "Clicking “Read Gita”, “Discover”, and “Ask Krishna” navigates to the corresponding existing tabs.",
-        "Clicking “Home” returns to Home tab if not already there; if already on Home tab it scrolls the Home content to the top."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/layout/TopMenuBar.tsx",
-          "operation": "create",
-          "description": "Create a shared sticky TopMenuBar component using shadcn-ui Button for the four exact labels (“Home”, “Read Gita”, “Discover”, “Ask Krishna”) plus the existing ThemeToggle; the component should accept the active tab and an onNavigate callback so “Home” can either navigate or scroll-to-top when already active. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Render the shared TopMenuBar above the tab content so it appears on all tabs/pages; wire its actions to existing tab switching and implement the special “Home” behavior (navigate if not on Home; otherwise scroll to top). Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "modify",
-          "description": "Remove/disable the HomePage-local top menu bar to avoid duplication, relying on the shared TopMenuBar rendered by App; keep Home content aligned under the global bar. Verify the component's usage instructions before implementing."
+          "description": "Ensure the existing sticky mini Ask Krishna section is the only pinned area for Home content, and adjust spacing/z-index as needed so it stays fixed below TopMenuBar (using the existing --top-menu-height offset) without overlap while the rest of Home scrolls."
         },
         {
           "path": "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
           "operation": "modify",
-          "description": "Adjust the TalkToKrishnaPage header behavior/layout to coexist with the new global sticky TopMenuBar (e.g., avoid double-sticky headers/overlap and ensure content starts below the global bar) while keeping the existing chat UI functional. Verify the component's usage instructions before implementing."
+          "description": "Restructure layout so only the chat thread area scrolls (overflow-y-auto) and the composer remains pinned at the bottom of the visible chat area; ensure sizing accounts for the global TopMenuBar and fixed bottom navigation so the composer is always visible."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add/adjust global CSS variables (e.g., a bottom-nav height variable) and any small global layout utilities needed to keep sticky elements correctly offset (TopMenuBar and bottom nav) and prevent overlap."
         }
       ]
     },
     {
-      "id": "REQ-26",
-      "summary": "Change navigation so tab switches and Read Gita internal view changes always open scrolled to the top (no per-tab scroll preservation).",
+      "id": "REQ-38",
+      "summary": "Change ChapterDetailView verse listing to a consistent 5-column table: Chapter:Verse, full Sanskrit, literal Hindi, literal English, and respectful Gen‑Z interpretation.",
       "acceptanceCriteria": [
-        "Switching tabs always scrolls to the top (window scrollY becomes 0) immediately on tab activation.",
-        "In Read Gita, when switching between views (chapters/today/chapter-detail/verse-detail), the view opens scrolled to the top of its content.",
-        "This behavior is consistent across Home, Read Gita, Discover, and Talk to Krishna."
+        "In ChapterDetailView, the table header shows 5 columns corresponding to: Chapter:Verse, Sanskrit, Literal Hindi, Literal English, Interpretation.",
+        "Each verse row renders the Chapter:Verse identifier (e.g., “2:47”) in column 1, and the full Sanskrit shloka in column 2 (not just a preview).",
+        "Horizontal scrolling still works on mobile and all 5 columns remain accessible and readable."
       ],
       "file_operations": [
+        {
+          "path": "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
+          "operation": "modify",
+          "description": "Update the verse table to exactly 5 columns (Chapter:Verse, full Sanskrit, literal Hindi meaning, literal English meaning, Gen‑Z interpretation); render the full Sanskrit text in its own column; keep horizontal scrolling working via the existing overflow-x wrapper/ScrollArea and adjust min-widths for mobile readability."
+        }
+      ]
+    },
+    {
+      "id": "REQ-39",
+      "summary": "Remove floral overlay decorations and apply subtle Krishna-life background imagery across the app with good readability in light and dark mode, served as static generated assets.",
+      "acceptanceCriteria": [
+        "The FlowerOverlay is no longer rendered globally (no flower stickers appear anywhere unless explicitly reintroduced).",
+        "The app uses Krishna-life imagery as background visuals across tabs (Home, Read Gita, Discover, Talk to Krishna) with appropriate opacity/blur so foreground text and cards remain readable.",
+        "Light and dark mode both maintain sufficient contrast (no background image makes primary text or table content hard to read).",
+        "All newly generated images are served as static assets from frontend/public/assets/generated and referenced directly from the frontend."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png",
+          "operation": "create",
+          "description": "Add generated static asset for Krishna-life background image: baby Krishna with butter theme, soft pastel style (frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png)."
+        },
+        {
+          "path": "frontend/public/assets/generated/krishna-life-bg-2.dim_1600x2400.png",
+          "operation": "create",
+          "description": "Add generated static asset for Krishna-life background image: Krishna playing flute, serene devotional style (frontend/public/assets/generated/krishna-life-bg-2.dim_1600x2400.png)."
+        },
+        {
+          "path": "frontend/public/assets/generated/krishna-life-bg-3.dim_1600x2400.png",
+          "operation": "create",
+          "description": "Add generated static asset for Krishna-life background image: Krishna lifting Govardhan, gentle pastel illustration/photo-collage look (frontend/public/assets/generated/krishna-life-bg-3.dim_1600x2400.png)."
+        },
+        {
+          "path": "frontend/public/assets/generated/krishna-life-bg-4.dim_1600x2400.png",
+          "operation": "create",
+          "description": "Add generated static asset for Krishna-life background image: Krishna with Arjuna on chariot (Kurukshetra), subtle and non-busy composition (frontend/public/assets/generated/krishna-life-bg-4.dim_1600x2400.png)."
+        },
+        {
+          "path": "frontend/public/assets/generated/krishna-life-bg-5.dim_1600x2400.png",
+          "operation": "create",
+          "description": "Add generated static asset for Krishna-life background image: Krishna dancing on Kaliya, softened tones and low visual noise (frontend/public/assets/generated/krishna-life-bg-5.dim_1600x2400.png)."
+        },
+        {
+          "path": "frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png",
+          "operation": "create",
+          "description": "Add generated static asset for Krishna-life background image: Radha-Krishna devotional scene, minimal background clutter (frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png)."
+        },
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Remove per-tab scroll position preservation and ensure that whenever activeTab changes, the window scroll position is reset to the top (scrollY=0) immediately on activation (including when navigating via the new global TopMenuBar)."
+          "description": "Remove global rendering of FlowerOverlay and wire in a new global background treatment component/layer that uses the six Krishna-life images as subtle, readable backgrounds across all tabs (with appropriate opacity/blur/gradient overlays for light/dark mode)."
         },
         {
-          "path": "frontend/src/pages/ReadGita/ReadGitaPage.tsx",
-          "operation": "modify",
-          "description": "Add view-change scroll reset so when switching between 'chapters' → 'today' → 'chapter-detail' → 'verse-detail' (and back), the newly shown view starts scrolled to the top of its content."
+          "path": "frontend/src/components/decorations/KrishnaLifeBackground.tsx",
+          "operation": "create",
+          "description": "Create a reusable global background component that renders Krishna-life imagery (using frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png through frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png) with a readability overlay that adapts to light/dark themes."
         },
         {
-          "path": "frontend/src/pages/Discover/DiscoverPage.tsx",
-          "operation": "modify",
-          "description": "Ensure switching between Discover's mood grid and MoodDetailView resets scroll to top so newly shown content starts at the top (consistent with the app-wide behavior)."
+          "path": "frontend/src/components/decorations/FlowerOverlay.tsx",
+          "operation": "delete",
+          "description": "Remove the FlowerOverlay component so floral sticker overlays can no longer appear from the global app shell."
         },
         {
-          "path": "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
+          "path": "frontend/src/pages/HomePage.tsx",
           "operation": "modify",
-          "description": "Ensure the Talk to Krishna tab content starts at the top on tab activation (align with window scroll-to-top behavior and avoid layout patterns that create unintended preserved scroll within the page container)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-27",
-      "summary": "Show all 18 chapters in Read Gita list and display each chapter’s verse count in bracket format in the list UI.",
-      "acceptanceCriteria": [
-        "The chapter listing renders 18 chapters when backend data is available (no missing entries).",
-        "Each chapter card displays the verse count in bracket format (example: “(47)”) in addition to the chapter title/subtitle.",
-        "The search filter still works and only filters from the full set of 18 chapters."
-      ],
-      "file_operations": [
+          "description": "Remove any remaining floral corner decorations in the Home hero section and align Home visuals with the new Krishna-life background approach so foreground text/cards remain readable."
+        },
         {
-          "path": "frontend/src/pages/ReadGita/ChapterListView.tsx",
+          "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Ensure the chapter list is derived from the full getAllChapters result (e.g., apply a stable sort by chapter number before filtering) and update the chapter card UI to display verseCount in bracket format “(47)” alongside the chapter title/subtitle (instead of “47 verses”), while keeping the existing search behavior intact. Verify the component's usage instructions before implementing."
+          "description": "Add global styles/utilities for the Krishna-life background layer (e.g., opacity/blur and light/dark readability overlays) to ensure tables and primary text remain legible across the app."
         }
       ]
     }

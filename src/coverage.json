@@ -1,109 +1,99 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T08:36:58.619Z",
+  "generatedAt": "2026-02-13T09:19:33.231Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 6,
-    "implemented": 6,
+    "total": 4,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-22",
-        "summary": "Update the Home page hero layout so that “Open today’s wisdom” and “Find by mood” render side-by-side (parallel) directly under the hero subtext (“The Bhagavad Gita — decoded for overthinkers, anxious minds, and curious Gen-Z souls.”) and are visible without scrolling on typical mobile viewports.",
+        "id": "REQ-37",
+        "summary": "Make the “Ask Krishna” entry UI static (not moving with scroll) by ensuring the Home page’s mini Ask Krishna widget section remains fixed/sticky below the global TopMenuBar across Home scrolling, and ensure the chat composer on the Talk to Krishna page remains fixed at the bottom while the chat thread scrolls independently.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-23",
-        "summary": "Update the Home page hero layout so that the “Talk to Krishna” CTA is moved next to the Lord Krishna picture (portrait) rather than being stacked below the “Find by mood” button.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-24",
-        "summary": "Make the floral visuals in the Home page background more prominent while preserving readability of foreground hero text and CTAs in both light and dark mode.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/public/assets/generated/flowers-corner-prominent.dim_1024x1024.png",
-          "frontend/src/pages/HomePage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/public/assets/generated/flowers-corner-prominent.dim_1024x1024.png",
-          "frontend/src/pages/HomePage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-25",
-        "summary": "Make the top menu bar (buttons labeled exactly: “Home”, “Read Gita”, “Discover”, “Ask Krishna”) visible on all pages/tabs (Home, Read Gita, Discover, Talk to Krishna), not only on the Home page.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/layout/TopMenuBar.tsx",
-          "frontend/src/App.tsx",
           "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx"
+          "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
+          "frontend/src/index.css"
         ],
         "matchedFiles": [
-          "frontend/src/components/layout/TopMenuBar.tsx",
-          "frontend/src/App.tsx",
           "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx"
+          "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
+          "frontend/src/index.css"
         ]
       },
       {
-        "id": "REQ-26",
-        "summary": "Change navigation scroll behavior so that when a user opens any tab/page, it starts at the top of that page (do not preserve previous per-tab scroll position). Also ensure internal view changes within Read Gita (chapter list → chapter detail → verse detail → back) start at the top of the newly shown view.",
+        "id": "REQ-38",
+        "summary": "Update the Read Gita chapter detail verse table to a 5-column layout exactly as follows: (1) Chapter:Verse identifier, (2) Original Sanskrit verse (full text), (3) Literal Hindi meaning, (4) Literal English meaning, (5) Interpretation in elegant, respectable Gen-Z lingo. Apply this consistently for every chapter’s verse listing.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/App.tsx",
-          "frontend/src/pages/ReadGita/ReadGitaPage.tsx",
-          "frontend/src/pages/Discover/DiscoverPage.tsx",
-          "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx"
+          "frontend/src/pages/ReadGita/ChapterDetailView.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/App.tsx",
-          "frontend/src/pages/ReadGita/ReadGitaPage.tsx",
-          "frontend/src/pages/Discover/DiscoverPage.tsx",
-          "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx"
+          "frontend/src/pages/ReadGita/ChapterDetailView.tsx"
         ]
       },
       {
-        "id": "REQ-27",
-        "summary": "Ensure the Read Gita chapter list displays all 18 chapters and show each chapter’s total verse count in brackets in the list UI (e.g., “(47)”).",
+        "id": "REQ-39",
+        "summary": "Replace the current floral overlay/background decorations with Krishna-life background imagery used across the app. Remove the flower overlay from the global app shell and instead render a subtle, readable background treatment composed of Lord Krishna images from various instances in his life, ensuring readability in both light and dark mode.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/ReadGita/ChapterListView.tsx"
+          "frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png",
+          "frontend/public/assets/generated/krishna-life-bg-2.dim_1600x2400.png",
+          "frontend/public/assets/generated/krishna-life-bg-3.dim_1600x2400.png",
+          "frontend/public/assets/generated/krishna-life-bg-4.dim_1600x2400.png",
+          "frontend/public/assets/generated/krishna-life-bg-5.dim_1600x2400.png",
+          "frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png",
+          "frontend/src/App.tsx",
+          "frontend/src/components/decorations/KrishnaLifeBackground.tsx",
+          "frontend/src/components/decorations/FlowerOverlay.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/index.css"
         ],
         "matchedFiles": [
-          "frontend/src/pages/ReadGita/ChapterListView.tsx"
+          "frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png",
+          "frontend/public/assets/generated/krishna-life-bg-2.dim_1600x2400.png",
+          "frontend/public/assets/generated/krishna-life-bg-3.dim_1600x2400.png",
+          "frontend/public/assets/generated/krishna-life-bg-4.dim_1600x2400.png",
+          "frontend/public/assets/generated/krishna-life-bg-5.dim_1600x2400.png",
+          "frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png",
+          "frontend/src/App.tsx",
+          "frontend/src/components/decorations/KrishnaLifeBackground.tsx",
+          "frontend/src/components/decorations/FlowerOverlay.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/index.css"
         ]
+      },
+      {
+        "id": "REQ-40",
+        "summary": "Populate the backend with the complete set of verses for all 18 chapters so that Read Gita can display every verse in the 5-column format fields (chapter, verse, Sanskrit, literal Hindi, literal English, elegant/respectable Gen-Z interpretation). Ensure the existing backend query methods return complete data for every chapter and verse.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
       }
     ]
   },
   "changedFiles": [
+    "backend/main.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/flowers-corner-prominent.dim_1024x1024.png",
+    "frontend/public/assets/generated/krishna-life-bg-1.dim_1600x2400.png",
+    "frontend/public/assets/generated/krishna-life-bg-2.dim_1600x2400.png",
+    "frontend/public/assets/generated/krishna-life-bg-3.dim_1600x2400.png",
+    "frontend/public/assets/generated/krishna-life-bg-4.dim_1600x2400.png",
+    "frontend/public/assets/generated/krishna-life-bg-5.dim_1600x2400.png",
+    "frontend/public/assets/generated/krishna-life-bg-6.dim_1600x2400.png",
     "frontend/src/App.tsx",
-    "frontend/src/components/layout/TopMenuBar.tsx",
-    "frontend/src/pages/Discover/DiscoverPage.tsx",
+    "frontend/src/components/decorations/FlowerOverlay.tsx",
+    "frontend/src/components/decorations/KrishnaLifeBackground.tsx",
+    "frontend/src/index.css",
     "frontend/src/pages/HomePage.tsx",
-    "frontend/src/pages/ReadGita/ChapterListView.tsx",
-    "frontend/src/pages/ReadGita/ReadGitaPage.tsx",
+    "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
     "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 9,
-  "summary": "Mobile-first spiritual reflection app/platform called \"Gita Saar\" for ages 13–25, featuring a Gen‑Z Hinglish \"best-friend Krishna\" chatbot, full Bhagavad Gita verse browsing with a fixed 4-column verse card format + action step, mood-based discovery, and an app-like UI with bottom navigation, dark mode, and updated styling preference: pink background with suitably-used purple typography.",
+  "projectStateVersion": 15,
+  "summary": "Mobile-first spiritual reflection app/platform called \"Gita Saar\" for ages 13–25, featuring a Gen‑Z Hinglish \"best-friend Krishna\" chatbot, full Bhagavad Gita browsing with a 5-column verse table format (chapter:verse, Sanskrit, literal Hindi, literal English, elegant/respectable Gen‑Z interpretation), mood-based discovery, and an app-like UI with bottom navigation, dark mode, and updated styling preference: pink background with suitably-used purple typography and Krishna-life imagery as background visuals (instead of floral backgrounds).",
   "architectural_notes": [
     "Mobile-first app-like IA with bottom navigation: Home / Read Gita / Talk to Krishna / Discover.",
     "Chatbot outputs must follow a strict verse card structure (Sanskrit + Hindi meaning + English meaning + Gen‑Z interpretation) and always end with a small action step.",
@@ -12,13 +12,14 @@
     "Verse card translation fields should be explicitly \"Literal Hindi translation\" and \"Literal English translation\" (not paraphrases), alongside Sanskrit and Gen‑Z interpretation.",
     "User requested a top menu/navigation bar (Home/Read Gita/Discover/Ask Krishna) in addition to existing app navigation expectations.",
     "Discover emotions should be hardcoded as selectable boxes/cards with verse suggestions and coping guidance per emotion.",
-    "Read Gita chapter pages requested as tabular verse rows (verse + Hindi meaning + English meaning + Gen‑Z interpretation)."
+    "Read Gita chapter detail and verse lists should use a 5-column table: (1) chapter:verse number, (2) Sanskrit original, (3) Literal Hindi translation, (4) Literal English translation, (5) Gen‑Z interpretation written in an elegant/respectable tone."
   ],
   "known_issues": [
-    "Build/deployment attempts failed due to an internal configuration issue and an inability to implement the request via the build tool."
+    "Build/deployment attempts failed due to an internal configuration issue and an inability to implement the request via the build tool.",
+    "Chatbot language currently feels too ‘tapori’ and not aligned with the intended Gen‑Z Hinglish best-friend Krishna tone."
   ],
-  "isFixRequest": false,
-  "imageRequirements": "## Edit Images\n- Increase visibility and prominence of the floral decoration while keeping a soft pastel style (flowers-corner.dim_1024x1024.png > flowers-corner-prominent.dim_1024x1024.png)",
+  "isFixRequest": true,
+  "imageRequirements": "## Required Images\n- Krishna-life background image: baby Krishna with butter theme, soft pastel style (krishna-life-bg-1.dim_1600x2400.png)\n- Krishna-life background image: Krishna playing flute, serene devotional style (krishna-life-bg-2.dim_1600x2400.png)\n- Krishna-life background image: Krishna lifting Govardhan, gentle pastel illustration/photo-collage look (krishna-life-bg-3.dim_1600x2400.png)\n- Krishna-life background image: Krishna with Arjuna on chariot (Kurukshetra), subtle and non-busy composition (krishna-life-bg-4.dim_1600x2400.png)\n- Krishna-life background image: Krishna dancing on Kaliya, softened tones and low visual noise (krishna-life-bg-5.dim_1600x2400.png)\n- Krishna-life background image: Radha-Krishna devotional scene, minimal background clutter (krishna-life-bg-6.dim_1600x2400.png)",
   "existing_features": [
     {
       "id": "feature-create-the-core-mobile-first-app-shell-with-bottom-navigation-containing-exactly-four-main-sections-home-read-gita-talk-to-krishna-and-discover-the-experience-must-feel-app-like-and-thumb-friendly-with-routing-state-that-preserves-the-current-tab-and-scroll-position-per-tab-during-the-session",
@@ -211,6 +212,86 @@
         "REQ-27"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-home-tab-top-section-so-the-lord-krishna-photo-and-an-ask-krishna-mini-chat-widget-remain-at-the-top-of-the-home-view-directly-below-the-global-topmenubar-and-visible-without-scrolling-on-typical-mobile-viewports",
+      "title": "Update the Home tab top section so the Lord Krishna photo and an “Ask Krishna” mini chat widget remain at the top of the Home view, directly below the global TopMenuBar, and visible without scrolling on typical mobile viewports.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-embedded-mini-chat-window-on-the-home-tab-within-the-pinned-top-section-that-lets-the-user-type-a-question-and-submit-it-from-the-home-tab-itself",
+      "title": "Add an embedded mini chat window on the Home tab (within the pinned top section) that lets the user type a question and submit it from the Home tab itself.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-when-the-user-submits-a-question-from-the-home-mini-chat-widget-navigate-the-user-to-the-dedicated-talktokrishnapage-ask-krishna-tab-and-ensure-the-submitted-question-is-carried-over-into-the-dedicated-chat-experience",
+      "title": "When the user submits a question from the Home mini chat widget, navigate the user to the dedicated TalkToKrishnaPage (Ask Krishna tab) and ensure the submitted question is carried over into the dedicated chat experience.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-increase-the-floral-decoration-density-across-the-app-by-adding-more-individual-flower-elements-distributed-across-the-whole-screen-while-preserving-readability-of-foreground-content-and-maintaining-the-current-soft-pink-pastel-design-direction-in-both-light-and-dark-mode",
+      "title": "Increase the floral decoration density across the app by adding more individual flower elements distributed across the whole screen while preserving readability of foreground content and maintaining the current soft-pink/pastel design direction in both light and dark mode.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-render-any-newly-generated-flower-image-assets-as-static-frontend-assets-under-frontend-public-assets-generated-and-use-them-in-the-ui-for-the-added-floral-decorations",
+      "title": "Render any newly generated flower image assets as static frontend assets under frontend/public/assets/generated and use them in the UI for the added floral decorations.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-any-overly-tapori-slang-from-krishna-chatbot-output-and-enforce-the-intended-gen-z-hinglish-best-friend-voice-consistently-in-chatbot-responses-supportivemessage-follow-up-questions-and-gen-z-interpretation-text-returned-for-verses-while-keeping-the-existing-safety-boundaries-and-progressive-depth-behavior",
+      "title": "Remove any overly “tapori” slang from Krishna chatbot output and enforce the intended Gen‑Z Hinglish best-friend voice consistently in chatbot responses (supportiveMessage, follow-up questions, and Gen‑Z interpretation text returned for verses), while keeping the existing safety boundaries and progressive-depth behavior.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-the-read-gita-chapter-detail-screen-ensure-all-verses-render-in-the-existing-4-column-table-layout-verse-identifier-sanskrit-preview-hindi-meaning-english-meaning-gen-z-interpretation-for-every-chapter-once-full-data-is-available",
+      "title": "In the Read Gita chapter detail screen, ensure all verses render in the existing 4-column table layout (Verse identifier/Sanskrit preview + Hindi meaning + English meaning + Gen‑Z interpretation) for every chapter once full data is available.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-ask-krishna-entry-ui-static-not-moving-with-scroll-by-ensuring-the-home-page-s-mini-ask-krishna-widget-section-remains-fixed-sticky-below-the-global-topmenubar-across-home-scrolling-and-ensure-the-chat-composer-on-the-talk-to-krishna-page-remains-fixed-at-the-bottom-while-the-chat-thread-scrolls-independently",
+      "title": "Make the “Ask Krishna” entry UI static (not moving with scroll) by ensuring the Home page’s mini Ask Krishna widget section remains fixed/sticky below the global TopMenuBar across Home scrolling, and ensure the chat composer on the Talk to Krishna page remains fixed at the bottom while the chat thread scrolls independently.",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-read-gita-chapter-detail-verse-table-to-a-5-column-layout-exactly-as-follows-1-chapter-verse-identifier-2-original-sanskrit-verse-full-text-3-literal-hindi-meaning-4-literal-english-meaning-5-interpretation-in-elegant-respectable-gen-z-lingo-apply-this-consistently-for-every-chapter-s-verse-listing",
+      "title": "Update the Read Gita chapter detail verse table to a 5-column layout exactly as follows: (1) Chapter:Verse identifier, (2) Original Sanskrit verse (full text), (3) Literal Hindi meaning, (4) Literal English meaning, (5) Interpretation in elegant, respectable Gen-Z lingo. Apply this consistently for every chapter’s verse listing.",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-floral-overlay-background-decorations-with-krishna-life-background-imagery-used-across-the-app-remove-the-flower-overlay-from-the-global-app-shell-and-instead-render-a-subtle-readable-background-treatment-composed-of-lord-krishna-images-from-various-instances-in-his-life-ensuring-readability-in-both-light-and-dark-mode",
+      "title": "Replace the current floral overlay/background decorations with Krishna-life background imagery used across the app. Remove the flower overlay from the global app shell and instead render a subtle, readable background treatment composed of Lord Krishna images from various instances in his life, ensuring readability in both light and dark mode.",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -335,27 +416,63 @@
       "status": "pending"
     },
     {
-      "id": "AR-30",
-      "summary": "Add devotional UI imagery elements (flowers and a Lord Krishna picture) while keeping the attached UI styling direction.",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-31",
-      "summary": "Change Read Gita chapter detail presentation to a table per chapter where each row shows: verse, Hindi meaning, English meaning, and Gen‑Z style interpretation.",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
       "id": "AR-32",
       "summary": "Global navigation/scroll behavior updates: top menu bar should be visible on all pages (not just Home) and every page/tab should open scrolled to the top when navigated to.",
       "reqIds": [],
       "status": "pending"
     },
     {
-      "id": "AR-33",
-      "summary": "Home page layout refinements: move “Talk to Krishna” CTA next to Krishna’s picture; place “Open today’s wisdom” and “Find by mood” CTAs side-by-side directly under the main headline; adjust typography/spacing so these CTAs are visible on initial view; make background floral elements more prominent.",
+      "id": "AR-34",
+      "summary": "Home page top section: keep Krishna photo + “Ask Krishna” widget pinned just below the top menu bar; show an embedded mini chat window/input there so the user can type a question, and on submit navigate to the dedicated full chat page.",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-36",
+      "summary": "Adjust chatbot/app copy tone: remove overly ‘tapori’ slang and enforce Gen‑Z Hinglish best-friend Krishna voice consistently across responses and UI text.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-38",
+      "summary": "Ensure the backend `getAllChapters()` returns the full set of 18 Bhagavad Gita chapters with correct verseCount per chapter, so the Read Gita chapter list always renders all 18 chapters.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-39",
+      "summary": "Ensure the backend `getVersesByChapter(chapterNumber)` returns every verse for the selected chapter, and each verse includes all fields required for the app’s 4-part/4-column verse format: Sanskrit, literal Hindi translation, literal English translation, Gen‑Z Krishna interpretation, and exactly one action step.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-40",
+      "summary": "Make the “Ask Krishna” element/static UI (chat entry/widget) fixed in place and not moving with scroll.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-41",
+      "summary": "Update Read Gita verse presentation to a 5-column table: (1) chapter & verse number, (2) original Sanskrit verse, (3) literal Hindi meaning, (4) literal English meaning, (5) interpretation in elegant and respectable Gen‑Z lingo; apply consistently across all chapters/verses.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-42",
+      "summary": "Replace floral background decorations with background images featuring Lord Krishna from various instances in his life, used across the app while preserving readability in light/dark mode.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-46",
+      "summary": "Populate the backend with the complete set of verses for all 18 chapters so that Read Gita can display every verse in the 5-column format fields (chapter, verse, Sanskrit, literal Hindi, literal English, elegant/respectable Gen-Z interpretation). Ensure the existing backend query methods return complete data for every chapter and verse.",
+      "reqIds": [
+        "REQ-40"
+      ],
       "status": "pending"
     }
   ],

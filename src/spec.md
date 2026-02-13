@@ -1,14 +1,13 @@
 # Specification
 
 ## Summary
-**Goal:** Refine the Home hero layout and background visuals, make the top menu bar global, ensure consistent scroll-to-top navigation, and improve Read Gita chapter list formatting.
+**Goal:** Keep “Ask Krishna” UI elements fixed while scrolling, update Read Gita verse presentation to a 5-column table, replace floral decorations with Krishna-life background imagery, and ensure all 18 chapters’ verses are fully populated.
 
 **Planned changes:**
-- Adjust Home hero layout so “Open today’s wisdom” and “Find by mood” appear side-by-side directly under the hero subtext and are visible without scrolling on typical mobile viewports.
-- Reposition the “Talk to Krishna” CTA to sit adjacent to the Krishna portrait while keeping responsive, non-overlapping layout.
-- Make the Home floral background visuals more prominent while preserving readability in both light and dark mode.
-- Show the same sticky top menu bar on all tabs/pages with labels: “Home”, “Read Gita”, “Discover”, “Ask Krishna”, including Home-to-top behavior when already on Home.
-- Update navigation so switching tabs and changing views within Read Gita always starts at the top of the newly opened view.
-- Ensure Read Gita chapter list shows all 18 chapters and displays each chapter’s total verse count in brackets (e.g., “(47)”), with search filtering still applied over the full set.
+- Make the Home page mini Ask Krishna widget (Krishna portrait + entry UI) sticky/fixed below the TopMenuBar so it stays visible while Home content scrolls.
+- Make the Talk to Krishna chat composer fixed at the bottom while the chat thread scrolls independently.
+- Update Read Gita chapter detail verse table to a 5-column layout: Chapter:Verse, full Sanskrit, literal Hindi meaning, literal English meaning, and an elegant/respectable Gen‑Z interpretation; keep mobile horizontal scrolling usable.
+- Remove the global flower overlay/decorations and apply subtle Krishna-life background imagery across all tabs with readability preserved in light and dark mode.
+- Populate backend verse data for all 18 chapters so verse queries return complete results including Sanskrit, literal Hindi/English meanings, and the Gen‑Z interpretation, while keeping required existing verse fields non-empty.
 
-**User-visible outcome:** The Home screen’s CTAs are immediately accessible and better arranged on mobile, the floral background is more visible, the top menu is available across all tabs, pages always open scrolled to the top, and Read Gita shows all chapters with verse counts in the list.
+**User-visible outcome:** The Ask Krishna widget stays visible on Home, the chat input stays pinned on Talk to Krishna, Read Gita shows every verse in a consistent 5-column table across all chapters, and the app background uses Krishna-life imagery instead of floral overlays without reducing text/table readability.
