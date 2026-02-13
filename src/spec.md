@@ -1,13 +1,14 @@
 # Specification
 
 ## Summary
-**Goal:** Refresh the UI/UX to a soft pink + purple-accent theme aligned with the provided screenshots, and fully populate + present complete Gita Saar content (18 chapters, all verses) with the required four-part format and action step.
+**Goal:** Refine the Home hero layout and background visuals, make the top menu bar global, ensure consistent scroll-to-top navigation, and improve Read Gita chapter list formatting.
 
 **Planned changes:**
-- Update the global visual theme so the app uses a clearly pink background across all pages, with intentional purple typography accents for headings, labels, links, active navigation, and emphasis text; keep both light and dark mode readable and consistent.
-- Refine UI/UX styling to match the screenshot direction: airy spacing, rounded cards, consistent elevations, serif-forward hero headings where appropriate, unified button styles, and consistent navigation active states across Home, Read Gita, Talk to Krishna, and Discover.
-- Populate backend with complete Gita Saar dataset covering all 18 chapters and every verse, where each verse includes Sanskrit, literal Hindi translation, literal English translation, Gen‑Z interpretation, and exactly one action step.
-- Update verse presentation UI so each verse card clearly shows labeled sections for “Sanskrit (original)”, “Literal Hindi translation”, “Literal English translation”, and “Gen‑Z interpretation”, with the action step always visible and visually distinct.
-- Add an in-page search/filter input on the Read Gita chapter listing screen to filter chapters client-side by English title and Sanskrit subtitle while keeping the existing four-tab structure unchanged.
+- Adjust Home hero layout so “Open today’s wisdom” and “Find by mood” appear side-by-side directly under the hero subtext and are visible without scrolling on typical mobile viewports.
+- Reposition the “Talk to Krishna” CTA to sit adjacent to the Krishna portrait while keeping responsive, non-overlapping layout.
+- Make the Home floral background visuals more prominent while preserving readability in both light and dark mode.
+- Show the same sticky top menu bar on all tabs/pages with labels: “Home”, “Read Gita”, “Discover”, “Ask Krishna”, including Home-to-top behavior when already on Home.
+- Update navigation so switching tabs and changing views within Read Gita always starts at the top of the newly opened view.
+- Ensure Read Gita chapter list shows all 18 chapters and displays each chapter’s total verse count in brackets (e.g., “(47)”), with search filtering still applied over the full set.
 
-**User-visible outcome:** The app displays a consistent pink-and-purple, screenshot-aligned interface in both light and dark mode, users can browse and search all 18 chapters, and every verse is shown with Sanskrit + literal Hindi/English translations + Gen‑Z interpretation and a clearly separated action step.
+**User-visible outcome:** The Home screen’s CTAs are immediately accessible and better arranged on mobile, the floral background is more visible, the top menu is available across all tabs, pages always open scrolled to the top, and Read Gita shows all chapters with verse counts in the list.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
+  "projectStateVersion": 9,
   "summary": "Mobile-first spiritual reflection app/platform called \"Gita Saar\" for ages 13–25, featuring a Gen‑Z Hinglish \"best-friend Krishna\" chatbot, full Bhagavad Gita verse browsing with a fixed 4-column verse card format + action step, mood-based discovery, and an app-like UI with bottom navigation, dark mode, and updated styling preference: pink background with suitably-used purple typography.",
   "architectural_notes": [
     "Mobile-first app-like IA with bottom navigation: Home / Read Gita / Talk to Krishna / Discover.",
@@ -9,10 +9,16 @@
     "Design system: soft pastel minimal UI, rounded components, micro-animations, and dark mode.",
     "Product constraint: 100% free (no paywalls, no guilt nudging).",
     "UI color constraint: primary background should be pink; use purple for typography/word accents in a readable, consistent way across light/dark modes.",
-    "Verse card translation fields should be explicitly \"Literal Hindi translation\" and \"Literal English translation\" (not paraphrases), alongside Sanskrit and Gen‑Z interpretation."
+    "Verse card translation fields should be explicitly \"Literal Hindi translation\" and \"Literal English translation\" (not paraphrases), alongside Sanskrit and Gen‑Z interpretation.",
+    "User requested a top menu/navigation bar (Home/Read Gita/Discover/Ask Krishna) in addition to existing app navigation expectations.",
+    "Discover emotions should be hardcoded as selectable boxes/cards with verse suggestions and coping guidance per emotion.",
+    "Read Gita chapter pages requested as tabular verse rows (verse + Hindi meaning + English meaning + Gen‑Z interpretation)."
   ],
-  "known_issues": [],
-  "isFixRequest": true,
+  "known_issues": [
+    "Build/deployment attempts failed due to an internal configuration issue and an inability to implement the request via the build tool."
+  ],
+  "isFixRequest": false,
+  "imageRequirements": "## Edit Images\n- Increase visibility and prominence of the floral decoration while keeping a soft pastel style (flowers-corner.dim_1024x1024.png > flowers-corner-prominent.dim_1024x1024.png)",
   "existing_features": [
     {
       "id": "feature-create-the-core-mobile-first-app-shell-with-bottom-navigation-containing-exactly-four-main-sections-home-read-gita-talk-to-krishna-and-discover-the-experience-must-feel-app-like-and-thumb-friendly-with-routing-state-that-preserves-the-current-tab-and-scroll-position-per-tab-during-the-session",
@@ -133,6 +139,78 @@
         "REQ-18"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-a-sticky-home-page-top-menu-bar-with-four-buttons-labeled-exactly-home-read-gita-discover-and-ask-krishna-clicking-home-must-scroll-to-the-top-of-the-home-page-content-not-change-tabs-clicking-the-other-three-buttons-must-navigate-to-the-existing-corresponding-app-tabs-read-gita-discover-and-the-ai-chatbot-tab",
+      "title": "Add a sticky Home page top menu bar with four buttons labeled exactly: \"Home\", \"Read Gita\", \"Discover\", and \"Ask Krishna\". Clicking \"Home\" must scroll to the top of the Home page content (not change tabs). Clicking the other three buttons must navigate to the existing corresponding app tabs (Read Gita, Discover, and the AI chatbot tab).",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-devotional-visual-elements-to-the-ui-by-incorporating-a-floral-decoration-s-and-b-a-lord-krishna-picture-in-a-way-that-matches-the-current-attached-styling-direction-soft-pink-canvas-airy-spacing-rounded-cards-and-stays-readable-in-both-light-and-dark-mode",
+      "title": "Add devotional visual elements to the UI by incorporating (a) floral decoration(s) and (b) a Lord Krishna picture in a way that matches the current attached styling direction (soft pink canvas, airy spacing, rounded cards) and stays readable in both light and dark mode.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-read-gita-chapter-detail-presentation-so-each-chapter-displays-a-table-where-each-row-corresponds-to-a-verse-and-the-columns-show-1-verse-identifier-chapter-verse-and-or-verse-number-and-verse-text-sanskrit-optional-2-hindi-meaning-3-english-meaning-and-4-gen-z-style-interpretation",
+      "title": "Update the Read Gita chapter detail presentation so each chapter displays a table where each row corresponds to a verse and the columns show: (1) Verse identifier (chapter:verse and/or verse number) and verse text (Sanskrit optional), (2) Hindi meaning, (3) English meaning, and (4) Gen-Z style interpretation.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-home-page-hero-layout-so-that-open-today-s-wisdom-and-find-by-mood-render-side-by-side-parallel-directly-under-the-hero-subtext-the-bhagavad-gita-decoded-for-overthinkers-anxious-minds-and-curious-gen-z-souls-and-are-visible-without-scrolling-on-typical-mobile-viewports",
+      "title": "Update the Home page hero layout so that “Open today’s wisdom” and “Find by mood” render side-by-side (parallel) directly under the hero subtext (“The Bhagavad Gita — decoded for overthinkers, anxious minds, and curious Gen-Z souls.”) and are visible without scrolling on typical mobile viewports.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-home-page-hero-layout-so-that-the-talk-to-krishna-cta-is-moved-next-to-the-lord-krishna-picture-portrait-rather-than-being-stacked-below-the-find-by-mood-button",
+      "title": "Update the Home page hero layout so that the “Talk to Krishna” CTA is moved next to the Lord Krishna picture (portrait) rather than being stacked below the “Find by mood” button.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-floral-visuals-in-the-home-page-background-more-prominent-while-preserving-readability-of-foreground-hero-text-and-ctas-in-both-light-and-dark-mode",
+      "title": "Make the floral visuals in the Home page background more prominent while preserving readability of foreground hero text and CTAs in both light and dark mode.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-top-menu-bar-buttons-labeled-exactly-home-read-gita-discover-ask-krishna-visible-on-all-pages-tabs-home-read-gita-discover-talk-to-krishna-not-only-on-the-home-page",
+      "title": "Make the top menu bar (buttons labeled exactly: “Home”, “Read Gita”, “Discover”, “Ask Krishna”) visible on all pages/tabs (Home, Read Gita, Discover, Talk to Krishna), not only on the Home page.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-change-navigation-scroll-behavior-so-that-when-a-user-opens-any-tab-page-it-starts-at-the-top-of-that-page-do-not-preserve-previous-per-tab-scroll-position-also-ensure-internal-view-changes-within-read-gita-chapter-list-chapter-detail-verse-detail-back-start-at-the-top-of-the-newly-shown-view",
+      "title": "Change navigation scroll behavior so that when a user opens any tab/page, it starts at the top of that page (do not preserve previous per-tab scroll position). Also ensure internal view changes within Read Gita (chapter list → chapter detail → verse detail → back) start at the top of the newly shown view.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-read-gita-chapter-list-displays-all-18-chapters-and-show-each-chapter-s-total-verse-count-in-brackets-in-the-list-ui-e-g-47",
+      "title": "Ensure the Read Gita chapter list displays all 18 chapters and show each chapter’s total verse count in brackets in the list UI (e.g., “(47)”).",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -242,6 +320,42 @@
       "reqIds": [
         "REQ-16"
       ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-28",
+      "summary": "Add a top menu/navigation bar with buttons: Home (scrolls to top), Read Gita, Discover, and Ask Krishna (chatbot) for mobile-compatible navigation.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-29",
+      "summary": "Update Discover UI to show hardcoded emotion boxes and, for each emotion, suggest relevant Gita verses plus guidance/suggestions for handling that emotion.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-30",
+      "summary": "Add devotional UI imagery elements (flowers and a Lord Krishna picture) while keeping the attached UI styling direction.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-31",
+      "summary": "Change Read Gita chapter detail presentation to a table per chapter where each row shows: verse, Hindi meaning, English meaning, and Gen‑Z style interpretation.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-32",
+      "summary": "Global navigation/scroll behavior updates: top menu bar should be visible on all pages (not just Home) and every page/tab should open scrolled to the top when navigated to.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-33",
+      "summary": "Home page layout refinements: move “Talk to Krishna” CTA next to Krishna’s picture; place “Open today’s wisdom” and “Find by mood” CTAs side-by-side directly under the main headline; adjust typography/spacing so these CTAs are visible on initial view; make background floral elements more prominent.",
+      "reqIds": [],
       "status": "pending"
     }
   ],

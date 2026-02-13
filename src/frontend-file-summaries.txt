@@ -1,12 +1,12 @@
 {
-  "frontend/src/App.tsx": "Main app shell with bottom tab navigation featuring purple active states and improved hover effects.",
-  "frontend/src/pages/HomePage.tsx": "Home page with serif hero typography, purple-accented CTAs, and consistent pink/purple theme throughout.",
-  "frontend/src/pages/ReadGita/ReadGitaPage.tsx": "Read Gita orchestrator managing navigation between chapter list, chapter detail, verse detail, and today's wisdom views.",
-  "frontend/src/pages/ReadGita/ChapterListView.tsx": "Chapter list with search functionality filtering by English title and Sanskrit subtitle, plus purple-themed styling.",
-  "frontend/src/pages/ReadGita/ChapterDetailView.tsx": "Chapter detail view with consistent purple accents and improved card styling.",
+  "frontend/src/App.tsx": "Main app shell with global TopMenuBar, bottom tab navigation, and scroll-to-top behavior on all tab switches (removed scroll position preservation).",
+  "frontend/src/pages/HomePage.tsx": "Home page with restructured hero layout placing primary CTAs side-by-side above the fold, Krishna portrait grouped with Talk to Krishna button, and prominent floral background decorations.",
+  "frontend/src/pages/ReadGita/ReadGitaPage.tsx": "Read Gita orchestrator managing navigation between chapter list, chapter detail, verse detail, and today's wisdom views with scroll-to-top on view changes.",
+  "frontend/src/pages/ReadGita/ChapterListView.tsx": "Chapter list displaying all 18 chapters sorted by number with verse counts in bracket format (e.g., \"(47)\") and search functionality.",
+  "frontend/src/pages/ReadGita/ChapterDetailView.tsx": "Chapter detail view displaying verses in a responsive table layout with columns for verse identifier/Sanskrit text, Hindi meaning, English meaning, and Gen-Z interpretation, with horizontal scroll support for mobile and preserved verse selection navigation.",
   "frontend/src/pages/ReadGita/VerseDetailView.tsx": "Single verse detail view with consistent spacing and purple accents.",
-  "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx": "Chat interface with purple-themed header and improved visual consistency.",
-  "frontend/src/pages/Discover/DiscoverPage.tsx": "Mood selection grid with updated purple-themed styling and improved card interactions.",
+  "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx": "Chat interface with simplified header (removed sticky positioning to work with global TopMenuBar) and purple-themed styling.",
+  "frontend/src/pages/Discover/DiscoverPage.tsx": "Mood selection grid with scroll-to-top behavior when switching between mood grid and detail view.",
   "frontend/src/pages/Discover/MoodDetailView.tsx": "Mood detail view with purple-accented CTAs and consistent styling.",
   "frontend/src/components/verse/VerseCard.tsx": "Verse card displaying all 4 parts with explicit labels (Sanskrit, Literal Hindi translation, Literal English translation, Gen Z interpretation) in responsive grid layout with always-visible action step.",
   "frontend/src/components/today/TodaysWisdomCard.tsx": "Displays today's deterministic verse using the shared VerseCard component with back navigation.",
@@ -21,5 +21,6 @@
   "frontend/src/state/sessionContext.tsx": "Session-scoped context provider managing Mood enum selection and chat history within browser session.",
   "frontend/src/index.css": "Global styles with pink background and purple accent OKLCH color system for light and dark modes, plus animation utilities (removed problematic @apply utility classes).",
   "frontend/tailwind.config.js": "Tailwind configuration with pink/purple color tokens, purple-glow shadow effects, and extended design system for consistent UI.",
-  "frontend/docs/APP_STRUCTURE_AND_FLOWS.md": "Comprehensive developer documentation covering architecture, page flows, component breakdown, backend API, VerseCard contract, chat behavior, and 3 sample multi-turn conversations."
+  "frontend/docs/APP_STRUCTURE_AND_FLOWS.md": "Comprehensive developer documentation covering architecture, page flows, component breakdown, backend API, VerseCard contract, chat behavior, and 3 sample multi-turn conversations.",
+  "frontend/src/components/layout/TopMenuBar.tsx": "Shared sticky top menu bar component with Home, Read Gita, Discover, Ask Krishna buttons and theme toggle, handling special Home scroll-to-top behavior when already on Home tab."
 }

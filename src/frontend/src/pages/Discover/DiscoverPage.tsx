@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Compass } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import MoodDetailView from './MoodDetailView';
@@ -19,6 +19,11 @@ const moods: Array<{ mood: Mood; label: string; tagline: string; emoji: string }
 export default function DiscoverPage({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
   const { setMood } = useSession();
+
+  // Scroll to top when switching between mood grid and detail view
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [selectedMood]);
 
   const handleMoodSelect = (mood: Mood) => {
     setSelectedMood(mood);

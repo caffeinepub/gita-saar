@@ -1,117 +1,142 @@
 {
   "kind": "build_request",
-  "title": "UI/UX polish with pink background + purple typography and populate complete Gita Saar (18 chapters, all verses, literal translations + Gen‑Z interpretation)",
+  "title": "Refine Home hero layout, global top menu bar, scroll-to-top navigation, and Read Gita chapter list formatting",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-14",
-      "text": "Update the global visual theme to use a pink background across the platform and apply purple typography accents appropriately (headlines, key labels, links, active navigation, and emphasis text) while maintaining readability and consistency in both light and dark mode.",
+      "id": "REQ-22",
+      "text": "Update the Home page hero layout so that “Open today’s wisdom” and “Find by mood” render side-by-side (parallel) directly under the hero subtext (“The Bhagavad Gita — decoded for overthinkers, anxious minds, and curious Gen-Z souls.”) and are visible without scrolling on typical mobile viewports.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-4"
         ],
         "quotes": [
-          "Keep background color pink and use purple in words suitably."
+          "make home page such that Open today's wisdom and Find by mood come parallel just under The Bhagavad Gita — decoded for overthinkers, anxious minds, and curious Gen-Z souls. and are visible on the home page (move fonts for all content such that these are visible)."
         ]
       },
       "acceptanceCriteria": [
-        "In light mode, the app background is visibly pink (not peach/ivory) across all tabs/pages (Home, Read Gita, Talk to Krishna, Discover).",
-        "Purple is used intentionally for emphasis (e.g., headings/active states) without reducing contrast below readable levels for body text.",
-        "Dark mode remains available and readable; purple accents remain visible and consistent in dark mode.",
-        "No changes are made to any files under frontend/src/components/ui (compose components instead)."
+        "On the Home page, the two CTAs “Open today’s wisdom” and “Find by mood” appear in a single row on mobile (wrapping only on extremely narrow widths), positioned immediately below the hero subtext.",
+        "On initial load at ~390x844 viewport, both CTAs are visible without scrolling (no vertical overflow required to see them).",
+        "The CTA buttons remain tappable and maintain the existing app styling (rounded/pill, soft pastel, readable in light/dark)."
       ]
     },
     {
-      "id": "REQ-15",
-      "text": "Refine the overall UI/UX to match the attached screenshot styling direction (soft pink canvas, airy spacing, rounded cards, serif-forward hero headings where appropriate, and clean navigation states) and fix visual inconsistencies across pages (spacing, card elevation, typography hierarchy, and button styles).",
+      "id": "REQ-23",
+      "text": "Update the Home page hero layout so that the “Talk to Krishna” CTA is moved next to the Lord Krishna picture (portrait) rather than being stacked below the “Find by mood” button.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-4"
         ],
         "quotes": [
-          "Evaluate the platform completely and provide the best UI and UX for the platform. Like it was there in the screenshot i have attached. Fix the details and update the website"
+          "make the home page such that Talk to krishna (below find my mood) moves next to krishna's pic."
         ]
       },
       "acceptanceCriteria": [
-        "Home, Read Gita, Discover, and Talk to Krishna share a consistent spacing system (padding, gaps) and consistent card radii/shadows.",
-        "Primary and secondary button styles are consistent across the app (pill buttons, predictable hover/press states).",
-        "Typography hierarchy is consistent (page titles, section titles, body text, captions) and visually aligned with the screenshot direction.",
-        "Navigation active state styling is clear and consistent (active tab stands out using purple accents)."
+        "On the Home page hero, the “Talk to Krishna” button is visually grouped with and placed adjacent to the Krishna portrait (e.g., beside it or aligned in the same row/cluster), not underneath the other two CTAs.",
+        "The button continues to navigate to the Talk to Krishna tab when clicked.",
+        "Layout remains responsive and does not overlap the portrait on small screens."
       ]
     },
     {
-      "id": "REQ-16",
-      "text": "Populate the backend with the complete Gita Saar content: all 18 chapters and every verse for each chapter, ensuring each verse includes (1) Sanskrit original verse, (2) literal Hindi translation, (3) literal English translation, and (4) Gen‑Z interpretation, plus exactly one action step per verse.",
-      "target": "backend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "Also i need to populate the complete Gita sar such that each chapter is shown separately, has all verses indiviudally displayed in 4 ways - sanskrit (original verse), Literal Hindi translation, Literal english translation and Gen Z inter pretation."
-        ]
-      },
-      "acceptanceCriteria": [
-        "getAllChapters() returns 18 chapters (1–18) with correct verseCount per chapter.",
-        "getVersesByChapter(n) returns all verses for chapter n (and none for other chapters).",
-        "Each Verse returned by getVersesByChapter and getVerse includes non-empty fields for sanskrit, hindiMeaning (literal), englishMeaning (literal), genZKrishnaInterpretation, and actionStep (exactly one actionable sentence/step).",
-        "getTodaysVerse() always returns a valid verse from the populated dataset (not an empty fallback verse)."
-      ]
-    },
-    {
-      "id": "REQ-17",
-      "text": "Update the verse presentation UI so each verse is displayed in the required 4-part format with clear labels: Sanskrit (original), Literal Hindi translation, Literal English translation, and Gen‑Z interpretation; keep the action step clearly separated and always visible within the verse card.",
+      "id": "REQ-24",
+      "text": "Make the floral visuals in the Home page background more prominent while preserving readability of foreground hero text and CTAs in both light and dark mode.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-4"
         ],
         "quotes": [
-          "each chapter is shown separately, has all verses indiviudally displayed in 4 ways"
+          "Create more prominent flowers in the background of the home page."
         ]
       },
       "acceptanceCriteria": [
-        "VerseCard labels explicitly use “Literal Hindi translation” and “Literal English translation” (not just “Meaning”).",
-        "Sanskrit is available for every verse and is not effectively hidden (either shown by default or the control to reveal it is clearly visible and discoverable).",
-        "The UI is responsive: on small screens the four parts are stacked cleanly; on larger screens the layout may use a multi-column/grid presentation without losing readability.",
-        "The action step is always displayed and visually distinct from the translations/interpretation."
+        "The Home page floral decoration is noticeably more visible than the current implementation (e.g., increased scale/coverage/contrast/opacity and/or additional placements), but hero headline/subtext and CTA labels retain accessible contrast.",
+        "No foreground UI elements become visually cluttered or hard to read in either light or dark theme."
       ]
     },
     {
-      "id": "REQ-18",
-      "text": "Enhance the Read Gita chapter listing screen to include an in-page search/filter input for chapters (by English title and Sanskrit subtitle) to match the usability shown in the screenshots, without changing the existing app’s four-tab structure.",
+      "id": "REQ-25",
+      "text": "Make the top menu bar (buttons labeled exactly: “Home”, “Read Gita”, “Discover”, “Ask Krishna”) visible on all pages/tabs (Home, Read Gita, Discover, Talk to Krishna), not only on the Home page.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-4"
         ],
         "quotes": [
-          "Like it was there in the screenshot i have attached. Fix the details and update the website"
+          "The meny bar should be visible on all pages."
         ]
       },
       "acceptanceCriteria": [
-        "Read Gita chapter list includes a search input that filters chapters client-side by English title and Sanskrit subtitle.",
-        "Search is case-insensitive and updates results as the user types.",
-        "Clearing the search restores the full 18-chapter list.",
-        "The existing navigation structure (four tabs) remains unchanged."
+        "When switching to any tab (Read Gita, Discover, Talk to Krishna), the same top menu bar is present and sticky at the top.",
+        "Menu button labels match exactly: “Home”, “Read Gita”, “Discover”, “Ask Krishna”.",
+        "Clicking “Read Gita”, “Discover”, and “Ask Krishna” navigates to the corresponding existing tabs.",
+        "Clicking “Home” returns to Home tab if not already there; if already on Home tab it scrolls the Home content to the top."
+      ]
+    },
+    {
+      "id": "REQ-26",
+      "text": "Change navigation scroll behavior so that when a user opens any tab/page, it starts at the top of that page (do not preserve previous per-tab scroll position). Also ensure internal view changes within Read Gita (chapter list → chapter detail → verse detail → back) start at the top of the newly shown view.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "All pages when opened should open on the top of the page."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Switching tabs always scrolls to the top (window scrollY becomes 0) immediately on tab activation.",
+        "In Read Gita, when switching between views (chapters/today/chapter-detail/verse-detail), the view opens scrolled to the top of its content.",
+        "This behavior is consistent across Home, Read Gita, Discover, and Talk to Krishna."
+      ]
+    },
+    {
+      "id": "REQ-27",
+      "text": "Ensure the Read Gita chapter list displays all 18 chapters and show each chapter’s total verse count in brackets in the list UI (e.g., “(47)”).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "The read gita should have all chapters listed (all 18 with total verses numbers in brackets each individually for them)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The chapter listing renders 18 chapters when backend data is available (no missing entries).",
+        "Each chapter card displays the verse count in bracket format (example: “(47)”) in addition to the chapter title/subtitle.",
+        "The search filter still works and only filters from the full set of 18 chapters."
       ]
     }
   ],
   "constraints": [
-    "Backend must remain a single Motoko actor with logic in backend/main.mo; add backend/migration.mo only if an upgrade requires state migration.",
-    "Do not edit immutable frontend paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
-    "No paywalls, subscriptions, upsells, or guilt nudges anywhere in the UI."
+    "Do not modify any files under frontend/src/components/ui (Shadcn components must be composed, not edited).",
+    "Do not edit immutable hook/provider paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
+    "Respect the existing four-tab app structure (Home, Read Gita, Talk to Krishna, Discover); do not add new tabs.",
+    "Keep the app 100% free: do not add paywalls, subscriptions, upsells, or guilt nudges."
   ],
   "nonGoals": [
-    "Adding new main tabs/sections beyond Home, Read Gita, Talk to Krishna, Discover.",
-    "Introducing any external database or third-party content APIs to source Gita text.",
-    "Implementing third-party authentication providers (only Internet Identity is supported).",
-    "Adding new Discover modes (e.g., “By Situation”) unless explicitly requested later."
+    "Do not change backend chapter/verse data models or APIs as part of this request.",
+    "Do not redesign the bottom navigation; keep it functional as-is.",
+    "Do not change chatbot behavior/personality rules."
   ],
   "imageRequirements": {
     "required": [],
-    "edits": []
+    "edits": [
+      "Increase visibility and prominence of the floral decoration while keeping a soft pastel style (flowers-corner.dim_1024x1024.png > flowers-corner-prominent.dim_1024x1024.png)"
+    ]
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

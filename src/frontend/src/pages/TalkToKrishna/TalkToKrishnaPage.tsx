@@ -77,7 +77,7 @@ export default function TalkToKrishnaPage() {
   return (
     <div className="flex flex-col h-screen max-w-2xl mx-auto">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-background/90 backdrop-blur-lg border-b border-border/50 px-4 py-3">
+      <header className="bg-background/90 backdrop-blur-lg border-b border-border/50 px-4 py-3">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold text-primary font-serif">Talk to Krishna</h1>

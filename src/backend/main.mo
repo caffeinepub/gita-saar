@@ -3,11 +3,11 @@ import Order "mo:core/Order";
 import Nat "mo:core/Nat";
 import Map "mo:core/Map";
 import Array "mo:core/Array";
-import Migration "migration";
+
 import List "mo:core/List";
 
 // Attach state migration logic using to new actor instance with the with clause
-(with migration = Migration.run)
+
 actor {
   type Chapter = {
     number : Nat;

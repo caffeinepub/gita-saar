@@ -16,8 +16,12 @@ export default function ChapterListView({
   const { data: chapters, isLoading } = useGetAllChapters();
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Filter chapters by search query (case-insensitive)
-  const filteredChapters = chapters?.filter((chapter) => {
+  // Sort chapters by number and filter by search query
+  const sortedChapters = chapters
+    ? [...chapters].sort((a, b) => Number(a.number) - Number(b.number))
+    : [];
+
+  const filteredChapters = sortedChapters.filter((chapter) => {
     const query = searchQuery.toLowerCase();
     return (
       chapter.englishTitle.toLowerCase().includes(query) ||
@@ -62,7 +66,7 @@ export default function ChapterListView({
       <div className="space-y-3">
         {isLoading ? (
           <>
-            {[...Array(6)].map((_, i) => (
+            {[...Array(18)].map((_, i) => (
               <Skeleton key={i} className="h-24 rounded-2xl" />
             ))}
           </>
@@ -80,7 +84,7 @@ export default function ChapterListView({
                 <div className="flex-1 min-w-0">
                   <h3 className="text-lg font-semibold text-primary mb-1">{chapter.englishTitle}</h3>
                   <p className="text-sm text-muted-foreground mb-2 italic">{chapter.sanskritSubtitle}</p>
-                  <p className="text-xs text-muted-foreground">{chapter.verseCount.toString()} verses</p>
+                  <p className="text-xs text-muted-foreground">({chapter.verseCount.toString()})</p>
                 </div>
               </div>
             </Card>
@@ -88,14 +92,6 @@ export default function ChapterListView({
         ) : (
           <div className="text-center py-12">
             <p className="text-muted-foreground">No chapters found matching "{searchQuery}"</p>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setSearchQuery('')}
-              className="mt-4 text-primary hover:text-primary"
-            >
-              Clear search
-            </Button>
           </div>
         )}
       </div>

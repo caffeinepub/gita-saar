@@ -1,83 +1,37 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T07:33:08.991Z",
-  "summary": "Theme updates (pink background + purple accents), UI polish, VerseCard 4-part layout, and chapter search appear implemented on the frontend. However, the backend content is far from complete (only 2 chapters and 2 verses shown), and several backend/schema additions and extra frontend features were introduced that were not requested.",
+  "generatedAt": "2026-02-13T08:36:58.613Z",
+  "summary": "Most requested navigation and layout changes appear implemented: a new global sticky TopMenuBar is added and mounted in App across tabs; tab switches and Read Gita internal view switches now scroll to top; Home hero CTAs are arranged in a row; floral assets are swapped to a more prominent image; Read Gita chapter cards show verse counts in bracket format and chapters are sorted. One requirement (Talk to Krishna CTA placement next to portrait) cannot be fully verified due to HomePage truncation.",
   "missing_requirements": [
     {
-      "id": "REQ-16",
-      "requirement": "Populate the backend with the complete Gita Saar content: all 18 chapters and every verse for each chapter, ensuring each verse includes Sanskrit, literal Hindi translation, literal English translation, Gen‑Z interpretation, and exactly one action step per verse.",
-      "reason": "The backend dataset shown includes only 2 chapters (1 and 2) and only 2 verses total, not all 18 chapters and all verses. This also prevents meeting AC around correct verse counts per chapter and complete per-chapter verse retrieval.",
+      "id": "REQ-23",
+      "requirement": "Move the “Talk to Krishna” CTA next to the Lord Krishna picture (portrait) rather than being stacked below the other CTAs.",
+      "reason": "HomePage.tsx is truncated right where the Krishna portrait section begins; the diff summary states intent but does not include the rendered Talk to Krishna button placement, so it cannot be confirmed from the provided evidence.",
       "evidence": [
-        "backend/main.mo"
-      ]
-    },
-    {
-      "id": "REQ-16",
-      "requirement": "getTodaysVerse() always returns a valid verse from the populated dataset (not an empty fallback verse).",
-      "reason": "The diff excerpt does not show getTodaysVerse() implementation, and the shown dataset is not fully populated; therefore the acceptance criterion cannot be confirmed as met from the diff summary.",
-      "evidence": [
-        "backend/main.mo"
-      ]
-    },
-    {
-      "id": "REQ-17",
-      "requirement": "VerseCard labels explicitly use “Literal Hindi translation” and “Literal English translation” (not just “Meaning”).",
-      "reason": "The VerseCard headings are rendered as “Literal Hindi Translation” and “Literal English Translation” (capital “T”), which does not exactly match the specified label text in the acceptance criteria.",
-      "evidence": [
-        "frontend/src/components/verse/VerseCard.tsx"
+        "frontend/src/pages/HomePage.tsx (truncated)"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Backend schema additions for Chapter: summary and keyInsights fields (and corresponding migration logic)",
-      "reason": "REQ-16 only asks to populate chapters with correct verse counts and verses with specific translation/interpretation fields. Adding chapter-level summary/keyInsights and introducing a migration module for them is not requested in REQ-14–REQ-18.",
+      "description": "Theme toggle control added to the global TopMenuBar.",
+      "reason": "REQ-25 specifies the top menu bar buttons/labels and sticky behavior but does not request adding a theme toggle UI element to that bar.",
       "evidence": [
-        "backend/main.mo",
-        "backend/migration.mo"
-      ]
-    },
-    {
-      "description": "Speech-to-text / voice input capability in chat composer",
-      "reason": "The BuildRequest does not request voice input or speech-to-text features; it focuses on UI polish, verse formatting, chapter search, and populating the full Gita content.",
-      "evidence": [
-        "frontend-file-summaries.txt (frontend/src/hooks/useSpeechToText.ts, frontend/src/components/chat/ChatComposer.tsx)"
-      ]
-    },
-    {
-      "description": "Chat safety modal with AI safety disclaimer",
-      "reason": "Not requested in REQ-14–REQ-18. While potentially beneficial, it is additional scope not specified in the BuildRequest.",
-      "evidence": [
-        "frontend-file-summaries.txt (frontend/src/components/chat/ChatSafetyModal.tsx)"
-      ]
-    },
-    {
-      "description": "New developer documentation file APP_STRUCTURE_AND_FLOWS.md",
-      "reason": "Documentation was not requested as part of REQ-14–REQ-18 deliverables.",
-      "evidence": [
-        "frontend-file-summaries.txt (frontend/docs/APP_STRUCTURE_AND_FLOWS.md)"
+        "frontend/src/components/layout/TopMenuBar.tsx"
       ]
     }
   ],
-  "confidence": 0.78,
+  "confidence": 0.72,
   "changed_files": [
-    "backend/main.mo",
-    "backend/migration.mo",
     "frontend-file-summaries.txt",
     "frontend/src/App.tsx",
-    "frontend/src/components/chat/ChatThread.tsx",
-    "frontend/src/components/chat/FollowUpQuestions.tsx",
-    "frontend/src/components/verse/VerseCard.tsx",
-    "frontend/src/index.css",
+    "frontend/src/components/layout/TopMenuBar.tsx",
     "frontend/src/pages/Discover/DiscoverPage.tsx",
-    "frontend/src/pages/Discover/MoodDetailView.tsx",
     "frontend/src/pages/HomePage.tsx",
-    "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
     "frontend/src/pages/ReadGita/ChapterListView.tsx",
-    "frontend/src/pages/ReadGita/VerseDetailView.tsx",
+    "frontend/src/pages/ReadGita/ReadGitaPage.tsx",
     "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
-    "frontend/tailwind.config.js",
     "project_state.json"
   ]
 }

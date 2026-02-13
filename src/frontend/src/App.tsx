@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Home, BookOpen, MessageCircle, Compass } from 'lucide-react';
 import HomePage from './pages/HomePage';
 import ReadGitaPage from './pages/ReadGita/ReadGitaPage';
 import TalkToKrishnaPage from './pages/TalkToKrishna/TalkToKrishnaPage';
 import DiscoverPage from './pages/Discover/DiscoverPage';
+import TopMenuBar from './components/layout/TopMenuBar';
 import { SessionProvider } from './state/sessionContext';
 import { ThemeProvider } from 'next-themes';
 
@@ -13,30 +14,23 @@ type TabId = 'home' | 'read' | 'chat' | 'discover';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabId>('home');
-  const scrollPositions = useRef<Record<TabId, number>>({
-    home: 0,
-    read: 0,
-    chat: 0,
-    discover: 0,
-  });
 
-  // Save scroll position when switching tabs
+  // Scroll to top whenever tab changes
   const handleTabChange = (newTab: TabId) => {
-    const currentScroll = window.scrollY;
-    scrollPositions.current[activeTab] = currentScroll;
     setActiveTab(newTab);
   };
 
-  // Restore scroll position when tab becomes active
   useEffect(() => {
-    const savedPosition = scrollPositions.current[activeTab];
-    window.scrollTo(0, savedPosition);
+    window.scrollTo(0, 0);
   }, [activeTab]);
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <SessionProvider>
         <div className="min-h-screen bg-background pb-20">
+          {/* Global Top Menu Bar */}
+          <TopMenuBar activeTab={activeTab} onNavigate={handleTabChange} />
+
           {/* Tab content */}
           <div className="relative">
             <div className={activeTab === 'home' ? 'block' : 'hidden'}>

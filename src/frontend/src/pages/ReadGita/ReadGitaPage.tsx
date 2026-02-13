@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ChapterListView from './ChapterListView';
 import ChapterDetailView from './ChapterDetailView';
 import VerseDetailView from './VerseDetailView';
@@ -10,6 +10,11 @@ export default function ReadGitaPage() {
   const [view, setView] = useState<View>('chapters');
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const [selectedVerse, setSelectedVerse] = useState<{ chapter: number; verse: number } | null>(null);
+
+  // Scroll to top whenever view changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [view]);
 
   const handleChapterSelect = (chapterNumber: number) => {
     setSelectedChapter(chapterNumber);

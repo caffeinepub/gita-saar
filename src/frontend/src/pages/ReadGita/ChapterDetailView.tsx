@@ -1,8 +1,16 @@
-import { ArrowLeft, BookText } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { useGetVersesByChapter, useGetAllChapters } from '@/hooks/useQueries';
 import { Skeleton } from '@/components/ui/skeleton';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function ChapterDetailView({
   chapterNumber,
@@ -19,7 +27,7 @@ export default function ChapterDetailView({
   const chapter = chapters?.find((c) => Number(c.number) === chapterNumber);
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6">
+    <div className="max-w-6xl mx-auto px-4 py-6">
       {/* Header */}
       <header className="mb-6">
         <Button variant="ghost" size="sm" onClick={onBack} className="mb-4 -ml-2 text-primary hover:text-primary">
@@ -41,34 +49,61 @@ export default function ChapterDetailView({
         )}
       </header>
 
-      {/* Verse List */}
-      <div className="space-y-3">
+      {/* Verse Table */}
+      <div className="border border-border/50 rounded-2xl overflow-hidden bg-card/80 backdrop-blur-sm shadow-lg">
         {isLoading ? (
-          <>
+          <div className="p-6 space-y-3">
             {[...Array(5)].map((_, i) => (
-              <Skeleton key={i} className="h-20 rounded-2xl" />
+              <Skeleton key={i} className="h-20 rounded-lg" />
             ))}
-          </>
+          </div>
         ) : (
-          verses?.map((verse) => (
-            <Card
-              key={`${verse.chapter}-${verse.verse}`}
-              className="p-4 cursor-pointer hover:shadow-lg hover:shadow-purple-glow/20 transition-all duration-300 hover:scale-[1.01] border-border/50 bg-card/80 backdrop-blur-sm"
-              onClick={() => onVerseSelect(Number(verse.chapter), Number(verse.verse))}
-            >
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center">
-                  <BookText className="w-4 h-4 text-primary" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-sm font-semibold text-primary mb-1">Verse {verse.verse.toString()}</h3>
-                  <p className="text-xs text-muted-foreground line-clamp-2">{verse.englishMeaning}</p>
-                </div>
-              </div>
-            </Card>
-          ))
+          <ScrollArea className="w-full">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-primary/5 hover:bg-primary/5">
+                    <TableHead className="font-semibold text-primary w-[100px]">Verse</TableHead>
+                    <TableHead className="font-semibold text-primary min-w-[200px]">Hindi Meaning</TableHead>
+                    <TableHead className="font-semibold text-primary min-w-[200px]">English Meaning</TableHead>
+                    <TableHead className="font-semibold text-primary min-w-[200px]">Gen Z Interpretation</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {verses?.map((verse) => (
+                    <TableRow
+                      key={`${verse.chapter}-${verse.verse}`}
+                      className="cursor-pointer hover:bg-primary/5 transition-colors"
+                      onClick={() => onVerseSelect(Number(verse.chapter), Number(verse.verse))}
+                    >
+                      <TableCell className="font-medium text-primary align-top">
+                        <div className="flex flex-col gap-1">
+                          <span className="text-sm font-bold">{verse.verse.toString()}</span>
+                          <span className="text-xs text-muted-foreground italic line-clamp-2">{verse.sanskrit}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-sm text-foreground align-top">
+                        <p className="leading-relaxed">{verse.hindiMeaning}</p>
+                      </TableCell>
+                      <TableCell className="text-sm text-foreground align-top">
+                        <p className="leading-relaxed">{verse.englishMeaning}</p>
+                      </TableCell>
+                      <TableCell className="text-sm text-foreground align-top">
+                        <p className="leading-relaxed font-medium text-primary/90">{verse.genZKrishnaInterpretation}</p>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </ScrollArea>
         )}
       </div>
+
+      {/* Mobile-friendly note */}
+      <p className="text-xs text-muted-foreground text-center mt-4 px-4">
+        💡 Tip: Scroll horizontally on mobile to view all columns. Tap any verse to see full details.
+      </p>
     </div>
   );
 }

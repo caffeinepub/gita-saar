@@ -2,12 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-global-visual-theme-to-use-a-pink-background-across-the-platform-and-apply-purple-typography-accents-appropriately-headlines-key-labels-links-active-navigation-and-emphasis-text-while-maintaining-readability-and-consistency-in-both-light-and-dark-mode",
-      "featureTitle": "Update the global visual theme to use a pink background across the platform and apply purple typography accents appropriately (headlines, key labels, links, active navigation, and emphasis text) while maintaining readability and consistency in both light and dark mode.",
+      "featureId": "feature-update-the-home-page-hero-layout-so-that-open-today-s-wisdom-and-find-by-mood-render-side-by-side-parallel-directly-under-the-hero-subtext-the-bhagavad-gita-decoded-for-overthinkers-anxious-minds-and-curious-gen-z-souls-and-are-visible-without-scrolling-on-typical-mobile-viewports",
+      "featureTitle": "Update the Home page hero layout so that “Open today’s wisdom” and “Find by mood” render side-by-side (parallel) directly under the hero subtext (“The Bhagavad Gita — decoded for overthinkers, anxious minds, and curious Gen-Z souls.”) and are visible without scrolling on typical mobile viewports.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/index.css",
-        "frontend/tailwind.config.js"
+        "frontend/src/pages/HomePage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -17,21 +15,53 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-14"
+        "REQ-22"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-refine-the-overall-ui-ux-to-match-the-attached-screenshot-styling-direction-soft-pink-canvas-airy-spacing-rounded-cards-serif-forward-hero-headings-where-appropriate-and-clean-navigation-states-and-fix-visual-inconsistencies-across-pages-spacing-card-elevation-typography-hierarchy-and-button-styles",
-      "featureTitle": "Refine the overall UI/UX to match the attached screenshot styling direction (soft pink canvas, airy spacing, rounded cards, serif-forward hero headings where appropriate, and clean navigation states) and fix visual inconsistencies across pages (spacing, card elevation, typography hierarchy, and button styles).",
+      "featureId": "feature-update-the-home-page-hero-layout-so-that-the-talk-to-krishna-cta-is-moved-next-to-the-lord-krishna-picture-portrait-rather-than-being-stacked-below-the-find-by-mood-button",
+      "featureTitle": "Update the Home page hero layout so that the “Talk to Krishna” CTA is moved next to the Lord Krishna picture (portrait) rather than being stacked below the “Find by mood” button.",
       "files": [
-        "frontend/src/components/chat/FollowUpQuestions.tsx",
-        "frontend/src/index.css",
-        "frontend/src/pages/Discover/DiscoverPage.tsx",
-        "frontend/src/pages/Discover/MoodDetailView.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-23"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-make-the-floral-visuals-in-the-home-page-background-more-prominent-while-preserving-readability-of-foreground-hero-text-and-ctas-in-both-light-and-dark-mode",
+      "featureTitle": "Make the floral visuals in the Home page background more prominent while preserving readability of foreground hero text and CTAs in both light and dark mode.",
+      "files": [
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-24"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-make-the-top-menu-bar-buttons-labeled-exactly-home-read-gita-discover-ask-krishna-visible-on-all-pages-tabs-home-read-gita-discover-talk-to-krishna-not-only-on-the-home-page",
+      "featureTitle": "Make the top menu bar (buttons labeled exactly: “Home”, “Read Gita”, “Discover”, “Ask Krishna”) visible on all pages/tabs (Home, Read Gita, Discover, Talk to Krishna), not only on the Home page.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/layout/TopMenuBar.tsx",
         "frontend/src/pages/HomePage.tsx",
-        "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
-        "frontend/src/pages/ReadGita/ChapterListView.tsx",
         "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx"
       ],
       "components": [
@@ -42,17 +72,18 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-15"
+        "REQ-25"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-verse-presentation-ui-so-each-verse-is-displayed-in-the-required-4-part-format-with-clear-labels-sanskrit-original-literal-hindi-translation-literal-english-translation-and-gen-z-interpretation-keep-the-action-step-clearly-separated-and-always-visible-within-the-verse-card",
-      "featureTitle": "Update the verse presentation UI so each verse is displayed in the required 4-part format with clear labels: Sanskrit (original), Literal Hindi translation, Literal English translation, and Gen‑Z interpretation; keep the action step clearly separated and always visible within the verse card.",
+      "featureId": "feature-change-navigation-scroll-behavior-so-that-when-a-user-opens-any-tab-page-it-starts-at-the-top-of-that-page-do-not-preserve-previous-per-tab-scroll-position-also-ensure-internal-view-changes-within-read-gita-chapter-list-chapter-detail-verse-detail-back-start-at-the-top-of-the-newly-shown-view",
+      "featureTitle": "Change navigation scroll behavior so that when a user opens any tab/page, it starts at the top of that page (do not preserve previous per-tab scroll position). Also ensure internal view changes within Read Gita (chapter list → chapter detail → verse detail → back) start at the top of the newly shown view.",
       "files": [
-        "frontend/src/components/chat/ChatThread.tsx",
-        "frontend/src/components/verse/VerseCard.tsx",
-        "frontend/src/pages/ReadGita/VerseDetailView.tsx"
+        "frontend/src/App.tsx",
+        "frontend/src/pages/Discover/DiscoverPage.tsx",
+        "frontend/src/pages/ReadGita/ReadGitaPage.tsx",
+        "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -62,13 +93,13 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-17"
+        "REQ-26"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-enhance-the-read-gita-chapter-listing-screen-to-include-an-in-page-search-filter-input-for-chapters-by-english-title-and-sanskrit-subtitle-to-match-the-usability-shown-in-the-screenshots-without-changing-the-existing-app-s-four-tab-structure",
-      "featureTitle": "Enhance the Read Gita chapter listing screen to include an in-page search/filter input for chapters (by English title and Sanskrit subtitle) to match the usability shown in the screenshots, without changing the existing app’s four-tab structure.",
+      "featureId": "feature-ensure-the-read-gita-chapter-list-displays-all-18-chapters-and-show-each-chapter-s-total-verse-count-in-brackets-in-the-list-ui-e-g-47",
+      "featureTitle": "Ensure the Read Gita chapter list displays all 18 chapters and show each chapter’s total verse count in brackets in the list UI (e.g., “(47)”).",
       "files": [
         "frontend/src/pages/ReadGita/ChapterListView.tsx"
       ],
@@ -80,7 +111,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-18"
+        "REQ-27"
       ],
       "confidence": "high"
     }

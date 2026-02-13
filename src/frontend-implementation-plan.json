@@ -1,128 +1,136 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Pink + purple theme polish, consistent UI, improved verse layout, and chapter search",
+  "title": "Refine hero layout, persistent top menu, scroll-to-top behavior, and Read Gita chapter list formatting",
   "requirements": [
     {
-      "id": "REQ-14",
-      "summary": "Update global theme to pink background with purple typography accents while preserving readable light/dark modes and not editing shadcn ui source components.",
+      "id": "REQ-22",
+      "summary": "Restructure Home hero so the two primary CTAs render side-by-side directly under the hero subtext and fit on typical mobile without scrolling.",
       "acceptanceCriteria": [
-        "In light mode, the app background is visibly pink (not peach/ivory) across all tabs/pages (Home, Read Gita, Talk to Krishna, Discover).",
-        "Purple is used intentionally for emphasis (e.g., headings/active states) without reducing contrast below readable levels for body text.",
-        "Dark mode remains available and readable; purple accents remain visible and consistent in dark mode.",
-        "No changes are made to any files under frontend/src/components/ui (compose components instead)."
+        "On the Home page, the two CTAs “Open today’s wisdom” and “Find by mood” appear in a single row on mobile (wrapping only on extremely narrow widths), positioned immediately below the hero subtext.",
+        "On initial load at ~390x844 viewport, both CTAs are visible without scrolling (no vertical overflow required to see them).",
+        "The CTA buttons remain tappable and maintain the existing app styling (rounded/pill, soft pastel, readable in light/dark)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/index.css",
+          "path": "frontend/src/pages/HomePage.tsx",
           "operation": "modify",
-          "description": "Adjust CSS variable tokens for light/dark themes so --background is a clearly pink canvas across the app, and set primary/ring/accent tokens to a purple-forward palette that maintains readable contrast for foreground/body text."
-        },
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Ensure Tailwind theme extensions (fonts, radii, shadows) support the updated pink/purple token strategy (e.g., add/adjust shadow presets and any needed semantic utilities) without relying on edits to frontend/src/components/ui. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Refine bottom tab active/hover styling to use the updated purple accents clearly (active state emphasis and readable inactive state) while keeping the four-tab structure unchanged."
+          "description": "Update the hero layout so the “Open today's wisdom” and “Find by mood” Buttons (shadcn-ui Button) render in a single-row layout immediately under the hero subtext on mobile, adjusting spacing/padding/typography so both CTAs are visible above the fold on typical mobile viewports. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-15",
-      "summary": "Refine UI/UX to match the screenshot direction (soft pink canvas, airy spacing, rounded cards, serif-forward hero headings, clean navigation states) and fix visual inconsistencies across pages.",
+      "id": "REQ-23",
+      "summary": "Move the “Talk to Krishna” CTA next to the Krishna portrait so it’s grouped with the image rather than stacked under the other CTAs.",
       "acceptanceCriteria": [
-        "Home, Read Gita, Discover, and Talk to Krishna share a consistent spacing system (padding, gaps) and consistent card radii/shadows.",
-        "Primary and secondary button styles are consistent across the app (pill buttons, predictable hover/press states).",
-        "Typography hierarchy is consistent (page titles, section titles, body text, captions) and visually aligned with the screenshot direction.",
-        "Navigation active state styling is clear and consistent (active tab stands out using purple accents)."
+        "On the Home page hero, the “Talk to Krishna” button is visually grouped with and placed adjacent to the Krishna portrait (e.g., beside it or aligned in the same row/cluster), not underneath the other two CTAs.",
+        "The button continues to navigate to the Talk to Krishna tab when clicked.",
+        "Layout remains responsive and does not overlap the portrait on small screens."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/index.css",
+          "path": "frontend/src/pages/HomePage.tsx",
           "operation": "modify",
-          "description": "Add a small set of reusable global utility classes (via Tailwind layers) for consistent spacing, soft card styling, and pill button conventions to reduce per-page inconsistencies (no changes inside frontend/src/components/ui)."
+          "description": "Recompose the hero section so the Krishna portrait and “Talk to Krishna” Button (shadcn-ui Button) are laid out as an adjacent cluster (e.g., portrait with CTA alongside/nearby) while keeping small-screen responsiveness and preserving navigation to the chat tab. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-24",
+      "summary": "Increase prominence of Home floral background visuals while keeping hero content readable in light and dark mode.",
+      "acceptanceCriteria": [
+        "The Home page floral decoration is noticeably more visible than the current implementation (e.g., increased scale/coverage/contrast/opacity and/or additional placements), but hero headline/subtext and CTA labels retain accessible contrast.",
+        "No foreground UI elements become visually cluttered or hard to read in either light or dark theme."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/flowers-corner-prominent.dim_1024x1024.png",
+          "operation": "create",
+          "description": "Add the updated generated floral asset for a more prominent soft-pastel background decoration: frontend/public/assets/generated/flowers-corner-prominent.dim_1024x1024.png."
         },
         {
           "path": "frontend/src/pages/HomePage.tsx",
           "operation": "modify",
-          "description": "Update hero typography to be serif-forward where appropriate (e.g., headline), tune spacing and section rhythm to feel airy, and align CTA/button styling with consistent pill/hover states. Continue using shadcn-ui Button/Card components via composition only; verify the component's usage instructions before implementing."
+          "description": "Swap the floral decoration image to frontend/public/assets/generated/flowers-corner-prominent.dim_1024x1024.png and adjust placement/scale/opacity (and, if needed, add additional decorative placements) while ensuring hero text and CTAs remain readable in both light and dark mode. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-25",
+      "summary": "Make a sticky top menu bar visible on all tabs/pages with exact labels and correct navigation/scroll-to-top behavior.",
+      "acceptanceCriteria": [
+        "When switching to any tab (Read Gita, Discover, Talk to Krishna), the same top menu bar is present and sticky at the top.",
+        "Menu button labels match exactly: “Home”, “Read Gita”, “Discover”, “Ask Krishna”.",
+        "Clicking “Read Gita”, “Discover”, and “Ask Krishna” navigates to the corresponding existing tabs.",
+        "Clicking “Home” returns to Home tab if not already there; if already on Home tab it scrolls the Home content to the top."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/layout/TopMenuBar.tsx",
+          "operation": "create",
+          "description": "Create a shared sticky TopMenuBar component using shadcn-ui Button for the four exact labels (“Home”, “Read Gita”, “Discover”, “Ask Krishna”) plus the existing ThemeToggle; the component should accept the active tab and an onNavigate callback so “Home” can either navigate or scroll-to-top when already active. Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/pages/ReadGita/ChapterListView.tsx",
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Align Read Gita list layout with consistent card radii/shadows/spacing and headline hierarchy; ensure interactions (hover/press) match the rest of the app using composed shadcn-ui Card/Button. Verify the component's usage instructions before implementing."
+          "description": "Render the shared TopMenuBar above the tab content so it appears on all tabs/pages; wire its actions to existing tab switching and implement the special “Home” behavior (navigate if not on Home; otherwise scroll to top). Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
+          "path": "frontend/src/pages/HomePage.tsx",
           "operation": "modify",
-          "description": "Normalize spacing, typography hierarchy, and verse list card styling so it matches the screenshot direction and other pages; keep interactions subtle and consistent using composed shadcn-ui components. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/pages/Discover/DiscoverPage.tsx",
-          "operation": "modify",
-          "description": "Refine mood grid spacing and card styling for consistency (rounded corners, soft elevation, clean focus/hover states) and align headings/subtext with the global typography scale using composed shadcn-ui Card. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/pages/Discover/MoodDetailView.tsx",
-          "operation": "modify",
-          "description": "Ensure CTA button style matches global primary button conventions (pill, consistent hover/press), and align section spacing and verse list rhythm with the rest of the app using composed shadcn-ui Button/Skeleton. Verify the component's usage instructions before implementing."
+          "description": "Remove/disable the HomePage-local top menu bar to avoid duplication, relying on the shared TopMenuBar rendered by App; keep Home content aligned under the global bar. Verify the component's usage instructions before implementing."
         },
         {
           "path": "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
           "operation": "modify",
-          "description": "Unify chat page spacing, header styling, and background overlays with the global theme; ensure button/icon states match the updated purple accent system using composed shadcn-ui Button. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/chat/FollowUpQuestions.tsx",
-          "operation": "modify",
-          "description": "Standardize follow-up question chips as secondary/pill buttons with consistent hover/press/focus styling that fits the pink/purple theme, using composed shadcn-ui Button. Verify the component's usage instructions before implementing."
+          "description": "Adjust the TalkToKrishnaPage header behavior/layout to coexist with the new global sticky TopMenuBar (e.g., avoid double-sticky headers/overlap and ensure content starts below the global bar) while keeping the existing chat UI functional. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-17",
-      "summary": "Update verse presentation so every verse card shows the 4 required parts with explicit labels and a clearly separated, always-visible action step, with responsive layout.",
+      "id": "REQ-26",
+      "summary": "Change navigation so tab switches and Read Gita internal view changes always open scrolled to the top (no per-tab scroll preservation).",
       "acceptanceCriteria": [
-        "VerseCard labels explicitly use “Literal Hindi translation” and “Literal English translation” (not just “Meaning”).",
-        "Sanskrit is available for every verse and is not effectively hidden (either shown by default or the control to reveal it is clearly visible and discoverable).",
-        "The UI is responsive: on small screens the four parts are stacked cleanly; on larger screens the layout may use a multi-column/grid presentation without losing readability.",
-        "The action step is always displayed and visually distinct from the translations/interpretation."
+        "Switching tabs always scrolls to the top (window scrollY becomes 0) immediately on tab activation.",
+        "In Read Gita, when switching between views (chapters/today/chapter-detail/verse-detail), the view opens scrolled to the top of its content.",
+        "This behavior is consistent across Home, Read Gita, Discover, and Talk to Krishna."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/verse/VerseCard.tsx",
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Revise VerseCard to present the four parts (Sanskrit (original), Literal Hindi translation, Literal English translation, Gen‑Z interpretation) with explicit labels; ensure Sanskrit is shown by default or the reveal control is prominent; implement a responsive stacked-to-grid layout; keep the action step always visible and visually distinct. Use shadcn-ui Card/Button via composition only and do not edit frontend/src/components/ui. Verify the component's usage instructions before implementing."
+          "description": "Remove per-tab scroll position preservation and ensure that whenever activeTab changes, the window scroll position is reset to the top (scrollY=0) immediately on activation (including when navigating via the new global TopMenuBar)."
         },
         {
-          "path": "frontend/src/pages/ReadGita/VerseDetailView.tsx",
+          "path": "frontend/src/pages/ReadGita/ReadGitaPage.tsx",
           "operation": "modify",
-          "description": "Ensure the verse detail view layout complements the updated VerseCard (consistent padding/spacing, readable width, and header hierarchy) without introducing new routes or tabs."
+          "description": "Add view-change scroll reset so when switching between 'chapters' → 'today' → 'chapter-detail' → 'verse-detail' (and back), the newly shown view starts scrolled to the top of its content."
         },
         {
-          "path": "frontend/src/components/chat/ChatThread.tsx",
+          "path": "frontend/src/pages/Discover/DiscoverPage.tsx",
           "operation": "modify",
-          "description": "Adjust chat rendering spacing around VerseCard (and Krishna message container) to match the updated verse presentation and global card rhythm, keeping readability strong in both themes."
+          "description": "Ensure switching between Discover's mood grid and MoodDetailView resets scroll to top so newly shown content starts at the top (consistent with the app-wide behavior)."
+        },
+        {
+          "path": "frontend/src/pages/TalkToKrishna/TalkToKrishnaPage.tsx",
+          "operation": "modify",
+          "description": "Ensure the Talk to Krishna tab content starts at the top on tab activation (align with window scroll-to-top behavior and avoid layout patterns that create unintended preserved scroll within the page container)."
         }
       ]
     },
     {
-      "id": "REQ-18",
-      "summary": "Add an in-page search/filter input to the Read Gita chapter list to filter chapters client-side by English title and Sanskrit subtitle without changing the four-tab structure.",
+      "id": "REQ-27",
+      "summary": "Show all 18 chapters in Read Gita list and display each chapter’s verse count in bracket format in the list UI.",
       "acceptanceCriteria": [
-        "Read Gita chapter list includes a search input that filters chapters client-side by English title and Sanskrit subtitle.",
-        "Search is case-insensitive and updates results as the user types.",
-        "Clearing the search restores the full 18-chapter list.",
-        "The existing navigation structure (four tabs) remains unchanged."
+        "The chapter listing renders 18 chapters when backend data is available (no missing entries).",
+        "Each chapter card displays the verse count in bracket format (example: “(47)”) in addition to the chapter title/subtitle.",
+        "The search filter still works and only filters from the full set of 18 chapters."
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/ReadGita/ChapterListView.tsx",
           "operation": "modify",
-          "description": "Add a client-side search input above the chapter list; filter fetched chapters by englishTitle and sanskritSubtitle (case-insensitive) as the user types; ensure clear/empty restores full list; keep existing Read Gita flow and four-tab navigation unchanged. Use shadcn-ui Input (or an equivalent composed input pattern) and existing Card/Skeleton styles without editing frontend/src/components/ui. Verify the component's usage instructions before implementing."
+          "description": "Ensure the chapter list is derived from the full getAllChapters result (e.g., apply a stable sort by chapter number before filtering) and update the chapter card UI to display verseCount in bracket format “(47)” alongside the chapter title/subtitle (instead of “47 verses”), while keeping the existing search behavior intact. Verify the component's usage instructions before implementing."
         }
       ]
     }
