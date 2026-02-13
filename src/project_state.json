@@ -1,41 +1,46 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "New project",
+  "summary": "Build and deploy a \"Read Gita\" section that displays verses in a 5-column table and includes complete verse data across all chapters.",
   "architectural_notes": [],
   "known_issues": [
-    "Error message appears in the \"Read Gita\" section (user reports; needs investigation and fix)."
+    "Table rows do not expand to show all cell content across 5 columns (content may be truncated).",
+    "Verse/chapter dataset is incomplete (not all verses for all chapters are populated)."
   ],
   "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-identify-and-fix-the-underlying-cause-of-the-error-shown-in-the-read-gita-section-so-that-chapters-and-verses-load-reliably-without-triggering-a-runtime-exception-or-failed-backend-call",
-      "title": "Identify and fix the underlying cause of the error shown in the Read Gita section so that chapters and verses load reliably without triggering a runtime exception or failed backend call.",
+      "id": "feature-update-the-read-gita-chapter-verse-table-so-each-row-expands-vertically-to-display-the-full-content-of-every-cell-across-all-5-columns-no-truncation-ellipsis-on-both-desktop-and-mobile-layouts",
+      "title": "Update the Read Gita chapter verse table so each row expands vertically to display the full content of every cell across all 5 columns (no truncation/ellipsis) on both desktop and mobile layouts.",
       "reqIds": [
         "REQ-1"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-consistent-user-facing-error-handling-and-recovery-actions-to-the-read-gita-views-chapterdetailview-versedetailview-and-today-s-wisdom-view-including-displaying-a-clear-english-error-state-and-a-retry-action-when-their-respective-queries-fail",
-      "title": "Add consistent user-facing error handling and recovery actions to the Read Gita views (ChapterDetailView, VerseDetailView, and Today’s Wisdom view), including displaying a clear English error state and a Retry action when their respective queries fail.",
-      "reqIds": [
-        "REQ-2"
       ],
       "version": 1
     }
   ],
   "new_feature_requests": [
     {
-      "id": "AR-3",
-      "summary": "Harden the backend Read Gita query methods so they cannot trap on missing data and always return the expected types for: getAllChapters, getVersesByChapter, getVerse, and getTodaysVerse.",
+      "id": "AR-1",
+      "summary": "Adjust the table UI so row height/row depth expands to show all cell content across all 5 columns (no truncation).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Populate the app with complete data for all verses across all chapters (full dataset coverage).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Populate backend verse data so the app contains verse records for every verse in every chapter (all 18 chapters), and ensure chapter verse counts match the returned verse list sizes.",
       "reqIds": [
-        "REQ-3"
+        "REQ-2"
       ],
       "status": "pending"
     }
   ],
-  "projectName": "Fix error message in Read Gita section",
+  "projectName": "Read Gita: Expand table rows to show full cell content and populate complete verse dataset",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

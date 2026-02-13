@@ -101,18 +101,18 @@ export default function ChapterDetailView({
                             </span>
                           </TableCell>
                           <TableCell className="text-sm text-foreground align-top">
-                            <p className="leading-relaxed font-serif line-clamp-3">{verse.sanskrit || '—'}</p>
+                            <p className="leading-relaxed font-serif whitespace-normal break-words">{verse.sanskrit || '—'}</p>
                           </TableCell>
                           <TableCell className="text-sm text-foreground align-top">
-                            <p className="leading-relaxed line-clamp-3">{verse.englishMeaning || '—'}</p>
+                            <p className="leading-relaxed whitespace-normal break-words">{verse.englishMeaning || '—'}</p>
                           </TableCell>
                           <TableCell className="text-sm text-foreground align-top">
-                            <p className="leading-relaxed font-medium text-primary/90 line-clamp-3">
+                            <p className="leading-relaxed font-medium text-primary/90 whitespace-normal break-words">
                               {verse.genZKrishnaInterpretation?.trim() || '—'}
                             </p>
                           </TableCell>
                           <TableCell className="text-sm text-foreground align-top">
-                            <p className="leading-relaxed line-clamp-3">
+                            <p className="leading-relaxed whitespace-normal break-words">
                               {verse.actionStep?.trim() || '—'}
                             </p>
                           </TableCell>
@@ -162,18 +162,18 @@ export default function ChapterDetailView({
                               </span>
                             </TableCell>
                             <TableCell className="text-sm text-foreground align-top">
-                              <p className="leading-relaxed font-serif line-clamp-3">{verse.sanskrit || '—'}</p>
+                              <p className="leading-relaxed font-serif whitespace-normal break-words">{verse.sanskrit || '—'}</p>
                             </TableCell>
                             <TableCell className="text-sm text-foreground align-top">
-                              <p className="leading-relaxed line-clamp-2">{verse.englishMeaning || '—'}</p>
+                              <p className="leading-relaxed whitespace-normal break-words">{verse.englishMeaning || '—'}</p>
                             </TableCell>
                             <TableCell className="text-sm text-foreground align-top">
-                              <p className="leading-relaxed font-medium text-primary/90 line-clamp-3">
+                              <p className="leading-relaxed font-medium text-primary/90 whitespace-normal break-words">
                                 {verse.genZKrishnaInterpretation?.trim() || '—'}
                               </p>
                             </TableCell>
                             <TableCell className="text-sm text-foreground align-top">
-                              <p className="leading-relaxed line-clamp-3">
+                              <p className="leading-relaxed whitespace-normal break-words">
                                 {verse.actionStep?.trim() || '—'}
                               </p>
                             </TableCell>

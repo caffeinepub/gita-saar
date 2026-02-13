@@ -1,74 +1,54 @@
 {
   "kind": "build_request",
-  "title": "Fix error message in Read Gita section",
-  "priority": "high",
+  "title": "Read Gita: Expand table rows to show full cell content and populate complete verse dataset",
+  "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Identify and fix the underlying cause of the error shown in the Read Gita section so that chapters and verses load reliably without triggering a runtime exception or failed backend call.",
-      "target": "both",
+      "text": "Update the Read Gita chapter verse table so each row expands vertically to display the full content of every cell across all 5 columns (no truncation/ellipsis) on both desktop and mobile layouts.",
+      "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-6"
         ],
         "quotes": [
-          "I am getting error message in read gita section. fix this"
+          "Increase the row depth to include all content in the cells of the table for all 5 columns."
         ]
       },
       "acceptanceCriteria": [
-        "Opening the Read Gita tab loads the chapter list without showing an error message.",
-        "Selecting a chapter successfully loads that chapter’s verse list without errors.",
-        "No uncaught exceptions occur in the browser console during Read Gita navigation (chapter list -> chapter detail -> verse detail -> back)."
+        "In ChapterDetailView, none of the 5 table columns use line-clamping or other truncation; long text wraps and the row height increases to fit it.",
+        "Desktop table rows show full Sanskrit, Literal English, Gen-Z Interpretation, and Action Step text without ellipses.",
+        "Mobile table rows (the horizontal-scroll table) also show full text for all columns without ellipses, with rows expanding in height as needed.",
+        "The table remains readable and aligned (cell content top-aligned) for multi-line content."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Add consistent user-facing error handling and recovery actions to the Read Gita views (ChapterDetailView, VerseDetailView, and Today’s Wisdom view), including displaying a clear English error state and a Retry action when their respective queries fail.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "I am getting error message in read gita section. fix this"
-        ]
-      },
-      "acceptanceCriteria": [
-        "If loading verses for a chapter fails, the chapter detail screen shows an English error message and a Retry button that re-attempts the request.",
-        "If loading an individual verse fails, the verse detail screen shows an English error message and a Retry button.",
-        "If loading Today’s Wisdom fails, the Today’s Wisdom screen shows an English error message and a Retry button.",
-        "Existing non-error empty states remain intact (e.g., “No verses available for this chapter yet.” when the backend returns an empty list)."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Harden the backend Read Gita query methods so they cannot trap on missing data and always return the expected types for: getAllChapters, getVersesByChapter, getVerse, and getTodaysVerse.",
+      "text": "Populate backend verse data so the app contains verse records for every verse in every chapter (all 18 chapters), and ensure chapter verse counts match the returned verse list sizes.",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-6"
         ],
         "quotes": [
-          "I am getting error message in read gita section. fix this"
+          "Also poulate all the data for all verses for all chapters"
         ]
       },
       "acceptanceCriteria": [
-        "Backend canister compiles and deploys successfully after changes.",
-        "Calling getAllChapters returns a non-empty list of chapters.",
-        "Calling getVersesByChapter for any chapter returns an array (possibly empty) without trapping.",
-        "Calling getVerse for a missing verse returns null (Motoko ?Verse) without trapping.",
-        "Calling getTodaysVerse always returns a Verse without trapping."
+        "For each chapter 1–18, getVersesByChapter(chapterNumber) returns exactly the number of verses specified by that chapter’s verseCount.",
+        "For any valid (chapter, verse) pair within the chapter’s verseCount, getVerse(chapter, verse) returns a non-null Verse with non-empty text fields for the 5-column table content (at minimum: sanskrit, englishMeaning, genZKrishnaInterpretation, actionStep).",
+        "The Read Gita UI no longer shows \"No verses available for this chapter yet.\" for any chapter 1–18.",
+        "Curated verse lookups by mood do not reference missing verses (i.e., getCuratedVersesByMood returns only verses that exist in the full dataset)."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (read-only).",
-    "Do not edit frontend/src/hooks/useInternetIdentity.ts(x), frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths).",
-    "Backend must remain a single Motoko actor in backend/main.mo; only add backend/migration.mo if an actual state migration is required."
+    "Backend must remain a single Motoko actor in backend/main.mo (no additional backend services).",
+    "Do not edit files under frontend/src/components/ui (they are immutable); compose styling changes within app/page components such as frontend/src/pages/ReadGita/ChapterDetailView.tsx."
   ],
   "nonGoals": [
-    "Adding new Gita content, new chapters, or additional verses beyond what is needed to fix the error.",
-    "Redesigning the overall app navigation or adding new tabs/features unrelated to Read Gita."
+    "Do not change the overall Read Gita navigation flow (chapter list → chapter detail → verse detail).",
+    "Do not add new authentication methods or external databases/services."
   ],
   "imageRequirements": {
     "required": [],

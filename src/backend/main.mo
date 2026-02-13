@@ -1,12 +1,12 @@
 import Time "mo:core/Time";
 import Nat "mo:core/Nat";
-import Order "mo:core/Order";
+import Int "mo:core/Int";
 import Array "mo:core/Array";
-import List "mo:core/List";
 import Map "mo:core/Map";
+import Order "mo:core/Order";
+import Migration "migration";
 
-// Attach state migration logic using to new actor instance with the with clause
-
+(with migration = Migration.run)
 actor {
   type Chapter = {
     number : Nat;
@@ -57,7 +57,6 @@ actor {
     };
   };
 
-  // Instead of storing as persistent state, generate chapters for each query
   func generateFullChapterList() : [Chapter] {
     [
       {

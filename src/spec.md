@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Fix the Read Gita section runtime/error state so chapters and verses load reliably, and add consistent, recoverable error handling in Read Gita-related views.
+**Goal:** Improve the Read Gita chapter verse table to show full verse content without truncation, and fully populate verse data across all 18 chapters.
 
 **Planned changes:**
-- Identify and fix the root cause of the Read Gita loading error so chapter list, chapter verses, and verse details can be navigated without backend call failures or uncaught exceptions.
-- Add consistent frontend error states and a Retry action for failed loads in ChapterDetailView, VerseDetailView, and Today’s Wisdom, while preserving existing non-error empty states.
-- Harden backend Read Gita query methods (getAllChapters, getVersesByChapter, getVerse, getTodaysVerse) to avoid trapping on missing data and always return the expected types.
+- Update the ChapterDetailView verse table so all 5 columns wrap long text with no clamping/ellipsis on both desktop and mobile, with rows expanding vertically and cell content top-aligned.
+- Populate backend verse data for every verse in every chapter (1–18) so chapter verse counts match returned verse list sizes and verse lookups return complete, non-empty text fields.
+- Ensure curated verse lookups by mood only reference verses that exist in the full dataset.
 
-**User-visible outcome:** Opening Read Gita shows chapters without errors, selecting a chapter and verse works reliably, and if any Read Gita/TODAY’s Wisdom fetch fails the user sees a clear English message with a Retry button instead of a crash or stuck state.
+**User-visible outcome:** Users can view every chapter’s complete set of verses, and read the full Sanskrit/translation/interpretation/action-step text directly in the chapter table on both desktop and mobile without any truncated rows.

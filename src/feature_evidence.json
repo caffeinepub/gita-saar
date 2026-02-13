@@ -2,11 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-identify-and-fix-the-underlying-cause-of-the-error-shown-in-the-read-gita-section-so-that-chapters-and-verses-load-reliably-without-triggering-a-runtime-exception-or-failed-backend-call",
-      "featureTitle": "Identify and fix the underlying cause of the error shown in the Read Gita section so that chapters and verses load reliably without triggering a runtime exception or failed backend call.",
+      "featureId": "feature-update-the-read-gita-chapter-verse-table-so-each-row-expands-vertically-to-display-the-full-content-of-every-cell-across-all-5-columns-no-truncation-ellipsis-on-both-desktop-and-mobile-layouts",
+      "featureTitle": "Update the Read Gita chapter verse table so each row expands vertically to display the full content of every cell across all 5 columns (no truncation/ellipsis) on both desktop and mobile layouts.",
       "files": [
-        "frontend/src/hooks/useQueries.ts",
-        "frontend/src/pages/ReadGita/ChapterListView.tsx"
+        "frontend/src/pages/ReadGita/ChapterDetailView.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -17,28 +16,6 @@
       ],
       "testIds": [
         "REQ-1"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-consistent-user-facing-error-handling-and-recovery-actions-to-the-read-gita-views-chapterdetailview-versedetailview-and-today-s-wisdom-view-including-displaying-a-clear-english-error-state-and-a-retry-action-when-their-respective-queries-fail",
-      "featureTitle": "Add consistent user-facing error handling and recovery actions to the Read Gita views (ChapterDetailView, VerseDetailView, and Today’s Wisdom view), including displaying a clear English error state and a Retry action when their respective queries fail.",
-      "files": [
-        "frontend/src/components/common/QueryErrorState.tsx",
-        "frontend/src/components/today/TodaysWisdomCard.tsx",
-        "frontend/src/hooks/useQueries.ts",
-        "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
-        "frontend/src/pages/ReadGita/VerseDetailView.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-2"
       ],
       "confidence": "high"
     }

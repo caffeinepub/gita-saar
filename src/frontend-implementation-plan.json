@@ -1,63 +1,22 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix Read Gita runtime error and add consistent retryable error states",
+  "title": "Read Gita: Expand chapter verse table rows to show full cell content",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Fix the underlying Read Gita runtime error so chapter/verse loading is reliable during navigation.",
+      "summary": "Remove truncation and allow ChapterDetailView table rows to grow vertically so all 5 columns show full wrapped text on desktop and mobile.",
       "acceptanceCriteria": [
-        "Opening the Read Gita tab loads the chapter list without showing an error message.",
-        "Selecting a chapter successfully loads that chapter’s verse list without errors.",
-        "No uncaught exceptions occur in the browser console during Read Gita navigation (chapter list -> chapter detail -> verse detail -> back)."
+        "In ChapterDetailView, none of the 5 table columns use line-clamping or other truncation; long text wraps and the row height increases to fit it.",
+        "Desktop table rows show full Sanskrit, Literal English, Gen-Z Interpretation, and Action Step text without ellipses.",
+        "Mobile table rows (the horizontal-scroll table) also show full text for all columns without ellipses, with rows expanding in height as needed.",
+        "The table remains readable and aligned (cell content top-aligned) for multi-line content."
       ],
       "file_operations": [
-        {
-          "path": "frontend/src/pages/ReadGita/ChapterListView.tsx",
-          "operation": "modify",
-          "description": "Harden chapter filtering/sorting/rendering against unexpected missing/undefined string fields to prevent runtime exceptions (e.g., safe lowercasing for titles/subtitles), while keeping existing loading and retry UI. Uses shadcn-ui primitives already imported (Alert/Button/Input/Card) for consistency—Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/hooks/useQueries.ts",
-          "operation": "modify",
-          "description": "Stabilize Read Gita data fetching hooks so failures are surfaced as query errors (not silent fallbacks) and are retryable: ensure Read Gita queries consistently throw when the backend actor is unavailable and add consistent retry behavior where missing, so views can reliably present error/retry states."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Add consistent English error states with Retry actions to ChapterDetailView, VerseDetailView, and Today’s Wisdom when their queries fail, without breaking existing empty states.",
-      "acceptanceCriteria": [
-        "If loading verses for a chapter fails, the chapter detail screen shows an English error message and a Retry button that re-attempts the request.",
-        "If loading an individual verse fails, the verse detail screen shows an English error message and a Retry button.",
-        "If loading Today’s Wisdom fails, the Today’s Wisdom screen shows an English error message and a Retry button.",
-        "Existing non-error empty states remain intact (e.g., “No verses available for this chapter yet.” when the backend returns an empty list)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/common/QueryErrorState.tsx",
-          "operation": "create",
-          "description": "Create a small reusable error-state component that shows a clear English message and a Retry action (callback) using existing shadcn-ui primitives (e.g., Alert + Button) for consistent UX across Read Gita views—Verify the component's usage instructions before implementing."
-        },
         {
           "path": "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
           "operation": "modify",
-          "description": "Add explicit error handling for the verses query: when isError, render the shared QueryErrorState with a Retry action (refetch); when not error, preserve the existing empty state for an empty verses list. Use existing shadcn-ui Table/Skeleton/Button and the new error component—Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/pages/ReadGita/VerseDetailView.tsx",
-          "operation": "modify",
-          "description": "Add explicit error handling for the verse query: when isError, render the shared QueryErrorState with Retry (refetch); keep the existing 'Verse not found' empty state only for successful queries returning null. Use existing shadcn-ui Button/Skeleton and the new error component—Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/today/TodaysWisdomCard.tsx",
-          "operation": "modify",
-          "description": "Add explicit error handling for Today’s Wisdom query: when isError, render the shared QueryErrorState with Retry (refetch); keep existing loading skeleton and non-error empty state behavior. Use existing shadcn-ui Button/Skeleton and the new error component—Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/hooks/useQueries.ts",
-          "operation": "modify",
-          "description": "Expose the needed query state to the views (isError/error/refetch) and ensure the Read Gita hooks support consistent retries so the new Retry buttons re-attempt the correct requests."
+          "description": "Update the desktop and mobile verse tables to remove all uses of line-clamp classes (and any other truncation/ellipsis styling) from the 4 long-text columns, ensuring content wraps (e.g., whitespace-normal / break-words) and rows expand naturally while keeping cells top-aligned. Continue using the existing shadcn-ui Table and ScrollArea components for layout; verify the component's usage instructions before implementing."
         }
       ]
     }

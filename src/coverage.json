@@ -1,50 +1,29 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T11:29:48.195Z",
+  "generatedAt": "2026-02-13T11:42:23.147Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 2,
+    "total": 2,
+    "implemented": 1,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Identify and fix the underlying cause of the error shown in the Read Gita section so that chapters and verses load reliably without triggering a runtime exception or failed backend call.",
+        "summary": "Update the Read Gita chapter verse table so each row expands vertically to display the full content of every cell across all 5 columns (no truncation/ellipsis) on both desktop and mobile layouts.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/ReadGita/ChapterListView.tsx",
-          "frontend/src/hooks/useQueries.ts"
+          "frontend/src/pages/ReadGita/ChapterDetailView.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/ReadGita/ChapterListView.tsx",
-          "frontend/src/hooks/useQueries.ts"
+          "frontend/src/pages/ReadGita/ChapterDetailView.tsx"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Add consistent user-facing error handling and recovery actions to the Read Gita views (ChapterDetailView, VerseDetailView, and Today’s Wisdom view), including displaying a clear English error state and a Retry action when their respective queries fail.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/common/QueryErrorState.tsx",
-          "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
-          "frontend/src/pages/ReadGita/VerseDetailView.tsx",
-          "frontend/src/components/today/TodaysWisdomCard.tsx",
-          "frontend/src/hooks/useQueries.ts"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/common/QueryErrorState.tsx",
-          "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
-          "frontend/src/pages/ReadGita/VerseDetailView.tsx",
-          "frontend/src/components/today/TodaysWisdomCard.tsx",
-          "frontend/src/hooks/useQueries.ts"
-        ]
-      },
-      {
-        "id": "REQ-3",
-        "summary": "Harden the backend Read Gita query methods so they cannot trap on missing data and always return the expected types for: getAllChapters, getVersesByChapter, getVerse, and getTodaysVerse.",
+        "summary": "Populate backend verse data so the app contains verse records for every verse in every chapter (all 18 chapters), and ensure chapter verse counts match the returned verse list sizes.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
@@ -53,16 +32,12 @@
   },
   "changedFiles": [
     "backend/main.mo",
+    "backend/migration.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/common/QueryErrorState.tsx",
-    "frontend/src/components/today/TodaysWisdomCard.tsx",
-    "frontend/src/hooks/useQueries.ts",
     "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
-    "frontend/src/pages/ReadGita/ChapterListView.tsx",
-    "frontend/src/pages/ReadGita/VerseDetailView.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
