@@ -8,6 +8,14 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const Chapter = IDL.Record({
+  'sanskritSubtitle' : IDL.Text,
+  'englishTitle' : IDL.Text,
+  'verseCount' : IDL.Nat,
+  'keyInsights' : IDL.Vec(IDL.Text),
+  'summary' : IDL.Text,
+  'number' : IDL.Nat,
+});
 export const Mood = IDL.Variant({
   'sad' : IDL.Null,
   'anxious' : IDL.Null,
@@ -33,6 +41,7 @@ export const ChatbotResponse = IDL.Record({
 });
 
 export const idlService = IDL.Service({
+  'getAllChapters' : IDL.Func([], [IDL.Vec(Chapter)], ['query']),
   'getChatbotResponse' : IDL.Func(
       [IDL.Text, IDL.Opt(Mood), IDL.Vec(IDL.Text)],
       [ChatbotResponse],
@@ -52,6 +61,14 @@ export const idlService = IDL.Service({
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const Chapter = IDL.Record({
+    'sanskritSubtitle' : IDL.Text,
+    'englishTitle' : IDL.Text,
+    'verseCount' : IDL.Nat,
+    'keyInsights' : IDL.Vec(IDL.Text),
+    'summary' : IDL.Text,
+    'number' : IDL.Nat,
+  });
   const Mood = IDL.Variant({
     'sad' : IDL.Null,
     'anxious' : IDL.Null,
@@ -77,6 +94,7 @@ export const idlFactory = ({ IDL }) => {
   });
   
   return IDL.Service({
+    'getAllChapters' : IDL.Func([], [IDL.Vec(Chapter)], ['query']),
     'getChatbotResponse' : IDL.Func(
         [IDL.Text, IDL.Opt(Mood), IDL.Vec(IDL.Text)],
         [ChatbotResponse],

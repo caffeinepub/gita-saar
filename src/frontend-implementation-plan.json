@@ -1,22 +1,6 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Conversational, plain-English helper text in Ask Krishna chat thread",
-  "requirements": [
-    {
-      "id": "REQ-29",
-      "summary": "Make the chat thread “no verse available” helper text plain English (no emojis) and consistent with the new conversational tone.",
-      "acceptanceCriteria": [
-        "In `frontend/src/components/chat/ChatThread.tsx`, the \"no verse\" hint text renders as plain English without emojis and remains a single concise sentence.",
-        "No other user-facing text changes introduce non-English phrasing or emoji-only indicators in the chat thread."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/chat/ChatThread.tsx",
-          "operation": "modify",
-          "description": "Replace the current emoji-prefixed “no verse” hint text with a single concise plain-English sentence (no emojis) that matches the updated conversational tone when no verse is available, without changing other chat-thread user-facing strings."
-        }
-      ]
-    }
-  ]
+  "title": "Frontend plan for Chapter 1 verse population update (no frontend changes required)",
+  "requirements": []
 }

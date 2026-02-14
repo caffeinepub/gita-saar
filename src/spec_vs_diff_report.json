@@ -1,32 +1,38 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-14T08:44:26.706Z",
-  "summary": "Frontend change in ChatThread.tsx appears to satisfy the plain-English single-sentence \"no verse\" hint requirement. Backend requirements for Krishna-like paraphrased responses and greeting/small-talk handling cannot be confirmed from the provided truncated backend/main.mo diff (the relevant getChatbotResponse implementation is not shown).",
+  "generatedAt": "2026-02-14T09:34:26.145Z",
+  "summary": "Backend/main.mo adds Chapter 1 verse records but, per the visible comment and truncated content, only includes verses 1:1–1:47. There is no visible update confirming Chapter 1 metadata verseCount=72. Also, project_state.json was modified even though the BuildRequest only constrained/required backend/main.mo changes.",
   "missing_requirements": [
     {
-      "id": "REQ-27",
-      "requirement": "Update backend getChatbotResponse in backend/main.mo so supportiveMessage is original/conversational (not direct verse text), always returns non-empty supportiveMessage, followUpQuestions (>=1), and actionStep even without a selectedVerse, and never traps on any input.",
-      "reason": "The diff for backend/main.mo is truncated and does not include the getChatbotResponse implementation or any visible changes demonstrating paraphrasing logic, deterministic fallbacks, or non-trapping handling.",
+      "id": "REQ-33",
+      "requirement": "Populate Bhagavad Gita Chapter 1 with all verses 1:1 through 1:72, with non-empty `sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, and `actionStep` for each verse, and ensure `getVersesByChapter(1)` and `getVerse(1,n)` cover n=1..72.",
+      "reason": "The diff explicitly indicates only verses 1:1 through 1:47 were added (\"implementation milestone\"), so verses 1:48–1:72 are not evidenced as present, meaning the full 1..72 coverage and corresponding query results cannot be met based on the shown changes.",
       "evidence": [
-        "backend/main.mo (truncated)"
+        "backend/main.mo (comment: \"// Verses from 1:1 to 1:47 added for implementation milestone.\")"
       ]
     },
     {
-      "id": "REQ-28",
-      "requirement": "Add greeting/small-talk handling in backend/main.mo getChatbotResponse so greetings get a friendly greeting + check-in question and small-talk follow-ups, without requiring selectedVerse.",
-      "reason": "The diff for backend/main.mo is truncated and does not show getChatbotResponse or any greeting detection/handling logic.",
+      "id": "REQ-34",
+      "requirement": "Update Chapter 1 metadata returned by `getAllChapters()` so that `verseCount` for Chapter 1 equals 72.",
+      "reason": "No visible changes show Chapter 1's `verseCount` being set/updated to 72 in the `getAllChapters()` dataset/logic; the truncated snippet does not provide evidence this was implemented.",
       "evidence": [
-        "backend/main.mo (truncated)"
+        "backend/main.mo (truncated; no shown update to Chapter 1 `verseCount` in chapter metadata / `getAllChapters()` output)"
       ]
     }
   ],
-  "hallucinated_features": [],
-  "confidence": 0.62,
+  "hallucinated_features": [
+    {
+      "description": "Updated project metadata/state file (project_state.json) including a summary claiming verses 1–72 were added.",
+      "reason": "The BuildRequest requirements only specify backend changes in `backend/main.mo`; modifying `project_state.json` is not requested as part of REQ-33/REQ-34.",
+      "evidence": [
+        "project_state.json (modified; summary text: \"add verses 1–72 with complete interpretations/fields for all columns.\")"
+      ]
+    }
+  ],
+  "confidence": 0.74,
   "changed_files": [
     "backend/main.mo",
-    "frontend-file-summaries.txt",
-    "frontend/src/components/chat/ChatThread.tsx",
     "project_state.json"
   ]
 }

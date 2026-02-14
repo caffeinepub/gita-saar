@@ -104,6 +104,14 @@ export interface ChatbotResponse {
     actionStep: string;
     followUpQuestions: Array<string>;
 }
+export interface Chapter {
+    sanskritSubtitle: string;
+    englishTitle: string;
+    verseCount: bigint;
+    keyInsights: Array<string>;
+    summary: string;
+    number: bigint;
+}
 export enum Mood {
     sad = "sad",
     anxious = "anxious",
@@ -113,6 +121,7 @@ export enum Mood {
     motivated = "motivated"
 }
 export interface backendInterface {
+    getAllChapters(): Promise<Array<Chapter>>;
     getChatbotResponse(userMessage: string, mood: Mood | null, _sessionHistory: Array<string>): Promise<ChatbotResponse>;
     getCuratedVersesByMood(mood: Mood): Promise<Array<Verse>>;
     getMoodTaglines(): Promise<Array<[Mood, string]>>;
@@ -123,6 +132,20 @@ export interface backendInterface {
 import type { ChatbotResponse as _ChatbotResponse, Mood as _Mood, Verse as _Verse } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async getAllChapters(): Promise<Array<Chapter>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllChapters();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllChapters();
+            return result;
+        }
+    }
     async getChatbotResponse(arg0: string, arg1: Mood | null, arg2: Array<string>): Promise<ChatbotResponse> {
         if (this.processError) {
             try {

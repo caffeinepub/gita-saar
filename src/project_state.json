@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 25,
-  "summary": "Refine Ask Krishna chatbot quality: ensure it produces more Krishna-like, conversational replies that synthesize Bhagavad Gita teachings into original guidance (not just direct verse quotes), including friendly greeting/small-talk behavior for messages like \"Hi.\"",
+  "projectStateVersion": 31,
+  "summary": "Update verse content for Chapter 1 per user request: add verses 1–72 with complete interpretations/fields for all columns.",
   "architectural_notes": [
     "User confirmed the new chapter structure looks correct; next priority is populating all chapters with full verse content and required interpretation columns."
   ],
@@ -9,9 +9,10 @@
     "Read Gita section shows an error message in the app.",
     "Home page Ask Krishna AI chatbot is not replying to user queries.",
     "Home page Ask Krishna chatbot only returns a generic canned response (e.g., \"I'm here for you! Let's talk it out, step by step\") instead of answering based on Bhagavad Gita knowledge.",
-    "Build/generation pipeline sometimes fails to finish generating the application (\"Unable to finish generating your application\"). User requested retry."
+    "Build/generation pipeline sometimes fails to finish generating the application (\"Unable to finish generating your application\"). User requested retry.",
+    "Read Gita section shows no chapters (chapter list appears empty/not visible)."
   ],
-  "isFixRequest": true,
+  "isFixRequest": false,
   "existing_features": [
     {
       "id": "feature-re-run-the-full-build-deploy-pipeline-for-the-current-project-and-produce-a-clear-deploy-report-that-includes-the-specific-failing-step-the-full-error-output-and-the-commit-source-state-that-was-deployed",
@@ -90,6 +91,14 @@
       "title": "Ensure all user-facing chat UI helper text in the chat thread is plain English (no emojis) and consistent with the new conversational tone when no verse is available.",
       "reqIds": [
         "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-frontend-chapters-query-hook-frontend-src-hooks-usequeries-ts-usegetallchapters-to-call-the-backend-actor-method-getallchapters-instead-of-returning-an-empty-array-placeholder-so-the-read-gita-chapter-list-screen-displays-chapters",
+      "title": "Update the frontend chapters query hook (`frontend/src/hooks/useQueries.ts` `useGetAllChapters`) to call the backend actor method `getAllChapters()` instead of returning an empty array placeholder, so the Read Gita Chapter List screen displays chapters.",
+      "reqIds": [
+        "REQ-31"
       ],
       "version": 1
     }
@@ -304,9 +313,53 @@
         "REQ-28"
       ],
       "status": "pending"
+    },
+    {
+      "id": "AR-32",
+      "summary": "Add a `getAllChapters()` query method to the Motoko canister (`backend/main.mo`) that returns the Bhagavad Gita chapter list as `[Chapter]` so the Read Gita chapter list can render chapters instead of being empty.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-33",
+      "summary": "Populate Bhagavad Gita Chapter 1 by adding verses 31–47 with all required fields filled (`sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, `actionStep`).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-34",
+      "summary": "In `backend/main.mo`, add Bhagavad Gita Chapter 1 verses 31 through 47 to the backend verse dataset so they are returned by `getVersesByChapter(1)` and `getVerse(1, verseNumber)`. Each Verse record must have all required fields filled for every verse: `sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, and `actionStep` (no empty strings).",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-35",
+      "summary": "Populate Bhagavad Gita Chapter 1 with verses 1–72, ensuring every verse has all required fields/columns filled (sanskrit, hindiMeaning, englishMeaning, genZKrishnaInterpretation, actionStep) with respective interpretations.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-36",
+      "summary": "In `backend/main.mo`, populate the verse dataset for Bhagavad Gita Chapter 1 with all verses 1:1 through 1:72. Each verse must be represented as a `Verse` record and must include non-empty values for every field used by the app: `sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, and `actionStep`.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-37",
+      "summary": "Update Chapter 1 metadata returned by `getAllChapters()` in `backend/main.mo` so that `verseCount` for Chapter 1 matches the populated dataset (72).",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "status": "pending"
     }
   ],
-  "projectName": "Populate Bhagavad Gita Chapter 1 with all 47 verses and complete verse fields",
+  "projectName": "Populate Bhagavad Gita Chapter 1 with verses 1–72 and complete verse fields",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

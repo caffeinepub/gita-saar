@@ -1,11 +1,10 @@
 # Specification
 
 ## Summary
-**Goal:** Make Ask Krishna’s chat replies more Krishna-like, conversational, and able to respond naturally to greetings while keeping responses stable and valid.
+**Goal:** Populate Bhagavad Gita Chapter 1 with a complete verse dataset (verses 1–72) including full interpretations for all fields used by the app.
 
 **Planned changes:**
-- Update `backend/main.mo` `getChatbotResponse(userMessage, mood, sessionHistory)` so `supportiveMessage` is an original, conversational Krishna-voiced reply that synthesizes Gita teachings (not direct verse text), and always returns a valid `ChatbotResponse` with non-empty `supportiveMessage`, at least one `followUpQuestions` item, and a non-empty `actionStep` (even when no verse is selected or input is empty).
-- Add greeting/small-talk handling in `getChatbotResponse` so greetings like “Hi/Hello/Hey” produce a friendly greeting plus a check-in question (e.g., “How are you doing today?”) and small-talk-appropriate follow-up questions, without requiring a selected verse.
-- Adjust the “no verse” helper text in `frontend/src/components/chat/ChatThread.tsx` to be a single concise plain-English sentence with no emojis, consistent with the updated conversational tone.
+- Update `backend/main.mo` to include Verse records for Chapter 1 verses 1:1 through 1:72 with non-empty values for `sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, and `actionStep`.
+- Update Chapter 1 metadata in `backend/main.mo` so `getAllChapters()` returns `verseCount: 72` for Chapter 1.
 
-**User-visible outcome:** Users receive more natural, Krishna-like conversational guidance (including friendly greeting responses), and the chat UI displays plain-English helper text when no verse is available.
+**User-visible outcome:** Users can load Bhagavad Gita Chapter 1 and access every verse from 1 to 72, each showing Sanskrit text, Hindi/English meaning, a Gen-Z Krishna interpretation, and an action step; Chapter 1 displays the correct verse count.

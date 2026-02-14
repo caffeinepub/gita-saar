@@ -1,39 +1,28 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-14T08:44:26.709Z",
+  "generatedAt": "2026-02-14T09:34:26.148Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 1,
+    "total": 2,
+    "implemented": 0,
     "items": [
       {
-        "id": "REQ-27",
-        "summary": "Update the backend `getChatbotResponse(userMessage, mood, sessionHistory)` in `backend/main.mo` so Krishna’s `supportiveMessage` is written as an original, conversational reply that synthesizes Bhagavad Gita teachings instead of directly quoting/pasting verse text or returning a generic canned line, while still returning a valid `ChatbotResponse` shape.",
+        "id": "REQ-33",
+        "summary": "In `backend/main.mo`, populate the verse dataset for Bhagavad Gita Chapter 1 with all verses 1:1 through 1:72. Each verse must be represented as a `Verse` record and must include non-empty values for every field used by the app: `sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, and `actionStep`.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
       },
       {
-        "id": "REQ-28",
-        "summary": "Add greeting/small-talk handling in `backend/main.mo` `getChatbotResponse` so that when the user message is a greeting (e.g., \"Hi\", \"Hello\", \"Hey\"), Krishna replies with a friendly greeting and a follow-up like “How are you doing today?” and keeps the conversation moving with at least one appropriate follow-up question.",
+        "id": "REQ-34",
+        "summary": "Update Chapter 1 metadata returned by `getAllChapters()` in `backend/main.mo` so that `verseCount` for Chapter 1 matches the populated dataset (72).",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
-      },
-      {
-        "id": "REQ-29",
-        "summary": "Ensure all user-facing chat UI helper text in the chat thread is plain English (no emojis) and consistent with the new conversational tone when no verse is available.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/chat/ChatThread.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/chat/ChatThread.tsx"
-        ]
       }
     ]
   },
@@ -41,9 +30,11 @@
     "backend/main.mo",
     "build-request.json",
     "feature_evidence.json",
-    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/chat/ChatThread.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

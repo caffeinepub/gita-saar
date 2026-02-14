@@ -22,6 +22,14 @@ export interface ChatbotResponse {
     actionStep: string;
     followUpQuestions: Array<string>;
 }
+export interface Chapter {
+    sanskritSubtitle: string;
+    englishTitle: string;
+    verseCount: bigint;
+    keyInsights: Array<string>;
+    summary: string;
+    number: bigint;
+}
 export enum Mood {
     sad = "sad",
     anxious = "anxious",
@@ -31,6 +39,7 @@ export enum Mood {
     motivated = "motivated"
 }
 export interface backendInterface {
+    getAllChapters(): Promise<Array<Chapter>>;
     getChatbotResponse(userMessage: string, mood: Mood | null, _sessionHistory: Array<string>): Promise<ChatbotResponse>;
     getCuratedVersesByMood(mood: Mood): Promise<Array<Verse>>;
     getMoodTaglines(): Promise<Array<[Mood, string]>>;

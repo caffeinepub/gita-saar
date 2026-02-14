@@ -1,71 +1,52 @@
 {
   "kind": "build_request",
-  "title": "Make Ask Krishna replies more Krishna-like, conversational, and greeting-aware",
+  "title": "Populate Bhagavad Gita Chapter 1 with verses 1–72 and complete interpretations",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-27",
-      "text": "Update the backend `getChatbotResponse(userMessage, mood, sessionHistory)` in `backend/main.mo` so Krishna’s `supportiveMessage` is written as an original, conversational reply that synthesizes Bhagavad Gita teachings instead of directly quoting/pasting verse text or returning a generic canned line, while still returning a valid `ChatbotResponse` shape.",
+      "id": "REQ-33",
+      "text": "In `backend/main.mo`, populate the verse dataset for Bhagavad Gita Chapter 1 with all verses 1:1 through 1:72. Each verse must be represented as a `Verse` record and must include non-empty values for every field used by the app: `sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, and `actionStep`.",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-9"
+          "recent-messages-4"
         ],
         "quotes": [
-          "want the chatbot replies to feel even more Krishna-like and dont just give the verses directly but look at the teachings and make your own suggestions to give answers. also be coversational."
+          "In chapter 1 add verses 1-72 with respective interpretation for all columns"
         ]
       },
       "acceptanceCriteria": [
-        "For non-greeting user messages, `supportiveMessage` is not a direct copy of `Verse.genZKrishnaInterpretation` and does not wrap it as a quote; it should be a paraphrased, Krishna-voiced guidance message in clear English.",
-        "`getChatbotResponse` always returns a `ChatbotResponse` with non-empty `supportiveMessage`, `followUpQuestions` (>= 1), and non-empty `actionStep` even when no verse is selected.",
-        "Backend behavior remains deterministic/stable and does not trap on any input string (including empty/whitespace)."
+        "Calling `getVersesByChapter(1)` returns a list that contains verses numbered 1 through 72 (no missing verse numbers).",
+        "For every verse 1..72 returned for Chapter 1, `sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, and `actionStep` are present and not empty strings.",
+        "Calling `getVerse(1, n)` returns a non-null result for every `n` from 1 to 72."
       ]
     },
     {
-      "id": "REQ-28",
-      "text": "Add greeting/small-talk handling in `backend/main.mo` `getChatbotResponse` so that when the user message is a greeting (e.g., \"Hi\", \"Hello\", \"Hey\"), Krishna replies with a friendly greeting and a follow-up like “How are you doing today?” and keeps the conversation moving with at least one appropriate follow-up question.",
+      "id": "REQ-34",
+      "text": "Update Chapter 1 metadata returned by `getAllChapters()` in `backend/main.mo` so that `verseCount` for Chapter 1 matches the populated dataset (72).",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-9"
+          "recent-messages-4"
         ],
         "quotes": [
-          "if someone says Hi, Say Hi, How are you doing today? and so on."
+          "In chapter 1 add verses 1-72 with respective interpretation for all columns"
         ]
       },
       "acceptanceCriteria": [
-        "When `userMessage` is a greeting, `supportiveMessage` starts with a friendly greeting and includes a conversational check-in question (e.g., “How are you doing today?”).",
-        "When `userMessage` is a greeting, `followUpQuestions` are small-talk oriented (e.g., feelings check-in, what’s on their mind) and contain at least 1 item.",
-        "Greeting handling does not require `selectedVerse` to be present; the response is still valid if `selectedVerse` is null."
-      ]
-    },
-    {
-      "id": "REQ-29",
-      "text": "Ensure all user-facing chat UI helper text in the chat thread is plain English (no emojis) and consistent with the new conversational tone when no verse is available.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-9"
-        ],
-        "quotes": [
-          "also be coversational."
-        ]
-      },
-      "acceptanceCriteria": [
-        "In `frontend/src/components/chat/ChatThread.tsx`, the \"no verse\" hint text renders as plain English without emojis and remains a single concise sentence.",
-        "No other user-facing text changes introduce non-English phrasing or emoji-only indicators in the chat thread."
+        "`getAllChapters()` returns Chapter 1 with `verseCount` equal to 72.",
+        "The Read Gita Chapter 1 detail view shows the expected number of verses available (verses 1–72 load successfully via the existing queries)."
       ]
     }
   ],
   "constraints": [
-    "Backend must remain a single Motoko actor with all logic in `backend/main.mo` (no additional backend services).",
-    "Do not edit any files under `frontend/src/components/ui` or any other paths listed in `frontend.immutablePaths`.",
-    "Use English for any user-facing text."
+    "Backend must remain a single Motoko actor; keep all logic in `backend/main.mo`.",
+    "Do not edit any frontend files under `frontend/src/components/ui` or other immutable paths listed in SYSTEM_CONTEXT."
   ],
   "nonGoals": [
-    "Populate or complete Bhagavad Gita chapters/verses dataset (Chapters 1–18) beyond what is necessary to adjust chatbot tone.",
-    "Add new authentication methods beyond Internet Identity.",
-    "Add real-time messaging (WebSockets) or external AI/LLM integrations."
+    "Adding or updating verses for chapters other than Chapter 1.",
+    "Changing the frontend table columns or verse presentation layout.",
+    "Introducing external data sources or databases for verse content."
   ],
   "imageRequirements": {
     "required": [],

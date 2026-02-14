@@ -1,16 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
-import { Verse, Mood } from '@/backend';
-
-// Local Chapter type since backend doesn't export it
-export type Chapter = {
-  number: bigint;
-  englishTitle: string;
-  sanskritSubtitle: string;
-  verseCount: bigint;
-  summary: string;
-  keyInsights: string[];
-};
+import { Verse, Mood, Chapter } from '@/backend';
 
 export function useGetAllChapters() {
   const { actor, isFetching } = useActor();
@@ -18,9 +8,8 @@ export function useGetAllChapters() {
   return useQuery<Chapter[]>({
     queryKey: ['chapters'],
     queryFn: async () => {
-      // Backend doesn't have getAllChapters method
-      // Return empty array until backend is updated
-      return [];
+      if (!actor) throw new Error('Backend actor not initialized');
+      return actor.getAllChapters();
     },
     enabled: !!actor && !isFetching,
     retry: 3,

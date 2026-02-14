@@ -10,6 +10,14 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
+export interface Chapter {
+  'sanskritSubtitle' : string,
+  'englishTitle' : string,
+  'verseCount' : bigint,
+  'keyInsights' : Array<string>,
+  'summary' : string,
+  'number' : bigint,
+}
 export interface ChatbotResponse {
   'selectedVerse' : [] | [Verse],
   'supportiveMessage' : string,
@@ -32,6 +40,7 @@ export interface Verse {
   'sanskrit' : string,
 }
 export interface _SERVICE {
+  'getAllChapters' : ActorMethod<[], Array<Chapter>>,
   'getChatbotResponse' : ActorMethod<
     [string, [] | [Mood], Array<string>],
     ChatbotResponse
