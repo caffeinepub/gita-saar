@@ -38,7 +38,7 @@ export default function TodaysWisdomCard({ onBack }: { onBack: () => void }) {
         <VerseCard verse={verse} />
       ) : (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">No verse available today.</p>
+          <p className="text-muted-foreground">No verse available today. Please check back later.</p>
           <Button variant="outline" onClick={() => refetch()} className="mt-4">
             Try Again
           </Button>

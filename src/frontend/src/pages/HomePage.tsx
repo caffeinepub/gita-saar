@@ -2,7 +2,7 @@ import { Sparkles, BookHeart, Compass, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SiX, SiInstagram } from 'react-icons/si';
-import MiniAskKrishnaWidget from '@/components/chat/MiniAskKrishnaWidget';
+import HomeAskKrishnaChat from '@/components/chat/HomeAskKrishnaChat';
 import SafeImage from '@/components/common/SafeImage';
 import { useSession } from '@/state/sessionContext';
 
@@ -13,24 +13,24 @@ export default function HomePage({ onNavigate }: { onNavigate: (tab: TabId) => v
   const appIdentifier = encodeURIComponent(
     typeof window !== 'undefined' ? window.location.hostname : 'gita-saar'
   );
-  const { setPendingMessage, setReadGitaIntent } = useSession();
-
-  const handleMiniChatSubmit = (message: string) => {
-    setPendingMessage(message);
-    onNavigate('chat');
-  };
+  const { setReadGitaIntent } = useSession();
 
   const handleOpenTodaysWisdom = () => {
     setReadGitaIntent('today');
     onNavigate('read');
   };
 
+  const handleReadGita = () => {
+    setReadGitaIntent('chapters');
+    onNavigate('read');
+  };
+
   return (
     <div className="min-h-screen">
-      {/* Pinned top section - Krishna portrait + mini chat widget */}
+      {/* Pinned top section - Krishna portrait + chat widget */}
       <div className="sticky top-[var(--top-menu-height)] z-40 bg-background/95 backdrop-blur-lg border-b border-border/50 shadow-sm">
         <div className="max-w-2xl mx-auto px-4 py-4">
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+          <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
             {/* Krishna portrait */}
             <SafeImage
               src="/assets/generated/lord-krishna-portrait.dim_1024x1024.png"
@@ -38,9 +38,9 @@ export default function HomePage({ onNavigate }: { onNavigate: (tab: TabId) => v
               className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-lg border-4 border-primary/20 shrink-0"
             />
             
-            {/* Mini chat widget */}
+            {/* Home Ask Krishna Chat - inline chat with expansion */}
             <div className="flex-1 w-full">
-              <MiniAskKrishnaWidget onSubmit={handleMiniChatSubmit} />
+              <HomeAskKrishnaChat />
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@ export default function HomePage({ onNavigate }: { onNavigate: (tab: TabId) => v
               icon={<BookHeart className="w-6 h-6" />}
               title="Read the Gita"
               description="All 18 chapters, decoded in simple English, Hindi, and Gen-Z Hinglish"
-              onClick={() => onNavigate('read')}
+              onClick={handleReadGita}
             />
             <FeatureCard
               icon={<MessageCircle className="w-6 h-6" />}

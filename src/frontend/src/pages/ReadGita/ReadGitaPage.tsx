@@ -19,6 +19,11 @@ export default function ReadGitaPage({ isActive }: { isActive: boolean }) {
       const intent = consumeReadGitaIntent();
       if (intent === 'today') {
         setView('today');
+      } else if (intent === 'chapters') {
+        // Reset to chapter list view
+        setView('chapters');
+        setSelectedChapter(null);
+        setSelectedVerse(null);
       }
     }
   }, [isActive, consumeReadGitaIntent]);

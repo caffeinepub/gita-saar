@@ -1,22 +1,20 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Read Gita: Expand chapter verse table rows to show full cell content",
+  "title": "Conversational, plain-English helper text in Ask Krishna chat thread",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Remove truncation and allow ChapterDetailView table rows to grow vertically so all 5 columns show full wrapped text on desktop and mobile.",
+      "id": "REQ-29",
+      "summary": "Make the chat thread “no verse available” helper text plain English (no emojis) and consistent with the new conversational tone.",
       "acceptanceCriteria": [
-        "In ChapterDetailView, none of the 5 table columns use line-clamping or other truncation; long text wraps and the row height increases to fit it.",
-        "Desktop table rows show full Sanskrit, Literal English, Gen-Z Interpretation, and Action Step text without ellipses.",
-        "Mobile table rows (the horizontal-scroll table) also show full text for all columns without ellipses, with rows expanding in height as needed.",
-        "The table remains readable and aligned (cell content top-aligned) for multi-line content."
+        "In `frontend/src/components/chat/ChatThread.tsx`, the \"no verse\" hint text renders as plain English without emojis and remains a single concise sentence.",
+        "No other user-facing text changes introduce non-English phrasing or emoji-only indicators in the chat thread."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
+          "path": "frontend/src/components/chat/ChatThread.tsx",
           "operation": "modify",
-          "description": "Update the desktop and mobile verse tables to remove all uses of line-clamp classes (and any other truncation/ellipsis styling) from the 4 long-text columns, ensuring content wraps (e.g., whitespace-normal / break-words) and rows expand naturally while keeping cells top-aligned. Continue using the existing shadcn-ui Table and ScrollArea components for layout; verify the component's usage instructions before implementing."
+          "description": "Replace the current emoji-prefixed “no verse” hint text with a single concise plain-English sentence (no emojis) that matches the updated conversational tone when no verse is available, without changing other chat-thread user-facing strings."
         }
       ]
     }

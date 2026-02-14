@@ -99,18 +99,10 @@ export interface Verse {
     sanskrit: string;
 }
 export interface ChatbotResponse {
-    selectedVerse: Verse;
+    selectedVerse?: Verse;
     supportiveMessage: string;
     actionStep: string;
     followUpQuestions: Array<string>;
-}
-export interface Chapter {
-    sanskritSubtitle: string;
-    englishTitle: string;
-    verseCount: bigint;
-    keyInsights: Array<string>;
-    summary: string;
-    number: bigint;
 }
 export enum Mood {
     sad = "sad",
@@ -121,43 +113,28 @@ export enum Mood {
     motivated = "motivated"
 }
 export interface backendInterface {
-    getAllChapters(): Promise<Array<Chapter>>;
-    getChatbotResponse(userMessage: string, mood: Mood | null, sessionHistory: Array<string>): Promise<ChatbotResponse>;
+    getChatbotResponse(userMessage: string, mood: Mood | null, _sessionHistory: Array<string>): Promise<ChatbotResponse>;
     getCuratedVersesByMood(mood: Mood): Promise<Array<Verse>>;
     getMoodTaglines(): Promise<Array<[Mood, string]>>;
-    getTodaysVerse(): Promise<Verse>;
+    getTodaysVerse(): Promise<Verse | null>;
     getVerse(chapter: bigint, verse: bigint): Promise<Verse | null>;
     getVersesByChapter(chapterNumber: bigint): Promise<Array<Verse>>;
 }
-import type { Mood as _Mood, Verse as _Verse } from "./declarations/backend.did.d.ts";
+import type { ChatbotResponse as _ChatbotResponse, Mood as _Mood, Verse as _Verse } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
-    async getAllChapters(): Promise<Array<Chapter>> {
-        if (this.processError) {
-            try {
-                const result = await this.actor.getAllChapters();
-                return result;
-            } catch (e) {
-                this.processError(e);
-                throw new Error("unreachable");
-            }
-        } else {
-            const result = await this.actor.getAllChapters();
-            return result;
-        }
-    }
     async getChatbotResponse(arg0: string, arg1: Mood | null, arg2: Array<string>): Promise<ChatbotResponse> {
         if (this.processError) {
             try {
                 const result = await this.actor.getChatbotResponse(arg0, to_candid_opt_n1(this._uploadFile, this._downloadFile, arg1), arg2);
-                return result;
+                return from_candid_ChatbotResponse_n4(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getChatbotResponse(arg0, to_candid_opt_n1(this._uploadFile, this._downloadFile, arg1), arg2);
-            return result;
+            return from_candid_ChatbotResponse_n4(this._uploadFile, this._downloadFile, result);
         }
     }
     async getCuratedVersesByMood(arg0: Mood): Promise<Array<Verse>> {
@@ -178,42 +155,42 @@ export class Backend implements backendInterface {
         if (this.processError) {
             try {
                 const result = await this.actor.getMoodTaglines();
-                return from_candid_vec_n4(this._uploadFile, this._downloadFile, result);
+                return from_candid_vec_n7(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getMoodTaglines();
-            return from_candid_vec_n4(this._uploadFile, this._downloadFile, result);
+            return from_candid_vec_n7(this._uploadFile, this._downloadFile, result);
         }
     }
-    async getTodaysVerse(): Promise<Verse> {
+    async getTodaysVerse(): Promise<Verse | null> {
         if (this.processError) {
             try {
                 const result = await this.actor.getTodaysVerse();
-                return result;
+                return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getTodaysVerse();
-            return result;
+            return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
         }
     }
     async getVerse(arg0: bigint, arg1: bigint): Promise<Verse | null> {
         if (this.processError) {
             try {
                 const result = await this.actor.getVerse(arg0, arg1);
-                return from_candid_opt_n8(this._uploadFile, this._downloadFile, result);
+                return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getVerse(arg0, arg1);
-            return from_candid_opt_n8(this._uploadFile, this._downloadFile, result);
+            return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
         }
     }
     async getVersesByChapter(arg0: bigint): Promise<Array<Verse>> {
@@ -231,19 +208,40 @@ export class Backend implements backendInterface {
         }
     }
 }
-function from_candid_Mood_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Mood): Mood {
-    return from_candid_variant_n7(_uploadFile, _downloadFile, value);
+function from_candid_ChatbotResponse_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _ChatbotResponse): ChatbotResponse {
+    return from_candid_record_n5(_uploadFile, _downloadFile, value);
 }
-function from_candid_opt_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_Verse]): Verse | null {
+function from_candid_Mood_n9(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Mood): Mood {
+    return from_candid_variant_n10(_uploadFile, _downloadFile, value);
+}
+function from_candid_opt_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_Verse]): Verse | null {
     return value.length === 0 ? null : value[0];
 }
-function from_candid_tuple_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [_Mood, string]): [Mood, string] {
+function from_candid_record_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    selectedVerse: [] | [_Verse];
+    supportiveMessage: string;
+    actionStep: string;
+    followUpQuestions: Array<string>;
+}): {
+    selectedVerse?: Verse;
+    supportiveMessage: string;
+    actionStep: string;
+    followUpQuestions: Array<string>;
+} {
+    return {
+        selectedVerse: record_opt_to_undefined(from_candid_opt_n6(_uploadFile, _downloadFile, value.selectedVerse)),
+        supportiveMessage: value.supportiveMessage,
+        actionStep: value.actionStep,
+        followUpQuestions: value.followUpQuestions
+    };
+}
+function from_candid_tuple_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [_Mood, string]): [Mood, string] {
     return [
-        from_candid_Mood_n6(_uploadFile, _downloadFile, value[0]),
+        from_candid_Mood_n9(_uploadFile, _downloadFile, value[0]),
         value[1]
     ];
 }
-function from_candid_variant_n7(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+function from_candid_variant_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     sad: null;
 } | {
     anxious: null;
@@ -258,8 +256,8 @@ function from_candid_variant_n7(_uploadFile: (file: ExternalBlob) => Promise<Uin
 }): Mood {
     return "sad" in value ? Mood.sad : "anxious" in value ? Mood.anxious : "angry" in value ? Mood.angry : "calm" in value ? Mood.calm : "lost" in value ? Mood.lost : "motivated" in value ? Mood.motivated : value;
 }
-function from_candid_vec_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<[_Mood, string]>): Array<[Mood, string]> {
-    return value.map((x)=>from_candid_tuple_n5(_uploadFile, _downloadFile, x));
+function from_candid_vec_n7(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<[_Mood, string]>): Array<[Mood, string]> {
+    return value.map((x)=>from_candid_tuple_n8(_uploadFile, _downloadFile, x));
 }
 function to_candid_Mood_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Mood): _Mood {
     return to_candid_variant_n3(_uploadFile, _downloadFile, value);

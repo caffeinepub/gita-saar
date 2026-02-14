@@ -8,14 +8,6 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
-export const Chapter = IDL.Record({
-  'sanskritSubtitle' : IDL.Text,
-  'englishTitle' : IDL.Text,
-  'verseCount' : IDL.Nat,
-  'keyInsights' : IDL.Vec(IDL.Text),
-  'summary' : IDL.Text,
-  'number' : IDL.Nat,
-});
 export const Mood = IDL.Variant({
   'sad' : IDL.Null,
   'anxious' : IDL.Null,
@@ -34,14 +26,13 @@ export const Verse = IDL.Record({
   'sanskrit' : IDL.Text,
 });
 export const ChatbotResponse = IDL.Record({
-  'selectedVerse' : Verse,
+  'selectedVerse' : IDL.Opt(Verse),
   'supportiveMessage' : IDL.Text,
   'actionStep' : IDL.Text,
   'followUpQuestions' : IDL.Vec(IDL.Text),
 });
 
 export const idlService = IDL.Service({
-  'getAllChapters' : IDL.Func([], [IDL.Vec(Chapter)], ['query']),
   'getChatbotResponse' : IDL.Func(
       [IDL.Text, IDL.Opt(Mood), IDL.Vec(IDL.Text)],
       [ChatbotResponse],
@@ -53,7 +44,7 @@ export const idlService = IDL.Service({
       [IDL.Vec(IDL.Tuple(Mood, IDL.Text))],
       ['query'],
     ),
-  'getTodaysVerse' : IDL.Func([], [Verse], ['query']),
+  'getTodaysVerse' : IDL.Func([], [IDL.Opt(Verse)], ['query']),
   'getVerse' : IDL.Func([IDL.Nat, IDL.Nat], [IDL.Opt(Verse)], ['query']),
   'getVersesByChapter' : IDL.Func([IDL.Nat], [IDL.Vec(Verse)], ['query']),
 });
@@ -61,14 +52,6 @@ export const idlService = IDL.Service({
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
-  const Chapter = IDL.Record({
-    'sanskritSubtitle' : IDL.Text,
-    'englishTitle' : IDL.Text,
-    'verseCount' : IDL.Nat,
-    'keyInsights' : IDL.Vec(IDL.Text),
-    'summary' : IDL.Text,
-    'number' : IDL.Nat,
-  });
   const Mood = IDL.Variant({
     'sad' : IDL.Null,
     'anxious' : IDL.Null,
@@ -87,14 +70,13 @@ export const idlFactory = ({ IDL }) => {
     'sanskrit' : IDL.Text,
   });
   const ChatbotResponse = IDL.Record({
-    'selectedVerse' : Verse,
+    'selectedVerse' : IDL.Opt(Verse),
     'supportiveMessage' : IDL.Text,
     'actionStep' : IDL.Text,
     'followUpQuestions' : IDL.Vec(IDL.Text),
   });
   
   return IDL.Service({
-    'getAllChapters' : IDL.Func([], [IDL.Vec(Chapter)], ['query']),
     'getChatbotResponse' : IDL.Func(
         [IDL.Text, IDL.Opt(Mood), IDL.Vec(IDL.Text)],
         [ChatbotResponse],
@@ -106,7 +88,7 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(IDL.Tuple(Mood, IDL.Text))],
         ['query'],
       ),
-    'getTodaysVerse' : IDL.Func([], [Verse], ['query']),
+    'getTodaysVerse' : IDL.Func([], [IDL.Opt(Verse)], ['query']),
     'getVerse' : IDL.Func([IDL.Nat, IDL.Nat], [IDL.Opt(Verse)], ['query']),
     'getVersesByChapter' : IDL.Func([IDL.Nat], [IDL.Vec(Verse)], ['query']),
   });

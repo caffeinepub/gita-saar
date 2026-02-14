@@ -71,13 +71,24 @@ export default function TalkToKrishnaPage() {
       { userMessage: text, mood: mood || null, sessionHistory },
       {
         onSuccess: (response) => {
+          // Guard against empty/undefined values and ensure safe display
+          const supportiveMessage = response.supportiveMessage?.trim() || 
+            "I'm here to help you navigate through this. Let's explore the wisdom of the Gita together.";
+          
+          const actionStep = response.actionStep?.trim() || 
+            "Take a moment to reflect on your feelings and know that guidance is always available.";
+          
+          const followUpQuestions = Array.isArray(response.followUpQuestions) && response.followUpQuestions.length > 0
+            ? response.followUpQuestions
+            : ["What's been on your mind lately?", "How are you feeling right now?", "What would help you most today?"];
+
           const krishnaMessage: Message = {
             id: (Date.now() + 1).toString(),
             role: 'krishna',
-            content: response.supportiveMessage,
-            verse: response.selectedVerse,
-            followUpQuestions: response.followUpQuestions,
-            actionStep: response.actionStep,
+            content: supportiveMessage,
+            verse: response.selectedVerse || undefined,
+            followUpQuestions: followUpQuestions,
+            actionStep: actionStep,
           };
           setMessages((prev) => [...prev, krishnaMessage]);
         },

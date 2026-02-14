@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Improve the Read Gita chapter verse table to show full verse content without truncation, and fully populate verse data across all 18 chapters.
+**Goal:** Make Ask Krishna’s chat replies more Krishna-like, conversational, and able to respond naturally to greetings while keeping responses stable and valid.
 
 **Planned changes:**
-- Update the ChapterDetailView verse table so all 5 columns wrap long text with no clamping/ellipsis on both desktop and mobile, with rows expanding vertically and cell content top-aligned.
-- Populate backend verse data for every verse in every chapter (1–18) so chapter verse counts match returned verse list sizes and verse lookups return complete, non-empty text fields.
-- Ensure curated verse lookups by mood only reference verses that exist in the full dataset.
+- Update `backend/main.mo` `getChatbotResponse(userMessage, mood, sessionHistory)` so `supportiveMessage` is an original, conversational Krishna-voiced reply that synthesizes Gita teachings (not direct verse text), and always returns a valid `ChatbotResponse` with non-empty `supportiveMessage`, at least one `followUpQuestions` item, and a non-empty `actionStep` (even when no verse is selected or input is empty).
+- Add greeting/small-talk handling in `getChatbotResponse` so greetings like “Hi/Hello/Hey” produce a friendly greeting plus a check-in question (e.g., “How are you doing today?”) and small-talk-appropriate follow-up questions, without requiring a selected verse.
+- Adjust the “no verse” helper text in `frontend/src/components/chat/ChatThread.tsx` to be a single concise plain-English sentence with no emojis, consistent with the updated conversational tone.
 
-**User-visible outcome:** Users can view every chapter’s complete set of verses, and read the full Sanskrit/translation/interpretation/action-step text directly in the chapter table on both desktop and mobile without any truncated rows.
+**User-visible outcome:** Users receive more natural, Krishna-like conversational guidance (including friendly greeting responses), and the chat UI displays plain-English helper text when no verse is available.

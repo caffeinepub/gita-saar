@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-read-gita-chapter-verse-table-so-each-row-expands-vertically-to-display-the-full-content-of-every-cell-across-all-5-columns-no-truncation-ellipsis-on-both-desktop-and-mobile-layouts",
-      "featureTitle": "Update the Read Gita chapter verse table so each row expands vertically to display the full content of every cell across all 5 columns (no truncation/ellipsis) on both desktop and mobile layouts.",
+      "featureId": "feature-ensure-all-user-facing-chat-ui-helper-text-in-the-chat-thread-is-plain-english-no-emojis-and-consistent-with-the-new-conversational-tone-when-no-verse-is-available",
+      "featureTitle": "Ensure all user-facing chat UI helper text in the chat thread is plain English (no emojis) and consistent with the new conversational tone when no verse is available.",
       "files": [
-        "frontend/src/pages/ReadGita/ChapterDetailView.tsx"
+        "frontend/src/components/chat/ChatThread.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -15,7 +15,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-1"
+        "REQ-29"
       ],
       "confidence": "high"
     }

@@ -6,18 +6,22 @@ import TalkToKrishnaPage from './pages/TalkToKrishna/TalkToKrishnaPage';
 import DiscoverPage from './pages/Discover/DiscoverPage';
 import TopMenuBar from './components/layout/TopMenuBar';
 import KrishnaLifeBackground from './components/decorations/KrishnaLifeBackground';
-import { SessionProvider } from './state/sessionContext';
-import { ThemeProvider } from 'next-themes';
+import { SessionProvider, useSession } from './state/sessionContext';
 
 // Developer note: See frontend/docs/APP_STRUCTURE_AND_FLOWS.md for architecture details
 
 type TabId = 'home' | 'read' | 'chat' | 'discover';
 
-export default function App() {
+function AppContent() {
   const [activeTab, setActiveTab] = useState<TabId>('home');
+  const { setReadGitaIntent, readGitaIntent } = useSession();
 
   // Scroll to top whenever tab changes
   const handleTabChange = (newTab: TabId) => {
+    // Set chapters intent when navigating to Read Gita tab, unless there's already a pending intent
+    if (newTab === 'read' && !readGitaIntent) {
+      setReadGitaIntent('chapters');
+    }
     setActiveTab(newTab);
   };
 
@@ -26,63 +30,67 @@ export default function App() {
   }, [activeTab]);
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <SessionProvider>
-        <div className="relative min-h-screen bg-background pb-20">
-          {/* Global Top Menu Bar - highest z-index for navigation */}
-          <TopMenuBar activeTab={activeTab} onNavigate={handleTabChange} />
+    <div className="relative min-h-screen bg-background pb-20">
+      {/* Global Top Menu Bar - highest z-index for navigation */}
+      <TopMenuBar activeTab={activeTab} onNavigate={handleTabChange} />
 
-          {/* Krishna life background imagery - behind everything */}
-          <KrishnaLifeBackground />
+      {/* Krishna life background imagery - behind everything */}
+      <KrishnaLifeBackground />
 
-          {/* Tab content - explicitly above background with isolated stacking context */}
-          <div className="relative z-10 pointer-events-auto">
-            <div className={activeTab === 'home' ? 'block' : 'hidden'}>
-              <HomePage onNavigate={handleTabChange} />
-            </div>
-            <div className={activeTab === 'read' ? 'block' : 'hidden'}>
-              <ReadGitaPage isActive={activeTab === 'read'} />
-            </div>
-            <div className={activeTab === 'chat' ? 'block' : 'hidden'}>
-              <TalkToKrishnaPage />
-            </div>
-            <div className={activeTab === 'discover' ? 'block' : 'hidden'}>
-              <DiscoverPage onNavigate={handleTabChange} />
-            </div>
-          </div>
-
-          {/* Fixed bottom navigation */}
-          <nav className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border z-50 safe-area-bottom">
-            <div className="flex items-center justify-around h-16 max-w-2xl mx-auto px-2">
-              <TabButton
-                icon={<Home className="w-5 h-5" />}
-                label="Home"
-                active={activeTab === 'home'}
-                onClick={() => handleTabChange('home')}
-              />
-              <TabButton
-                icon={<BookOpen className="w-5 h-5" />}
-                label="Read Gita"
-                active={activeTab === 'read'}
-                onClick={() => handleTabChange('read')}
-              />
-              <TabButton
-                icon={<MessageCircle className="w-5 h-5" />}
-                label="Talk"
-                active={activeTab === 'chat'}
-                onClick={() => handleTabChange('chat')}
-              />
-              <TabButton
-                icon={<Compass className="w-5 h-5" />}
-                label="Discover"
-                active={activeTab === 'discover'}
-                onClick={() => handleTabChange('discover')}
-              />
-            </div>
-          </nav>
+      {/* Tab content - explicitly above background with isolated stacking context */}
+      <div className="relative z-10 pointer-events-auto">
+        <div className={activeTab === 'home' ? 'block' : 'hidden'}>
+          <HomePage onNavigate={handleTabChange} />
         </div>
-      </SessionProvider>
-    </ThemeProvider>
+        <div className={activeTab === 'read' ? 'block' : 'hidden'}>
+          <ReadGitaPage isActive={activeTab === 'read'} />
+        </div>
+        <div className={activeTab === 'chat' ? 'block' : 'hidden'}>
+          <TalkToKrishnaPage />
+        </div>
+        <div className={activeTab === 'discover' ? 'block' : 'hidden'}>
+          <DiscoverPage onNavigate={handleTabChange} />
+        </div>
+      </div>
+
+      {/* Fixed bottom navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border z-50 safe-area-bottom">
+        <div className="flex items-center justify-around h-16 max-w-2xl mx-auto px-2">
+          <TabButton
+            icon={<Home className="w-5 h-5" />}
+            label="Home"
+            active={activeTab === 'home'}
+            onClick={() => handleTabChange('home')}
+          />
+          <TabButton
+            icon={<BookOpen className="w-5 h-5" />}
+            label="Read Gita"
+            active={activeTab === 'read'}
+            onClick={() => handleTabChange('read')}
+          />
+          <TabButton
+            icon={<MessageCircle className="w-5 h-5" />}
+            label="Talk"
+            active={activeTab === 'chat'}
+            onClick={() => handleTabChange('chat')}
+          />
+          <TabButton
+            icon={<Compass className="w-5 h-5" />}
+            label="Discover"
+            active={activeTab === 'discover'}
+            onClick={() => handleTabChange('discover')}
+          />
+        </div>
+      </nav>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <SessionProvider>
+      <AppContent />
+    </SessionProvider>
   );
 }
 

@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { Mood } from '@/backend';
 
-type ReadGitaIntent = 'today' | null;
+type ReadGitaIntent = 'today' | 'chapters' | null;
 
 type SessionContextType = {
   mood: Mood | null;

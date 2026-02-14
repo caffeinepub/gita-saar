@@ -17,18 +17,10 @@ export interface Verse {
     sanskrit: string;
 }
 export interface ChatbotResponse {
-    selectedVerse: Verse;
+    selectedVerse?: Verse;
     supportiveMessage: string;
     actionStep: string;
     followUpQuestions: Array<string>;
-}
-export interface Chapter {
-    sanskritSubtitle: string;
-    englishTitle: string;
-    verseCount: bigint;
-    keyInsights: Array<string>;
-    summary: string;
-    number: bigint;
 }
 export enum Mood {
     sad = "sad",
@@ -39,11 +31,10 @@ export enum Mood {
     motivated = "motivated"
 }
 export interface backendInterface {
-    getAllChapters(): Promise<Array<Chapter>>;
-    getChatbotResponse(userMessage: string, mood: Mood | null, sessionHistory: Array<string>): Promise<ChatbotResponse>;
+    getChatbotResponse(userMessage: string, mood: Mood | null, _sessionHistory: Array<string>): Promise<ChatbotResponse>;
     getCuratedVersesByMood(mood: Mood): Promise<Array<Verse>>;
     getMoodTaglines(): Promise<Array<[Mood, string]>>;
-    getTodaysVerse(): Promise<Verse>;
+    getTodaysVerse(): Promise<Verse | null>;
     getVerse(chapter: bigint, verse: bigint): Promise<Verse | null>;
     getVersesByChapter(chapterNumber: bigint): Promise<Array<Verse>>;
 }

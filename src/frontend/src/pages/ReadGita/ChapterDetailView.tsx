@@ -1,4 +1,4 @@
-import { ArrowLeft, ChevronsRight } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useGetVersesByChapter, useGetAllChapters } from '@/hooks/useQueries';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -191,21 +191,9 @@ export default function ChapterDetailView({
                 </div>
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
-              {/* Scroll indicator for mobile */}
-              <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-card/90 to-transparent pointer-events-none flex items-center justify-center md:hidden">
-                <ChevronsRight className="w-5 h-5 text-primary/60 animate-pulse" />
-              </div>
             </>
           )}
         </div>
-      )}
-
-      {/* Mobile-friendly note */}
-      {!isError && (
-        <p className="text-xs text-muted-foreground text-center mt-4 px-4">
-          Tip: Tap any verse to see full details including complete translations and action steps.
-          <span className="md:hidden"> Scroll horizontally to view all columns on smaller screens.</span>
-        </p>
       )}
     </div>
   );

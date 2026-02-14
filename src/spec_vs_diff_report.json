@@ -1,34 +1,32 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T11:42:23.144Z",
-  "summary": "REQ-2 (complete verse dataset and consistency guarantees) is not evidenced in the provided backend diff snippet; the diff only shows chapter metadata generation and adds a migration module. REQ-1 (no truncation in the 5-column table on desktop/mobile) cannot be conclusively verified from the truncated ChapterDetailView diff, though the snippet shows table structure changes.",
+  "generatedAt": "2026-02-14T08:44:26.706Z",
+  "summary": "Frontend change in ChatThread.tsx appears to satisfy the plain-English single-sentence \"no verse\" hint requirement. Backend requirements for Krishna-like paraphrased responses and greeting/small-talk handling cannot be confirmed from the provided truncated backend/main.mo diff (the relevant getChatbotResponse implementation is not shown).",
   "missing_requirements": [
     {
-      "id": "REQ-2",
-      "requirement": "Populate backend verse data so the app contains verse records for every verse in every chapter (all 18 chapters), ensure chapter verse counts match returned verse list sizes, and ensure curated mood lookups only reference existing verses.",
-      "reason": "The backend diff snippet shows chapter metadata (verseCount values) but does not show any implementation or data population for the full set of verses across all chapters, nor evidence that getVersesByChapter/getVerse/getCuratedVersesByMood are updated to guarantee full coverage and consistency.",
+      "id": "REQ-27",
+      "requirement": "Update backend getChatbotResponse in backend/main.mo so supportiveMessage is original/conversational (not direct verse text), always returns non-empty supportiveMessage, followUpQuestions (>=1), and actionStep even without a selectedVerse, and never traps on any input.",
+      "reason": "The diff for backend/main.mo is truncated and does not include the getChatbotResponse implementation or any visible changes demonstrating paraphrasing logic, deterministic fallbacks, or non-trapping handling.",
       "evidence": [
-        "backend/main.mo (truncated): shows generateFullChapterList() with verseCount fields but no verse dataset population or getVersesByChapter/getVerse implementation evidence"
+        "backend/main.mo (truncated)"
       ]
-    }
-  ],
-  "hallucinated_features": [
+    },
     {
-      "description": "Added a backend migration module and wired it into main actor (Migration.run) despite no migration requirement in the BuildRequest.",
-      "reason": "BuildRequest does not request introducing a migration module or migration wiring; only requires UI table expansion and full verse dataset population.",
+      "id": "REQ-28",
+      "requirement": "Add greeting/small-talk handling in backend/main.mo getChatbotResponse so greetings get a friendly greeting + check-in question and small-talk follow-ups, without requiring selectedVerse.",
+      "reason": "The diff for backend/main.mo is truncated and does not show getChatbotResponse or any greeting detection/handling logic.",
       "evidence": [
-        "backend/migration.mo (added)",
-        "backend/main.mo: import Migration \"migration\" and '(with migration = Migration.run)'"
+        "backend/main.mo (truncated)"
       ]
     }
   ],
-  "confidence": 0.64,
+  "hallucinated_features": [],
+  "confidence": 0.62,
   "changed_files": [
     "backend/main.mo",
-    "backend/migration.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
+    "frontend/src/components/chat/ChatThread.tsx",
     "project_state.json"
   ]
 }

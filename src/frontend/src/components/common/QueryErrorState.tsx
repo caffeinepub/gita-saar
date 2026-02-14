@@ -11,8 +11,8 @@ export default function QueryErrorState({ message, onRetry }: QueryErrorStatePro
   return (
     <Alert variant="destructive" className="mb-4">
       <AlertCircle className="h-4 w-4" />
-      <AlertDescription className="flex items-center justify-between gap-4">
-        <span>
+      <AlertDescription className="flex items-center justify-between gap-4 flex-wrap">
+        <span className="flex-1 min-w-0">
           {message || 'Something went wrong. Please check your connection and try again.'}
         </span>
         <Button

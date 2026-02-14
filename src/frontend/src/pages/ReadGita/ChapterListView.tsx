@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { BookOpen, Sparkles, Search, AlertCircle } from 'lucide-react';
+import { BookOpen, Sparkles, Search } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useGetAllChapters } from '@/hooks/useQueries';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import QueryErrorState from '@/components/common/QueryErrorState';
 
 export default function ChapterListView({
   onChapterSelect,
@@ -75,24 +75,10 @@ export default function ChapterListView({
             ))}
           </>
         ) : isError ? (
-          <Alert variant="destructive" className="mb-4">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription className="flex items-center justify-between gap-4">
-              <span>
-                {error instanceof Error 
-                  ? error.message 
-                  : 'Failed to load chapters. Please check your connection and try again.'}
-              </span>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => refetch()}
-                className="shrink-0"
-              >
-                Retry
-              </Button>
-            </AlertDescription>
-          </Alert>
+          <QueryErrorState
+            message={error instanceof Error ? error.message : 'Failed to load chapters. Please check your connection and try again.'}
+            onRetry={() => refetch()}
+          />
         ) : filteredChapters && filteredChapters.length > 0 ? (
           filteredChapters.map((chapter) => (
             <Card
@@ -113,20 +99,10 @@ export default function ChapterListView({
             </Card>
           ))
         ) : chapters && chapters.length === 0 ? (
-          <Alert>
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription className="flex items-center justify-between gap-4">
-              <span>No chapters available. Please try again.</span>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => refetch()}
-                className="shrink-0"
-              >
-                Retry
-              </Button>
-            </AlertDescription>
-          </Alert>
+          <QueryErrorState
+            message="No chapters available. Please try again."
+            onRetry={() => refetch()}
+          />
         ) : (
           <div className="text-center py-12">
             <p className="text-muted-foreground">No chapters found matching "{searchQuery}"</p>

@@ -1,19 +1,95 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
-  "summary": "Build and deploy a \"Read Gita\" section that displays verses in a 5-column table and includes complete verse data across all chapters.",
-  "architectural_notes": [],
+  "projectStateVersion": 25,
+  "summary": "Refine Ask Krishna chatbot quality: ensure it produces more Krishna-like, conversational replies that synthesize Bhagavad Gita teachings into original guidance (not just direct verse quotes), including friendly greeting/small-talk behavior for messages like \"Hi.\"",
+  "architectural_notes": [
+    "User confirmed the new chapter structure looks correct; next priority is populating all chapters with full verse content and required interpretation columns."
+  ],
   "known_issues": [
-    "Table rows do not expand to show all cell content across 5 columns (content may be truncated).",
-    "Verse/chapter dataset is incomplete (not all verses for all chapters are populated)."
+    "Read Gita section shows an error message in the app.",
+    "Home page Ask Krishna AI chatbot is not replying to user queries.",
+    "Home page Ask Krishna chatbot only returns a generic canned response (e.g., \"I'm here for you! Let's talk it out, step by step\") instead of answering based on Bhagavad Gita knowledge.",
+    "Build/generation pipeline sometimes fails to finish generating the application (\"Unable to finish generating your application\"). User requested retry."
   ],
   "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-update-the-read-gita-chapter-verse-table-so-each-row-expands-vertically-to-display-the-full-content-of-every-cell-across-all-5-columns-no-truncation-ellipsis-on-both-desktop-and-mobile-layouts",
-      "title": "Update the Read Gita chapter verse table so each row expands vertically to display the full content of every cell across all 5 columns (no truncation/ellipsis) on both desktop and mobile layouts.",
+      "id": "feature-re-run-the-full-build-deploy-pipeline-for-the-current-project-and-produce-a-clear-deploy-report-that-includes-the-specific-failing-step-the-full-error-output-and-the-commit-source-state-that-was-deployed",
+      "title": "Re-run the full build + deploy pipeline for the current project and produce a clear deploy report that includes the specific failing step, the full error output, and the commit/source state that was deployed.",
       "reqIds": [
-        "REQ-1"
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-if-the-redeploy-fails-again-identify-the-root-cause-from-the-error-output-and-implement-the-minimal-code-config-changes-required-to-make-the-project-build-and-deploy-successfully-then-re-run-the-deploy",
+      "title": "If the redeploy fails again, identify the root cause from the error output and implement the minimal code/config changes required to make the project build and deploy successfully, then re-run the deploy.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-when-the-user-navigates-to-the-read-gita-tab-by-pressing-read-gita-e-g-from-home-or-the-bottom-navigation-ensure-the-read-gita-section-opens-on-the-chapter-list-view-all-chapters-listed-rather-than-preserving-the-previously-open-internal-read-gita-sub-view-today-chapter-detail-or-verse-detail-keep-the-existing-behavior-where-open-today-s-wisdom-intentionally-opens-the-today-view",
+      "title": "When the user navigates to the Read Gita tab by pressing \"Read Gita\" (e.g., from Home or the bottom navigation), ensure the Read Gita section opens on the chapter list view (all chapters listed) rather than preserving the previously-open internal Read Gita sub-view (today, chapter detail, or verse detail). Keep the existing behavior where \"Open today's wisdom\" intentionally opens the Today view.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-on-the-home-page-keep-the-ask-krishna-conversation-user-messages-krishna-replies-follow-up-questions-within-the-home-page-chatbot-ui-itself-instead-of-navigating-away-to-the-talk-to-krishna-tab-to-see-replies",
+      "title": "On the Home page, keep the Ask Krishna conversation (user messages + Krishna replies + follow-up questions) within the Home page chatbot UI itself instead of navigating away to the Talk to Krishna tab to see replies.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-auto-expand-enlarge-the-home-page-ask-krishna-discussion-window-after-the-first-message-is-sent-so-that-the-chat-thread-occupies-a-major-portion-of-the-screen-for-readability-while-keeping-the-composer-accessible",
+      "title": "Auto-expand/enlarge the Home page Ask Krishna discussion window after the first message is sent so that the chat thread occupies a major portion of the screen for readability, while keeping the composer accessible.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enable-a-voice-message-mode-in-the-home-page-ask-krishna-chatbot-composer-so-users-can-dictate-messages-via-speech-to-text-and-send-them-as-chat-messages",
+      "title": "Enable a voice message mode in the Home page Ask Krishna chatbot composer so users can dictate messages via speech-to-text and send them as chat messages.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-identify-and-fix-the-root-cause-of-the-error-message-shown-in-the-read-gita-section-so-that-the-chapter-list-chapter-detail-and-verse-detail-screens-load-successfully-without-runtime-errors",
+      "title": "Identify and fix the root cause of the error message shown in the Read Gita section so that the Chapter List, Chapter Detail, and Verse Detail screens load successfully without runtime errors.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-home-page-ask-krishna-chatbot-so-it-reliably-replies-after-a-user-sends-a-message-including-proper-error-handling-and-visible-feedback-if-the-chatbot-request-fails",
+      "title": "Fix the Home page Ask Krishna chatbot so it reliably replies after a user sends a message, including proper error handling and visible feedback if the chatbot request fails.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-frontend-home-and-talk-to-krishna-chat-uis-display-the-improved-grounded-replies-without-requiring-any-navigation-changes-and-add-a-clear-ui-hint-when-the-backend-cannot-select-a-verse-still-showing-a-gita-grounded-message",
+      "title": "Ensure the frontend Home and Talk-to-Krishna chat UIs display the improved grounded replies without requiring any navigation changes, and add a clear UI hint when the backend cannot select a verse (still showing a Gita-grounded message).",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-all-user-facing-chat-ui-helper-text-in-the-chat-thread-is-plain-english-no-emojis-and-consistent-with-the-new-conversational-tone-when-no-verse-is-available",
+      "title": "Ensure all user-facing chat UI helper text in the chat thread is plain English (no emojis) and consistent with the new conversational tone when no verse is available.",
+      "reqIds": [
+        "REQ-29"
       ],
       "version": 1
     }
@@ -21,26 +97,216 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Adjust the table UI so row height/row depth expands to show all cell content across all 5 columns (no truncation).",
+      "summary": "Add all verses of Bhagavad Gita Chapter 1 with all columns appropriately filled",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Populate the app with complete data for all verses across all chapters (full dataset coverage).",
+      "summary": "Populate the backend verse dataset so Chapter 1 (Arjuna Vishada Yoga) contains all verses 1:1 through 1:47, with every Verse record fully filled for all columns/fields used by the app: `sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, and `actionStep`.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add Bhagavad Gita Chapter 2 under the Read Gota section and populate all Chapter 2 verses in the same structured format as Chapter 1 (all required verse fields filled).",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-4",
-      "summary": "Populate backend verse data so the app contains verse records for every verse in every chapter (all 18 chapters), and ensure chapter verse counts match the returned verse list sizes.",
+      "summary": "Update the backend chapter list returned by `getAllChapters()` so that Bhagavad Gita Chapter 2 appears in the Read Gita chapter list with correct metadata (chapter number, English title, Sanskrit subtitle, verse count, summary, and key insights), consistent with the Chapter record structure used for Chapter 1.",
       "reqIds": [
-        "REQ-2"
+        "REQ-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Populate the backend verse dataset so Chapter 2 contains every verse from 2:1 through 2:72, using the exact same Verse record fields and formatting approach used for Chapter 1 (`sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, `actionStep`). Ensure all verses are present and each required field is filled (no missing verses, no empty strings for required fields).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Add Bhagavad Gita Chapters 3–18 under Chapter 2 in the Read Gita section in correct natural sequence (3,4,5,...,18).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Update the backend chapter list returned by `getAllChapters()` so that Bhagavad Gita Chapters 3–18 appear in the Read Gita chapter list with correct metadata for each chapter (number, titles/subtitle, verse count, summary, key insights), consistent with the Chapter record structure used for Chapters 1–2.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Populate the backend verse dataset so Chapters 3–18 contain every verse for each respective chapter, using the exact same Verse record fields and formatting approach used for Chapter 1 (`sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, and `actionStep`). Ensure all verses are present and each required field is filled (no missing verses, no empty strings for required fields).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Update the backend chapter list so the Read Gita section includes Bhagavad Gita Chapters 3 through 18 in correct natural numeric sequence (3, 4, 5, ..., 18) with complete chapter metadata for each chapter (chapter number, English title, Sanskrit subtitle, verse count, summary, key insights), consistent with the Chapter record structure currently used for Chapters 1–2.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Populate the backend verse dataset to include every verse for Bhagavad Gita Chapters 3–18, using the exact same Verse record fields and formatting approach used for Chapter 1: `sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, and `actionStep` (no missing verses and no empty strings for required verse fields).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Update the backend chapter list returned by `getAllChapters()` (in `backend/main.mo`) so the Read Gita section contains Bhagavad Gita Chapters 3 through 17 in correct natural numeric sequence between Chapter 2 and Chapter 18, with complete metadata for each chapter using the existing `Chapter` record shape (`number`, `englishTitle`, `sanskritSubtitle`, `verseCount`, `summary`, `keyInsights`).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Populate the backend verse dataset in `backend/main.mo` so that Chapters 3–18 contain every verse for each respective chapter in full, using the exact same `Verse` record fields used by the app and by Chapter 1 formatting: `chapter`, `verse`, `sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, `actionStep`. Ensure verse numbering is complete and continuous for each chapter.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Populate the backend verse dataset in `backend/main.mo` so that Chapters 1–18 contain every verse for each respective chapter in full, using the existing `Verse` record fields/columns: `chapter`, `verse`, `sanskrit`, `hindiMeaning`, `englishMeaning`, `genZKrishnaInterpretation`, `actionStep`. Ensure verse numbering is complete and continuous for each chapter and that none of the required text fields are empty strings.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Update `moodVerseMappings` in `backend/main.mo` so that every referenced `(chapter, verse)` pair exists in the populated verse dataset (i.e., `getCuratedVersesByMood` never points at missing verses).",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Update Read Gita button/navigation so that pressing \"Read Gita\" opens the chapters list page (showing all chapters).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "On the Home page Ask Krishna AI chatbot, keep replies and the full discussion within the chat window itself (no separate/disconnected view for responses).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Auto-expand/enlarge the Ask Krishna AI chatbot discussion window after chat begins so it takes up a major portion of the screen for better readability.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Enable a voice message mode in the Ask Krishna AI chatbot (voice input for sending messages).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Ensure the Home page Ask Krishna AI chatbot reliably responds to user queries with answers grounded in Bhagavad Gita teachings, written in the voice/persona of Lord Krishna.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Harden the backend Read Gita API so it never traps for missing or incomplete verse data: `getAllChapters()`, `getVersesByChapter(chapterNumber)`, `getVerse(chapter, verse)`, and `getTodaysVerse()` must return consistent, safe responses (e.g., empty list or null where applicable) instead of causing canister errors.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Update the backend chatbot response generation (`getChatbotResponse`) so replies are grounded in Bhagavad Gita teachings and written as if Lord Krishna is responding directly to the user, while always returning a valid `ChatbotResponse` shape (selected verse, supportive message, follow-ups, action step).",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Update the backend `getChatbotResponse(userMessage, mood, sessionHistory)` implementation (in `backend/main.mo`) so the `supportiveMessage` is generated from Bhagavad Gita knowledge instead of always returning the same canned line.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Populate a minimal, always-available Gita verse knowledge base in `backend/main.mo` so the chatbot can reliably ground replies in actual verses (and so existing `moodVerseMappings` references can resolve to real verses).",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Make `getChatbotResponse` select and return a relevant verse when possible (via mood-based curation and/or simple message-based topic matching) and write the reply in a Krishna persona that references the selected verse’s teaching in clear English.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Make Ask Krishna chatbot more Krishna-like and conversational: synthesize Gita teachings into original guidance (avoid just quoting verses directly) and add friendly greeting/small-talk flows (e.g., respond to \"Hi\" with \"Hi, how are you doing today?\").",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-28",
+      "summary": "Update the backend `getChatbotResponse(userMessage, mood, sessionHistory)` in `backend/main.mo` so Krishna’s `supportiveMessage` is written as a conversational, Krishna-like response that synthesizes Bhagavad Gita teachings into original guidance rather than directly quoting or pasting verse text/interpretation.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-29",
+      "summary": "Add greeting/small-talk handling in `backend/main.mo` `getChatbotResponse` so that when the user message is a greeting (e.g., \"Hi\", \"Hello\", \"Hey\"), Krishna replies with a friendly greeting and a follow-up like “How are you doing today?” and keeps the conversation moving with at least one appropriate follow-up question.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-30",
+      "summary": "Update the backend `getChatbotResponse(userMessage, mood, sessionHistory)` in `backend/main.mo` so Krishna’s `supportiveMessage` is written as an original, conversational reply that synthesizes Bhagavad Gita teachings instead of directly quoting/pasting verse text or returning a generic canned line, while still returning a valid `ChatbotResponse` shape.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-31",
+      "summary": "Add greeting/small-talk handling in `backend/main.mo` `getChatbotResponse` so that when the user message is a greeting (e.g., \"Hi\", \"Hello\", \"Hey\"), Krishna replies with a friendly greeting and a follow-up like “How are you doing today?” and keeps the conversation moving with at least one appropriate follow-up question.",
+      "reqIds": [
+        "REQ-28"
       ],
       "status": "pending"
     }
   ],
-  "projectName": "Read Gita: Expand table rows to show full cell content and populate complete verse dataset",
+  "projectName": "Populate Bhagavad Gita Chapter 1 with all 47 verses and complete verse fields",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

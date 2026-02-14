@@ -68,7 +68,7 @@ export default function ChatComposer({ onSend, disabled }: { onSend: (message: s
           onClick={handleVoiceToggle}
           disabled={disabled}
           className="rounded-full w-12 h-12 shrink-0"
-          title={isSupported ? (isListening ? 'Stop recording' : 'Start voice input') : 'Voice input not supported'}
+          title={isListening ? 'Stop voice input' : 'Start voice input'}
         >
           {isListening ? (
             <Mic className="w-5 h-5 animate-pulse" />
@@ -82,6 +82,7 @@ export default function ChatComposer({ onSend, disabled }: { onSend: (message: s
         disabled={disabled || (!message.trim() && !transcript.trim())}
         className="rounded-full w-12 h-12 shrink-0"
         size="icon"
+        title="Send message"
       >
         <Send className="w-5 h-5" />
       </Button>

@@ -1,43 +1,49 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T11:42:23.147Z",
+  "generatedAt": "2026-02-14T08:44:26.709Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
+    "total": 3,
     "implemented": 1,
     "items": [
       {
-        "id": "REQ-1",
-        "summary": "Update the Read Gita chapter verse table so each row expands vertically to display the full content of every cell across all 5 columns (no truncation/ellipsis) on both desktop and mobile layouts.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/ReadGita/ChapterDetailView.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/ReadGita/ChapterDetailView.tsx"
-        ]
-      },
-      {
-        "id": "REQ-2",
-        "summary": "Populate backend verse data so the app contains verse records for every verse in every chapter (all 18 chapters), and ensure chapter verse counts match the returned verse list sizes.",
+        "id": "REQ-27",
+        "summary": "Update the backend `getChatbotResponse(userMessage, mood, sessionHistory)` in `backend/main.mo` so Krishna’s `supportiveMessage` is written as an original, conversational reply that synthesizes Bhagavad Gita teachings instead of directly quoting/pasting verse text or returning a generic canned line, while still returning a valid `ChatbotResponse` shape.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
+      },
+      {
+        "id": "REQ-28",
+        "summary": "Add greeting/small-talk handling in `backend/main.mo` `getChatbotResponse` so that when the user message is a greeting (e.g., \"Hi\", \"Hello\", \"Hey\"), Krishna replies with a friendly greeting and a follow-up like “How are you doing today?” and keeps the conversation moving with at least one appropriate follow-up question.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-29",
+        "summary": "Ensure all user-facing chat UI helper text in the chat thread is plain English (no emojis) and consistent with the new conversational tone when no verse is available.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/chat/ChatThread.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/chat/ChatThread.tsx"
+        ]
       }
     ]
   },
   "changedFiles": [
     "backend/main.mo",
-    "backend/migration.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/pages/ReadGita/ChapterDetailView.tsx",
+    "frontend/src/components/chat/ChatThread.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
